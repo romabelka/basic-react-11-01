@@ -11,14 +11,11 @@ class CommentsBlock  extends Component {
         const {comments} = this.props;
 
         const haveComments = !(comments ===  undefined) ;  // в данных нет комментриев 
-        const bodyCommentsBlock  = haveComments && this.state.isOpenCommets && <CommentsList comments = {comments} />;
-           
+        const bodyCommentsBlock  = haveComments && this.state.isOpenCommets && <CommentsList comments = {comments} />;   
 
         return(
             <div>  
                <h3>All comments</h3> 
-               
-              
                <button onClick={this.handleClick}>
                         {this.state.isOpenCommets ? 'Hide comments' : 'Show comments'}
                </button>

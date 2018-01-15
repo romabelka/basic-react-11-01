@@ -4,11 +4,11 @@ class CommentsList extends Component {
 
     render() {
         const { comments } = this.props;
-        const comentElements = comments.map((comment, index) => <li key={comment.id}> <Comment comment = {comment} /> </li>);
+        const commentElements = comments.map((comment, index) => <li key={comment.id}> <Comment comment = {comment} /> </li>);
 
         return (
             <ol>
-                {comentElements}
+                {commentElements}
             </ol>
         )
     }
