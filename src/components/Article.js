@@ -40,7 +40,8 @@ class Article extends Component {
     render() {
         const {article} = this.props
 //        if (this.state.isOpen) throw new Error()
-         
+        console.log(article.comments)
+     
         const body = this.state.isOpen && <section>{article.text}<CommentsBlock comments = {article.comments} /> </section>
         return (
             <div>

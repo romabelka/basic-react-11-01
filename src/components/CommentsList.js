@@ -8,7 +8,6 @@ class CommentsList extends Component {
 
         return (
             <div>
-                {console.log(comments)}
                 {comentElements}
             </div>
         )

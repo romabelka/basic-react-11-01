@@ -10,14 +10,19 @@ class CommentsBlock  extends Component {
     render(){
         const {comments} = this.props;
 
-        const bodyCommentsBlock  =  this.state.isOpenCommets && <CommentsList comments = {comments} />;
+        const haveComments = !(comments ===  undefined) ;  // в данных нет комментриев 
+        const bodyCommentsBlock  = haveComments && this.state.isOpenCommets && <CommentsList comments = {comments} />;
+           
+
         return(
             <div>  
-               <h3>All comments</h3>  
+               <h3>All comments</h3> 
+               
+              
                <button onClick={this.handleClick}>
                         {this.state.isOpenCommets ? 'close' : 'open'}
-              </button>
-                {console.log(comments)}
+               </button>
+               { (!haveComments) ? "no comments" : "" }  
                {bodyCommentsBlock}
             </div>
         )
