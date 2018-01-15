@@ -23,10 +23,17 @@ class Article extends Component {
     }
 
     handleClick = () => {
-        console.log('---', 'clicked')
-        this.setState({
-            isOpen: !this.state.isOpen
+        this.setState((state) => ({
+            isOpen: !state.isOpen
+        }))
+/*
+        this.setState((state) => {
+            console.log('---', this.state, state)
+            return {
+                isOpen: !state.isOpen
+            }
         })
+*/
     }
 }
 
