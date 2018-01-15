@@ -1,4 +1,7 @@
 import React, {Component} from 'react'
+import CommentsBlock  from './CommentsBlock'
+
+
 
 class Article extends Component {
     constructor(props) {
@@ -37,7 +40,9 @@ class Article extends Component {
     render() {
         const {article} = this.props
 //        if (this.state.isOpen) throw new Error()
-        const body = this.state.isOpen && <section>{article.text}</section>
+        console.log(article.comments)
+     
+        const body = this.state.isOpen && <section>{article.text}<CommentsBlock comments = {article.comments} /> </section>
         return (
             <div>
                 <h2>
@@ -46,7 +51,9 @@ class Article extends Component {
                         {this.state.isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
+                
                 {body}
+
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
