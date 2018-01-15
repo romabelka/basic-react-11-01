@@ -20,7 +20,7 @@ class CommentsBlock  extends Component {
                
               
                <button onClick={this.handleClick}>
-                        {this.state.isOpenCommets ? 'close' : 'open'}
+                        {this.state.isOpenCommets ? 'Hide comments' : 'Show comments'}
                </button>
                { (!haveComments) ? "no comments" : "" }  
                {bodyCommentsBlock}

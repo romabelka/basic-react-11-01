@@ -5,12 +5,10 @@ class Comment extends Component{
     const { comment } = this.props;
     return(
         <div>
-       <b>{comment.user}</b>  
-       <p>{comment.text} </p>   
-       
+            <b>{comment.user}</b>  
+            <p>{comment.text}</p>   
        </div>
     )
-
    }
 }
 

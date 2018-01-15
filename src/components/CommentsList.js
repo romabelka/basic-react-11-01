@@ -7,9 +7,9 @@ class CommentsList extends Component {
         const comentElements = comments.map((comment, index) => <li key={comment.id}> <Comment comment = {comment} /> </li>);
 
         return (
-            <div>
+            <ol>
                 {comentElements}
-            </div>
+            </ol>
         )
     }
 }
