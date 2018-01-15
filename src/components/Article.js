@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentList from './CommentList'
 
 class Article extends Component {
     constructor(props) {
@@ -6,7 +7,8 @@ class Article extends Component {
 
         this.state = {
             isOpen: props.defaultOpen,
-            foo: null
+            foo: null,
+            commentsCollapsed: true
         }
     }
 
@@ -38,6 +40,10 @@ class Article extends Component {
         const {article} = this.props
 //        if (this.state.isOpen) throw new Error()
         const body = this.state.isOpen && <section>{article.text}</section>
+        const collapsed = this.state.commentsCollapsed
+        const articleComments = article.comments
+        const commentList = !collapsed && articleComments && <CommentList comments={articleComments} />
+
         return (
             <div>
                 <h2>
@@ -45,11 +51,21 @@ class Article extends Component {
                     <button onClick={this.handleClick}>
                         {this.state.isOpen ? 'close' : 'open'}
                     </button>
+                    <button onClick={this.toggleComments}>
+                        {collapsed ? 'show' : 'hide'} comments
+                    </button>
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                {commentList}
             </div>
         )
+    }
+
+    toggleComments = () => {
+      this.setState((state) => ({
+        commentsCollapsed: !state.commentsCollapsed
+      }))
     }
 
     handleClick = () => {
