@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Comments from './Comments'
 
 class Article extends Component {
     constructor(props) {
@@ -48,6 +49,7 @@ class Article extends Component {
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <Comments comments = {article.comments}/>
             </div>
         )
     }
