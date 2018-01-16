@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans:400,700&subset=cyrillic');
+body{
+	background: #F2F2F2;
+  	font-family: sans-serif;
+}
+#container{
+	max-width:1000px;
+	margin:0 auto;
+}
+/*=-=-=-=-=-=-=-=-=-=-=-=-*/
+h1{
+	color:black;
+	text-align:center;
+}
+.App{
+	width:100%;
+}
+/*=-=-=-=-=-=-=-=-=-=-=-=-*/
+ul{
+	list-style:none;
+	margin:0;
+}
+.ArticleList{
+	background:#E6E6E6;
+	padding:20px;
+}
+/*=-=-=-=-=-=-=-=-=-=-=-=-*/
+.titleArticle{
+	color:#0B0B61;
+	border-bottom: 2px solid #0B0B61;
+	padding-bottom: 5px;
+}
+.dateArticle{
+	font-size:12px;
+	color:grey;
+	font-style:italic;
+}
+button{
+	cursor: pointer;
+  	border:none;
+  	background:none;
+  	font-family: 'PT Sans', sans-serif;
+  	font-size:18px;
+}
+.icon{
+	font-size:18px;
+}
+.Article{
+	background:white;
+	padding:20px;
+	margin:10px;
+
+}
+.Content{
+	padding:20px;
+	background:#EFF8FB;
+	font-size:16px;
+	font-family: 'PT Sans', sans-serif;
+}
+/*=-=-=-=-=-=-=-=-=-=-=-=-*/
+.Comment{
+	padding: 20px;
+	margin:5px;
+	background:#EFF8FB;
+	font-family: 'PT Sans', sans-serif;
+}

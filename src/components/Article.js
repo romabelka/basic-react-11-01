@@ -1,71 +1,66 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
 
-class Article extends Component {
+import Comments from './Comments';
+
+export default class Article extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
 
         this.state = {
-            isOpen: props.defaultOpen,
-            foo: null
+            isOpenText: false,
+            isOpenTextIcon:"icon ion-chevron-right",
+            isOpenComment: false
         }
+        this.handleClickTextButton = this.handleClickTextButton.bind(this);
+        this.handleClickCommentButton = this.handleClickCommentButton.bind(this);
     }
-
-    componentWillMount() {
-        console.log('---', 'mounting')
+    handleClickTextButton(){
+        let tmp = (this.state.isOpenText === false)?true:false;
+        let i = (this.state.isOpenText === false)?"ion-chevron-down":"icon ion-chevron-right";
+        this.setState({
+            isOpenText:tmp,
+            isOpenTextIcon:i
+        });
     }
-
-    componentDidMount() {
-        console.log('---', 'mounted')
+    handleClickCommentButton(){
+        let tmp = (this.state.isOpenComment === false)?true:false;
+        this.setState({
+            isOpenComment : tmp
+        });
     }
-
-    componentWillReceiveProps(nextProps) {
-        console.log('---', 'will receive props')
-        if (this.props.defaultOpen !== nextProps.defaultOpen) this.setState({
-            isOpen: nextProps.defaultOpen
-        })
-    }
-
-    componentWillUpdate(nexState) {
-//        if (nexState.isOpen) fetchData()
-    }
-/*
-    state = {
-        isOpen: true
-    }
-*/
-
     render() {
-        const {article} = this.props
-//        if (this.state.isOpen) throw new Error()
-        const body = this.state.isOpen && <section>{article.text}</section>
+        const {article} = this.props;
+        const body = this.state.isOpenText && <section className="Content">{article.text}</section>;
+        const comments = article.comments;
+        const commentElement = this.state.isOpenComment && comments && comments.map(function(item,index){
+            return(
+                <div key ={item.id}>
+                    <Comments comment={item} />
+                </div>
+            );
+        });
+    
         return (
-            <div>
-                <h2>
+            <div className="Article">
+                <h2 className="titleArticle">
                     {article.title}
-                    <button onClick={this.handleClick}>
-                        {this.state.isOpen ? 'close' : 'open'}
-                    </button>
                 </h2>
+                <button onClick={this.handleClickTextButton}>
+                    <i className={this.state.isOpenTextIcon}></i> {this.state.isOpenText ? 'Скрыть' : 'Просмотреть'}
+                </button>
                 {body}
-                <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <h3 className="dateArticle">
+                    creation date: {(new Date(article.date)).toDateString()}
+                </h3>
+                {comments ? (
+                    <button onClick={this.handleClickCommentButton}>
+                        <i className="icon ion-chatboxes"></i> {this.state.isOpenComment ? 'Скрыть комментарии' : 'Смотреть комментарии'}
+                    </button>
+                ) : (
+                    <p>Комментариев к этому посту еще нет</p>
+                )}
+                {commentElement}
             </div>
         )
     }
-
-    handleClick = () => {
-        this.setState((state) => ({
-            isOpen: !state.isOpen
-        }))
-/*
-        this.setState((state) => {
-            console.log('---', this.state, state)
-            return {
-                isOpen: !state.isOpen
-            }
-        })
-*/
-    }
 }
-
-
-export default Article
