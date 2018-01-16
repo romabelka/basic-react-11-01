@@ -5,7 +5,7 @@ import articles from '../fixtures'
 function App() {
     return (
         <div>
-            <h1>Newsfeed</h1>
+            <h1>App name</h1>
             <ArticleList articles = {articles} />
         </div>
     )

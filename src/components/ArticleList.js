@@ -13,7 +13,7 @@ class ArticleList extends Component {
         if (this.state.error) return <h2>Some error</h2>
 
         const articleElements = this.props.articles.map((article, index) => <li key={article.id}>
-            <Article article = {article} defaultOpen = {index === 0} />
+            <Article article = {article} defaultOpen = {index === 0}/>
         </li>)
         return (
             <ul>
