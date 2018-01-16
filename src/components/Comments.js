@@ -4,7 +4,10 @@ class Comments extends Component {
 
 	render() {
 
-		const commentElements = this.props.comments.map((comment, index) => <ul>
+		// if () const commentElements = 'There are no comments yet'
+		const commentElements = this.props.comments ? 
+
+		this.props.comments.map((comment, index) => <ul>
 			<li key={comment.id}>
 				<div>{comment.text}</div>
 				<div>User:
@@ -12,6 +15,10 @@ class Comments extends Component {
 				</div>
 			</li>
 		</ul>)
+
+		:
+
+		'There are no comments yet'
 
 		return (
 			<div>{commentElements}</div>
