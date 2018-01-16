@@ -9,7 +9,7 @@ const ArticleList = (props) => {
     </li>
   ))
   return (
-    <ul>
+    <ul className='list mw7 center'>
       {articleElements}
     </ul>
   )

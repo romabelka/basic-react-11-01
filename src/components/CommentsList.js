@@ -16,7 +16,7 @@ class CommentsList extends Component {
   render() {
     const {comments} = this.props
     const commentsList = comments && (
-      <ul>
+      <ul className='list mt3 pa0'>
         {comments.map((comment) => (
           <Comment
             key={comment.id}
@@ -27,8 +27,8 @@ class CommentsList extends Component {
       </ul>
     )
     const commentsListBody = comments && (
-      <div>
-        <button onClick={this.handlerToggleComments}>
+      <div className='mt3'>
+        <button onClick={this.handlerToggleComments} className='br2 bn ph2 pv1 bg-green white f5'>
           {this.state.isExpanded ? 'Hide Comments' : 'Show Comments'}
         </button>
         {
