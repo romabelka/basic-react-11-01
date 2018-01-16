@@ -8,7 +8,7 @@ class Comment extends Component {
         <h4>{comment.user}</h4>
         <div>{comment.text}</div>
       </div>
-    );
+    )
   }
 }
 

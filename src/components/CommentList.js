@@ -9,18 +9,18 @@ class CommentList extends Component {
   handleClick = () => {
     this.setState((state) => ({
       isOpen: !state.isOpen
-    }));
+    }))
   }
 
   render() {
-    const {comments} = this.props;
-    const commentElements = comments ? comments.map((comment)=>{
+    const {comments} = this.props
+    const commentElements = comments ? comments.map(comment => {
       return (
         <li key={comment.id}>
           <Comment comment={comment}/>
         </li>
       )
-    }) : 'No comments';
+    }) : 'No comments'
 
     return (
       <div>
@@ -31,7 +31,7 @@ class CommentList extends Component {
           {this.state.isOpen && commentElements}
         </ul>
       </div>
-    );
+    )
   }
 }
 
