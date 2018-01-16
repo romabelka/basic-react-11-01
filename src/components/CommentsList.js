@@ -28,7 +28,10 @@ class CommentsList extends Component {
     )
     const commentsListBody = comments && (
       <div className='mt3'>
-        <button onClick={this.handlerToggleComments} className='br2 bn ph2 pv1 bg-green white f5'>
+        <button
+          onClick={this.handlerToggleComments}
+          className={`br2 bn ph2 pv1 white f5 ${this.state.isExpanded ? 'bg-red' : 'bg-green'}`}
+        >
           {this.state.isExpanded ? 'Hide Comments' : 'Show Comments'}
         </button>
         {

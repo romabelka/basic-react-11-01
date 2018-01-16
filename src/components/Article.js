@@ -29,7 +29,10 @@ class Article extends Component {
       <div className='mt4 pt4 bt b--gray'>
         <h2 className='mt0 mb3 flex items-center'>
           {article.title}
-          <button onClick={this.handleClick} className='br2 bn ph2 pv1 bg-blue white f5 ml3'>
+          <button
+            onClick={this.handleClick}
+            className={`br2 bn ph2 pv1 white f5 ml3 ${this.state.isOpen ? 'bg-red' : 'bg-blue'}`}
+          >
             {this.state.isOpen ? 'close' : 'open'}
           </button>
         </h2>
