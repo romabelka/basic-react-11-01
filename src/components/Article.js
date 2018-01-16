@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Comments from './Comments'
 
 class Article extends Component {
     constructor(props) {
@@ -26,18 +27,11 @@ class Article extends Component {
     }
 
     componentWillUpdate(nexState) {
-//        if (nexState.isOpen) fetchData()
     }
-/*
-    state = {
-        isOpen: true
-    }
-*/
 
     render() {
         const {article} = this.props
-//        if (this.state.isOpen) throw new Error()
-        const body = this.state.isOpen && <section>{article.text}</section>
+        const body = this.state.isOpen && <div><section>{article.text}</section><Comments comments = {article.comments} /></div>
         return (
             <div>
                 <h2>
@@ -56,16 +50,7 @@ class Article extends Component {
         this.setState((state) => ({
             isOpen: !state.isOpen
         }))
-/*
-        this.setState((state) => {
-            console.log('---', this.state, state)
-            return {
-                isOpen: !state.isOpen
-            }
-        })
-*/
     }
 }
-
 
 export default Article
