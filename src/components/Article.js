@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentsList from './CommentsList'
 
 class Article extends Component {
     constructor(props) {
@@ -38,6 +39,9 @@ class Article extends Component {
         const {article} = this.props
 //        if (this.state.isOpen) throw new Error()
         const body = this.state.isOpen && <section>{article.text}</section>
+        const comments = article.comments 
+            ? <CommentsList comments={article.comments}/> 
+            : <div>This article doesn't have commets</div>
         return (
             <div>
                 <h2>
@@ -48,6 +52,8 @@ class Article extends Component {
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <hr/>
+                {comments}
             </div>
         )
     }
