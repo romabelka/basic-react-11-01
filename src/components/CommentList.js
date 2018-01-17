@@ -18,6 +18,8 @@ class CommentList extends Component {
                 <Comment comment = {comment}/>
             </li>);
 
+            const count = this.props.comments.length;
+
             const body = this.state.isOpen && <ol>{commentElements}</ol>;
 
             return (
@@ -25,6 +27,7 @@ class CommentList extends Component {
                     {body}
                     <button type="button" onClick={this.showComment}>
                         {this.state.isOpen ? 'close comments' : 'open comments'}
+                        &nbsp;({count})
                     </button>
                 </div>
             );
