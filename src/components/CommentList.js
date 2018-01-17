@@ -4,7 +4,7 @@ import Comment from './Comment'
 class CommentList extends Component {
     render() {
         const commentElements = this.props.comments.map((comment, index) => <li key={comment.id}>
-            <Comment comment = {comment} defaultOpen = {index === 0}/>
+            <Comment comment = {comment} />
         </li>)
         return (
             <ul>
