@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentList from './CommentList'
 
 class Article extends Component {
     constructor(props) {
@@ -37,7 +38,7 @@ class Article extends Component {
     render() {
         const {article} = this.props
 //        if (this.state.isOpen) throw new Error()
-        const body = this.state.isOpen && <section>{article.text}</section>
+        const body = this.state.isOpen && <section>{article.text}<CommentList article = {article}/></section>
         return (
             <div>
                 <h2>
