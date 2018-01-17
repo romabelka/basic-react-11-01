@@ -6,7 +6,15 @@ class CommentList extends Component {
         isOpen: false
     }
     render() {
-        const commentsList = this.state.isOpen && this.props.article.comments.map(comment => <li key = {comment.id}>
+        const {comments} = this.props.article
+
+        if (!comments) return (
+            <div>
+                <p><i>No comments</i></p>
+            </div>
+        )
+
+        const commentsList = this.state.isOpen && comments.map(comment => <li key = {comment.id}>
             <Comment comment = {comment}/>
         </li>)
         return (
