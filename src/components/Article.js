@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentList from './CommentList'
 
 class Article extends Component {
     constructor(props) {
@@ -38,6 +39,13 @@ class Article extends Component {
         const {article} = this.props
 //        if (this.state.isOpen) throw new Error()
         const body = this.state.isOpen && <section>{article.text}</section>
+        // Постарался всю логику отдать в компонент списка комментариев
+        // но всё же часть вынес в этот компонент
+        // Не придумал короткого решения для отображения 'no comments' в компоненте комментов
+        // Есть ли смысл усложнять компонент комментов, чтобы оставить там всю логику?
+        // Или если есть более короткое решение, то можно вынести логику сюда?
+        // Надеюсь понятно объяснил
+        const comments = article.comments ? <CommentList comments = {article.comments} /> : 'no comments'
         return (
             <div>
                 <h2>
@@ -48,6 +56,7 @@ class Article extends Component {
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                {comments}
             </div>
         )
     }
