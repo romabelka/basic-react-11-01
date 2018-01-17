@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import CommentList from './CommentList'
 
 class Article extends Component {
     constructor(props) {
@@ -6,6 +7,7 @@ class Article extends Component {
 
         this.state = {
             isOpen: props.defaultOpen,
+			isOpenComments: props.defaultOpenComments,
             foo: null
         }
     }
@@ -38,6 +40,9 @@ class Article extends Component {
         const {article} = this.props
 //        if (this.state.isOpen) throw new Error()
         const body = this.state.isOpen && <section>{article.text}</section>
+        const comments = article.comments && 
+							this.state.isOpenComments && 
+							<CommentList comments = {article.comments} />
         return (
             <div>
                 <h2>
@@ -48,6 +53,13 @@ class Article extends Component {
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+				<h4>
+					Комментарии
+					<button onClick={this.handleCommentsClick}>
+						{this.state.isOpenComments ? 'close' : 'open'}
+					</button>
+				</h4>
+				{comments}
             </div>
         )
     }
@@ -65,6 +77,12 @@ class Article extends Component {
         })
 */
     }
+	
+	handleCommentsClick = () => {
+		this.setState((state) => ({
+            isOpenComments: !state.isOpenComments
+        }))
+	}
 }
 
 
