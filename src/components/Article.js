@@ -25,21 +25,20 @@ class Article extends PureComponent {
 
     render() {
         console.log('---', 'rerendering')
-        const {article, isOpen} = this.props
+        const {article, isOpen, onButtonClick} = this.props
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
-                <CommentList comments = {article.comments}/>
+                <CommentList comments = {article.comments} />
             </div>
         )
         return (
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={this.handleClick}>
+                    <button onClick={(ev) => onButtonClick(ev, article)}>
                         {isOpen ? 'close' : 'open'}
                     </button>
-                    <button onClick = {this.handleDeleteComment}>delete comment</button>
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>

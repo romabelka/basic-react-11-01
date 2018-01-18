@@ -1,29 +1,60 @@
 import React, {Component} from 'react'
 import Comment from './Comment'
+import toggleOpen from '../decorators/toggleOpen'
 
+function CommentList(props) {
+    const {isOpen, toggleOpen} = props
+    const text = isOpen ? 'hide comments' : 'show comments'
+    return (
+        <div>
+            <button onClick={toggleOpen}>{text}</button>
+            {getBody(props)}
+        </div>
+    )
+}
+
+function getBody(props) {
+    const {comments, isOpen} = props
+    if (!isOpen) return null
+
+    const body = comments.length ? (
+        <ul>
+            {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}
+        </ul>
+    ) : <h3>No comments yet</h3>
+
+    return (
+        <div>
+            {body}
+        </div>
+    )
+}
+
+CommentList.defaultProps = {
+    comments: []
+}
+
+/*
 class CommentList extends Component {
     static defaultProps = {
         comments: []
     }
 
-    state = {
-        isOpen: false
-    }
-
     render() {
-        const text = this.state.isOpen ? 'hide comments' : 'show comments'
+        const {isOpen, toggleOpen} = this.props
+        const text = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
-                <button onClick={this.toggleOpen}>{text}</button>
+                <button onClick={toggleOpen}>{text}</button>
                 {this.getBody()}
             </div>
         )
     }
 
     getBody() {
-        if (!this.state.isOpen) return null
+        const {comments, isOpen} = this.props
+        if (!isOpen) return null
 
-        const {comments} = this.props
         const body = comments.length ? (
             <ul>
                 {comments.map(comment => <li key = {comment.id}><Comment comment = {comment} /></li>)}
@@ -37,10 +68,8 @@ class CommentList extends Component {
         )
     }
 
-    toggleOpen = () => this.setState({
-        isOpen: !this.state.isOpen
-    })
 }
+*/
 
 
-export default CommentList
+export default toggleOpen(CommentList)

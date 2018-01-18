@@ -15,11 +15,12 @@ class ArticleList extends Component {
     render() {
         if (this.state.error) return <h2>Some error</h2>
 
-        const articleElements = this.props.articles.map((article, index) => <li
-            key = {article.id}
-            onClick = {this.toggleOpenArticle(article.id)}
-        >
-            <Article article = {article} defaultOpen = {index === 0} isOpen = {article.id === this.state.openArticleId} />
+        const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
+            <Article article = {article}
+                     defaultOpen = {index === 0}
+                     isOpen = {article.id === this.state.openArticleId}
+                     onButtonClick = {this.toggleOpenArticle(article.id)}
+            />
         </li>)
         return (
             <ul>
