@@ -1,43 +1,28 @@
 import React, {Component} from 'react'
+import CommentList from './CommentList'
 
 class Article extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            isOpen: props.defaultOpen,
-            foo: null
+            isOpen: props.defaultOpen
         }
     }
-
-    componentWillMount() {
-        console.log('---', 'mounting')
-    }
-
-    componentDidMount() {
-        console.log('---', 'mounted')
-    }
-
     componentWillReceiveProps(nextProps) {
-        console.log('---', 'will receive props')
-        if (this.props.defaultOpen !== nextProps.defaultOpen) this.setState({
+        if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
             isOpen: nextProps.defaultOpen
         })
     }
 
-    componentWillUpdate(nexState) {
-//        if (nexState.isOpen) fetchData()
-    }
-/*
-    state = {
-        isOpen: true
-    }
-*/
-
     render() {
         const {article} = this.props
-//        if (this.state.isOpen) throw new Error()
-        const body = this.state.isOpen && <section>{article.text}</section>
+        const body = this.state.isOpen && (
+            <div>
+                <section>{article.text}</section>
+                <CommentList comments = {article.comments}/>
+            </div>
+        )
         return (
             <div>
                 <h2>
@@ -53,17 +38,9 @@ class Article extends Component {
     }
 
     handleClick = () => {
-        this.setState((state) => ({
-            isOpen: !state.isOpen
-        }))
-/*
-        this.setState((state) => {
-            console.log('---', this.state, state)
-            return {
-                isOpen: !state.isOpen
-            }
+        this.setState({
+            isOpen: !this.state.isOpen
         })
-*/
     }
 }
 
