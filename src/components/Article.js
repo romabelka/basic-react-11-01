@@ -1,23 +1,32 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import CommentList from './CommentList'
 
-class Article extends Component {
+class Article extends PureComponent {
+    static propTypes = {
+/*
+        defaultOpen: PropTypes.bool, //if Article is open by default
+*/
+        article: PropTypes.shape({
+//            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            text: PropTypes.string,
+            comments: PropTypes.array
+        }).isRequired
+    }
+
     constructor(props) {
         super(props)
 
         this.state = {
-            isOpen: props.defaultOpen
+            foo: 'bar'
         }
-    }
-    componentWillReceiveProps(nextProps) {
-        if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState({
-            isOpen: nextProps.defaultOpen
-        })
     }
 
     render() {
-        const {article} = this.props
-        const body = this.state.isOpen && (
+        console.log('---', 'rerendering')
+        const {article, isOpen} = this.props
+        const body = isOpen && (
             <div>
                 <section>{article.text}</section>
                 <CommentList comments = {article.comments}/>
@@ -28,8 +37,9 @@ class Article extends Component {
                 <h2>
                     {article.title}
                     <button onClick={this.handleClick}>
-                        {this.state.isOpen ? 'close' : 'open'}
+                        {isOpen ? 'close' : 'open'}
                     </button>
+                    <button onClick = {this.handleDeleteComment}>delete comment</button>
                 </h2>
                 {body}
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
@@ -37,11 +47,6 @@ class Article extends Component {
         )
     }
 
-    handleClick = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        })
-    }
 }
 
 

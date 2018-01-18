@@ -8,4 +8,10 @@ function Comment({comment}) {
     )
 }
 
+/*
+Comment.defaultProps = {
+    comment: {}
+}
+*/
+
 export default Comment
