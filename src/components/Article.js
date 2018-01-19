@@ -1,14 +1,15 @@
 import React, {Component} from 'react'
 import CommentList from './CommentList'
+import PropTypes from 'prop-types'
 
 class Article extends Component {
     constructor(props) {
         super(props)
 
         this.state = {
-            isOpen: props.defaultOpen,
-            isCommentsShown: false
+            isOpen: props.defaultOpen
         }
+
     }
 
     componentWillMount() {
@@ -23,7 +24,8 @@ class Article extends Component {
         console.log('---', 'will receive props')
         if (this.props.defaultOpen !== nextProps.defaultOpen) {
             this.setState({
-            isOpen: nextProps.defaultOpen            })
+            isOpen: nextProps.defaultOpen
+            })
         }
     }
 
@@ -31,34 +33,20 @@ class Article extends Component {
 //        if (nexState.isOpen) fetchData()
     }
 
-    render() {
-        const {article} = this.props
+    render({article} = this.props) {
 
         const body = this.state.isOpen && <section>{article.text}</section>
-
-        let commentsBtn = null
-
-        if (article.comments) {
-            
-            let commentsTotal = article.comments.length
-
-            commentsBtn = <button onClick={this.toggleCommentList}> {this.state.isCommentsShown ? 'Hide' : 'Comments: ' + commentsTotal } </button>
-        }
-
-        const commentList = this.state.isCommentsShown && <CommentList comments = {article.comments} />
 
         return (
             <div>
                 <h2>
                     {article.title}
-
                     <button onClick={this.handleClick}>
                         {this.state.isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
                 {body}
-                {commentsBtn}
-                {commentList}
+                <CommentList comments = {article.comments} />
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
@@ -70,11 +58,6 @@ class Article extends Component {
         }))
     }
 
-    toggleCommentList = () => {
-        this.setState((state) => ({
-            isCommentsShown: !state.isCommentsShown
-        }))
-    }
 }
 
 

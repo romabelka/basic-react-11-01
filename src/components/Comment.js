@@ -2,9 +2,9 @@ import React, {Component} from 'react'
 
 export default Comment = ({comment} = props) => {
     return (
-        <li> 
-            <p> {comment.user} </p>
+        <p> 
+            <strong> {comment.user} </strong>
             {comment.text} 
-        </li>
+        </p>
     )
 }
