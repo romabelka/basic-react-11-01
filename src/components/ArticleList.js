@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import Article from './Article'
+import toggleOpenArticle from '../decorators/toggleOpenArticle'
 
 class ArticleList extends Component {
     state = {
-        error: null,
-        openArticleId: null
+        error: null
     }
 
     componentDidCatch(error) {
@@ -18,8 +18,8 @@ class ArticleList extends Component {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle}
+                     isOpen = {article.id === this.props.openArticleId}
+                     onButtonClick = {this.props.toggleOpenArticle}
             />
         </li>)
         return (
@@ -28,8 +28,6 @@ class ArticleList extends Component {
             </ul>
         )
     }
-
-    toggleOpenArticle = (openArticleId) => this.setState({ openArticleId })
 }
 
-export default ArticleList
+export default toggleOpenArticle(ArticleList)
