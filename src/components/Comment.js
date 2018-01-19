@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function Comment({comment}) {
     return (
@@ -8,10 +9,8 @@ function Comment({comment}) {
     )
 }
 
-/*
-Comment.defaultProps = {
-    comment: {}
+Comment.propTypes = {
+    comment: PropTypes.object.isRequired
 }
-*/
 
 export default Comment
