@@ -1,35 +1,23 @@
 import React, { Component } from 'react'
 import Article from './Article'
+import catchError from '../decorators/catchError'
+import toggleOpenItem from '../decorators/toggleOpenItem'
 
-class ArticleList extends Component {
-    state = {
-        error: null,
-        openArticleId: null
-    }
-
-    componentDidCatch(error) {
-        console.log('---', 123, error)
-        this.setState({ error })
-    }
-
-    render() {
-        if (this.state.error) return <h2>Some error</h2>
-
-        const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
-            <Article article = {article}
-                     defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle}
-            />
-        </li>)
-        return (
-            <ul>
-                {articleElements}
-            </ul>
-        )
-    }
-
-    toggleOpenArticle = (openArticleId) => this.setState(state => ({openArticleId: openArticleId === state.openArticleId ? null : openArticleId}))
+function ArticleList(props) {
+    if (props.error) return <h2>Some error</h2>
+    const {toggleOpenItem: toggleOpenArticle, itemId: openAricleId} = props
+    const articleElements = props.articles.map((article, index) => <li key = {article.id}>
+        <Article article = {article}
+                    defaultOpen = {index === 0}
+                    isOpen = {article.id === openAricleId}
+                    onButtonClick = {toggleOpenArticle}
+        />
+    </li>)
+    return (
+        <ul> {d}
+            {articleElements}
+        </ul>
+    )
 }
 
-export default ArticleList
+export default catchError(toggleOpenItem(ArticleList))
