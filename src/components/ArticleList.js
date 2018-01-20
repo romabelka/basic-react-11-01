@@ -14,7 +14,7 @@ function ArticleList(props) {
         />
     </li>)
     return (
-        <ul> {d}
+        <ul>
             {articleElements}
         </ul>
     )
