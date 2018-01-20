@@ -2,7 +2,7 @@ import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
 
-class Article extends PureComponent {
+class Article extends Component {
     static propTypes = {
 /*
         defaultOpen: PropTypes.bool, //if Article is open by default
@@ -21,6 +21,10 @@ class Article extends PureComponent {
         this.state = {
             foo: 'bar'
         }
+    }
+
+    shouldComponentUpdate(nextProps) {
+      return this.props.isOpen !== nextProps.isOpen;
     }
 
     render() {
