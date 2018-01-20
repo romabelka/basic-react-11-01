@@ -1,50 +1,43 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
+import PropTypes from 'prop-types'
 import CommentList from './CommentList'
 
-class Article extends Component {
+class Article extends PureComponent {
+    static propTypes = {
+/*
+        defaultOpen: PropTypes.bool, //if Article is open by default
+*/
+        article: PropTypes.shape({
+//            id: PropTypes.string.isRequired,
+            title: PropTypes.string.isRequired,
+            text: PropTypes.string,
+            comments: PropTypes.array
+        }).isRequired
+    }
+
     constructor(props) {
         super(props)
 
         this.state = {
-            isOpen: props.defaultOpen,
-            foo: null
+            foo: 'bar'
         }
     }
 
-    componentWillMount() {
-        console.log('---', 'mounting')
-    }
-
-    componentDidMount() {
-        console.log('---', 'mounted')
-    }
-
-    componentWillReceiveProps(nextProps) {
-        console.log('---', 'will receive props')
-        if (this.props.defaultOpen !== nextProps.defaultOpen) this.setState({
-            isOpen: nextProps.defaultOpen
-        })
-    }
-
-    componentWillUpdate(nexState) {
-//        if (nexState.isOpen) fetchData()
-    }
-/*
-    state = {
-        isOpen: true
-    }
-*/
-
     render() {
-        const {article} = this.props
-//        if (this.state.isOpen) throw new Error()
-        const body = this.state.isOpen && <section>{article.text}<CommentList article = {article}/></section>
+        console.log('---', 'rerendering')
+        const {article, isOpen, onButtonClick} = this.props
+        const body = isOpen && (
+            <div>
+                <section>{article.text}</section>
+                <CommentList comments = {article.comments} />
+            </div>
+        )
         return (
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={this.handleClick}>
-                        {this.state.isOpen ? 'close' : 'open'}
+                    <button onClick={(ev) => onButtonClick(ev, article)}>
+                        {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
                 {body}
@@ -53,19 +46,6 @@ class Article extends Component {
         )
     }
 
-    handleClick = () => {
-        this.setState((state) => ({
-            isOpen: !state.isOpen
-        }))
-/*
-        this.setState((state) => {
-            console.log('---', this.state, state)
-            return {
-                isOpen: !state.isOpen
-            }
-        })
-*/
-    }
 }
 
 
