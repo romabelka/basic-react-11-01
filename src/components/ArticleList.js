@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
 import catchError from '../decorators/catchError'
 import toggleOpenItem from '../decorators/toggleOpenItem'
 // ------------------ HOC через наследование ------------------
 // import ToggleOpenItemComponent from './ToggleOpenItemComponent'
 // ------------------ HOC через наследование ------------------
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired,
+    error: PropTypes.string,
+    itemId: PropTypes.string,
+    toggleOpenArticle: PropTypes.func,
+}
+
 function ArticleList(props) {
     if (props.error) return <h2>Some error</h2>
     const {toggleOpenItem: toggleOpenArticle, itemId: openAricleId} = props

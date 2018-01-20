@@ -11,6 +11,6 @@ export default (OriginalComponent) => class DecoratedComponent extends React.Com
     }
 
     render() {
-        return <OriginalComponent {...this.props} {...this.state} error={this.state.error}/>
+        return <OriginalComponent {...this.props} {...this.state}/>
     }
 }
