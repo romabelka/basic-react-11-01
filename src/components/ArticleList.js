@@ -24,7 +24,7 @@ class ArticleList extends accordeonBehaviour {
             <Article article = {article}
                      defaultOpen = {index === 0}
                      isOpen = {article.id === this.state.itemId}
-                     onButtonClick = {this.toggleItem()}
+                     onButtonClick = {this.toggleItem}
             />
         </li>)
         return (
