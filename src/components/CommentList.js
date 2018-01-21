@@ -1,6 +1,21 @@
 import React, {Component} from 'react'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import PropTypes from 'prop-types'
+
+
+CommentList.propTypes = {
+        isOpen: PropTypes.bool,
+        toggleOpen : PropTypes.func,
+        comments: PropTypes.arrayOf(PropTypes.shape({
+            id: PropTypes.string.isRequired,
+            user: PropTypes.string.isRequired,
+            text: PropTypes.string
+        }))
+    }
+
+
+
 
 function CommentList(props) {
     const {isOpen, toggleOpen} = props

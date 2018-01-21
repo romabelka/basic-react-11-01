@@ -1,54 +1,23 @@
 import React, { Component } from 'react'
 import Article from './Article'
+import PropTypes from 'prop-types'
 
-//import accordion from '../decorators/accordion' // decorator
+import accordion from '../decorators/accordion' // decorator
 
 
-// class ArticleList extends Component {
-//     state = {
-//         error: null
-//     }
+class ArticleList extends Component {
 
-//     componentDidCatch(error) {
-//         console.log('---', 123, error)
-//         this.setState({ error })
-//     }
-
-//     render() {
-//         if (this.state.error) return <h2>Some error</h2>
-     
-//         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
-//             <Article article = {article}
-//                      defaultOpen = {index === 0}
-//                      isOpen = {article.id === this.props.openArticleId}
-//                      onButtonClick = {this.props.toggleOpenArticle}
-//             />
-//         </li>)
+    static propTypes = {
+         
+        articles: PropTypes.array.isRequired,
+        error: PropTypes.string,
+        toggleOpenArticle: PropTypes.func,
+        openArticleId: PropTypes.string
+     }
 
 
 
-//         return (
-//             <ul>
-//                 {articleElements}
-//             </ul>
-//         )
-//     }
 
-
-
-    
-        
-// }
-
-// export default accordion(ArticleList)
-
-// decorator task end 
-
-
-import Accordion from './Accordion'
-
-
-class ArticleList extends Accordion {
     state = {
         error: null
     }
@@ -59,14 +28,13 @@ class ArticleList extends Accordion {
     }
 
     render() {
-        console.log("asdada")
         if (this.state.error) return <h2>Some error</h2>
      
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle}
+                     isOpen = {article.id === this.props.openArticleId}
+                     onButtonClick = {this.props.toggleOpenArticle}
             />
         </li>)
 
@@ -78,6 +46,51 @@ class ArticleList extends Accordion {
             </ul>
         )
     }
+
+
+
+    
+        
 }
 
-    export default ArticleList
+export default accordion(ArticleList)
+
+// decorator task end 
+
+
+// import Accordion from './Accordion'
+
+
+// class ArticleList extends Accordion {
+//     state = {
+//         error: null
+//     }
+
+//     componentDidCatch(error) {
+//         console.log('---', 123, error)
+//         this.setState({ error })
+//     }
+
+//     render() {
+//         console.log("asdada")
+//         if (this.state.error) return <h2>Some error</h2>
+     
+//         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
+//             <Article article = {article}
+//                      defaultOpen = {index === 0}
+//                      isOpen = {article.id === this.state.openArticleId}
+//                      onButtonClick = {this.toggleOpenArticle}
+//             />
+//         </li>)
+
+
+
+//         return (
+//             <ul>
+//                 {articleElements}
+//             </ul>
+//         )
+//     }
+// }
+
+//     export default ArticleList
