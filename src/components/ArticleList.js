@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Article from './Article'
 //import toggleOpenArticle from '../decorators/toggleOpenArticle'
-import toggleOpenArticle from '../decorators/toggleOpenArticleClass'
+import toggleOpenClass from '../decorators/toggleOpenArticleClass'
 
 // function ArticleList(props) {
 //     const{openArticleId, toggleOpenArticle} = props;
@@ -21,13 +21,13 @@ import toggleOpenArticle from '../decorators/toggleOpenArticleClass'
 
 // export default toggleOpenArticle(ArticleList);
 
-class ArticleList extends toggleOpenArticle {
+class ArticleList extends toggleOpenClass {
     render () {
-        const {openArticleId, toggleOpenArticle} = props;
-        const articleElements = props.articles.map((article, index) => <li key = {article.id}>
+        const {openArticleId} = this.props;
+        const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                 defaultOpen = {index === 0}
-                isOpen = {article.id === openArticleId}
+                isOpen = {article.id === this.state.openArticleId}
                 onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
@@ -38,6 +38,8 @@ class ArticleList extends toggleOpenArticle {
         ) 
     }  
 }
+
+export default ArticleList;
 
 // class ArticleList extends toggleOpenArticle {
 //     state = {
