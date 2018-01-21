@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import CommentList from './CommentList'
 
 const Article = (props) => {
-  console.log('---', 'rerendering')
   const {article, isOpen, onButtonClick} = props
   const body = isOpen && (
     <div>
@@ -15,7 +14,7 @@ const Article = (props) => {
     <div>
       <h2>
         {article.title}
-        <button onClick={(ev) => onButtonClick(article.id)}>
+        <button onClick={() => onButtonClick(article.id)}>
           {isOpen ? 'close' : 'open'}
         </button>
       </h2>
@@ -23,6 +22,12 @@ const Article = (props) => {
       <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
     </div>
   )
+}
+
+Article.propTypes = {
+  article: PropTypes.object.isRequired,
+  isOpen: PropTypes.bool,
+  onButtonClick: PropTypes.func,
 }
 
 

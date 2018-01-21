@@ -7,18 +7,8 @@ export default (OriginalComponent) => class DecoratedComponent extends Component
   
   toggleItem = (itemId) => {
     this.setState({
-    
+      itemId: itemId === this.state.itemId ? null : itemId
     })
-    
-    
-    if (itemId === this.state.itemId) {
-      this.setState({
-        itemId: null
-      })
-    }
-    else {
-      this.setState({itemId})
-    }
   }
   
   render() {
