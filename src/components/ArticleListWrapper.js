@@ -6,7 +6,8 @@ export default class ArticleListWrapper extends Component {
   }
 
   toggleOpenArticle = (openArticleId) => () => {
-    this.setState({ openArticleId })
+    const newOpenArticleId = this.state.openArticleId !== openArticleId ? openArticleId : null
+    this.setState({ openArticleId: newOpenArticleId })
   }
 
   render() {
