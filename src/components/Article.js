@@ -4,15 +4,15 @@ import CommentList from './CommentList'
 
 class Article extends PureComponent {
     static propTypes = {
-/*
-        defaultOpen: PropTypes.bool, //if Article is open by default
-*/
+        defaultOpen: PropTypes.bool.isRequired,
+        isOpen: PropTypes.bool.isRequired,
         article: PropTypes.shape({
-//            id: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
-        }).isRequired
+        }).isRequired,
+        onButtonClick: PropTypes.func.isRequired,
     }
 
     constructor(props) {
