@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import MyTypes from '../types'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
@@ -11,6 +13,10 @@ function CommentList(props) {
             {getBody(props)}
         </div>
     )
+}
+
+Comment.propTypes = {
+    comments: MyTypes.CommentListType
 }
 
 function getBody(props) {

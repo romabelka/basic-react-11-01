@@ -1,4 +1,6 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import MyTypes from '../types'
 
 function Comment({comment}) {
     return (
@@ -6,6 +8,10 @@ function Comment({comment}) {
             {comment.text} <b>by {comment.user}</b>
         </div>
     )
+}
+
+Comment.propTypes = {
+    comment: MyTypes.CommentType
 }
 
 /*

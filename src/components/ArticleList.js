@@ -1,10 +1,16 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import MyTypes from '../types'
 import Article from './Article'
+import AccordionClass from './AccordionClass';
 
-class ArticleList extends Component {
+class ArticleList extends AccordionClass {
     state = {
-        error: null,
-        openArticleId: null
+        error: null
+    }
+
+    static propTypes = {
+        articles: MyTypes.ArticleListType
     }
 
     componentDidCatch(error) {
@@ -19,7 +25,7 @@ class ArticleList extends Component {
             <Article article = {article}
                      defaultOpen = {index === 0}
                      isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                     onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
@@ -28,8 +34,6 @@ class ArticleList extends Component {
             </ul>
         )
     }
-
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
 }
 
-export default ArticleList
+export default ArticleList;
