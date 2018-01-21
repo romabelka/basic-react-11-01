@@ -15,7 +15,9 @@ class Accordion extends React.Component {
         return <span />
     }
 
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
+    toggleOpenArticle = (openArticleId) => () => {
+        this.setState({ openArticleId: this.state.openArticleId !== openArticleId ? openArticleId: null })
+    }
 }
 
 export default Accordion

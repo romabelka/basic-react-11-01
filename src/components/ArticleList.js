@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
 import Accordion from './Accordion'
 
 class ArticleList extends Accordion {
+    static propTypes = {
+        articles: PropTypes.array.isRequired
+    }
+
     constructor(props) {
         super(props)
     }
