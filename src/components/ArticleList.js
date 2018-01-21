@@ -1,10 +1,14 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
 // import accordion from '../decorators/accordion'
 import Accordion from './Accordion'
 class ArticleList extends Accordion {
     state = {
         error: null,
+    }
+    static propTypes = {
+        articles: PropTypes.array.isRequired
     }
 
     render() {
