@@ -4,25 +4,15 @@ import CommentList from './CommentList'
 
 class Article extends PureComponent {
     static propTypes = {
-/*
-        defaultOpen: PropTypes.bool, //if Article is open by default
-*/
         article: PropTypes.shape({
-//            id: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
-        }).isRequired
+        }).isRequired,
+        isOpen: PropTypes.bool.isRequired,
+        onButtonClick: PropTypes.func.isRequired
     }
-
-    constructor(props) {
-        super(props)
-
-        this.state = {
-            foo: 'bar'
-        }
-    }
-
     render() {
         console.log('---', 'rerendering')
         const {article, isOpen, onButtonClick} = this.props
@@ -36,7 +26,7 @@ class Article extends PureComponent {
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={(ev) => onButtonClick(ev, article)}>
+                    <button onClick={onButtonClick(article.id)}>
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>

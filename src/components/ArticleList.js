@@ -1,25 +1,21 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
 
+import isOpenHOC from '../decorators/isOpenHOC'
+
 class ArticleList extends Component {
-    state = {
-        error: null,
-        openArticleId: null
+    static propTypes = {
+        articles: PropTypes.array.isRequired,
+        toggleOpenArticle: PropTypes.func.isRequired
     }
-
-    componentDidCatch(error) {
-        console.log('---', 123, error)
-        this.setState({ error })
-    }
-
     render() {
-        if (this.state.error) return <h2>Some error</h2>
-
+        const {openArticleId, toggleOpenArticle} = this.props
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                     isOpen = {article.id === openArticleId}
+                     onButtonClick = {toggleOpenArticle}
             />
         </li>)
         return (
@@ -28,8 +24,6 @@ class ArticleList extends Component {
             </ul>
         )
     }
-
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
 }
 
-export default ArticleList
+export default isOpenHOC(ArticleList)
