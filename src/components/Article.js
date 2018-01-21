@@ -1,18 +1,22 @@
 import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
+import toggleOpen from '../decorators/toggleOpen'
+
+PropTypes.shape.Article = PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string,
+    comments: PropTypes.array
+}).isRequired
 
 class Article extends PureComponent {
     static propTypes = {
-/*
+        article: PropTypes.shape.Article,
         defaultOpen: PropTypes.bool, //if Article is open by default
-*/
-        article: PropTypes.shape({
-//            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string,
-            comments: PropTypes.array
-        }).isRequired
+        isActive: PropTypes.bool,
+        toggleOpen: PropTypes.func,
+        toggleActive: PropTypes.func
     }
 
     constructor(props) {
@@ -23,9 +27,15 @@ class Article extends PureComponent {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+      const {isOpen, isActive, toggleOpen} = nextProps
+      if (isOpen && !isActive) toggleOpen()
+    }
+
     render() {
         console.log('---', 'rerendering')
-        const {article, isOpen, onButtonClick} = this.props
+        const {article, isOpen, toggleOpen, toggleActive} = this.props
+
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
@@ -36,7 +46,10 @@ class Article extends PureComponent {
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={(ev) => onButtonClick(ev, article)}>
+                    <button onClick={() => {
+                      toggleOpen()
+                      toggleActive(article.id)
+                    }}>
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
@@ -49,4 +62,4 @@ class Article extends PureComponent {
 }
 
 
-export default Article
+export default toggleOpen(Article)

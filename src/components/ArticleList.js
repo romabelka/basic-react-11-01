@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
+import toggleActive from '../decorators/toggleActive'
 
 class ArticleList extends Component {
+    static propTypes = {
+      articles: PropTypes.arrayOf(PropTypes.shape.Article).isRequired,
+      toggleActive: PropTypes.func,
+      activeId: PropTypes.string
+    }
+
     state = {
-        error: null,
-        openArticleId: null
+        error: null
     }
 
     componentDidCatch(error) {
@@ -18,8 +25,8 @@ class ArticleList extends Component {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                     isActive = {article.id === this.props.activeId}
+                     toggleActive = {this.props.toggleActive}
             />
         </li>)
         return (
@@ -28,8 +35,6 @@ class ArticleList extends Component {
             </ul>
         )
     }
-
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
 }
 
-export default ArticleList
+export default toggleActive(ArticleList)
