@@ -1,35 +1,72 @@
 import React, { Component } from 'react'
 import Article from './Article'
+//import toggleOpenArticle from '../decorators/toggleOpenArticle'
+import toggleOpenArticle from '../decorators/toggleOpenArticleClass'
 
-class ArticleList extends Component {
-    state = {
-        error: null,
-        openArticleId: null
-    }
+// function ArticleList(props) {
+//     const{openArticleId, toggleOpenArticle} = props;
+//     const articleElements = props.articles.map((article, index) => <li key = {article.id}>
+//         <Article article = {article}
+//             defaultOpen = {index === 0}
+//             isOpen = {article.id === openArticleId}
+//             onButtonClick = {toggleOpenArticle}
+//         />
+//     </li>)
+//     return (
+//         <ul>
+//             {articleElements}
+//         </ul>
+//     )   
+// }
 
-    componentDidCatch(error) {
-        console.log('---', 123, error)
-        this.setState({ error })
-    }
+// export default toggleOpenArticle(ArticleList);
 
-    render() {
-        if (this.state.error) return <h2>Some error</h2>
-
-        const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
+class ArticleList extends toggleOpenArticle {
+    render () {
+        const {openArticleId, toggleOpenArticle} = props;
+        const articleElements = props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
-                     defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                defaultOpen = {index === 0}
+                isOpen = {article.id === openArticleId}
+                onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
             <ul>
                 {articleElements}
             </ul>
-        )
-    }
-
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
+        ) 
+    }  
 }
 
-export default ArticleList
+// class ArticleList extends toggleOpenArticle {
+//     state = {
+//         error: null,
+//         openArticleId: null
+//     }
+
+//     componentDidCatch(error) {
+//         console.log('---', 123, error)
+//         this.setState({ error })
+//     }
+
+//     render() {
+//         if (this.state.error) return <h2>Some error</h2>
+
+//         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
+//             <Article article = {article}
+//                      defaultOpen = {index === 0}
+//                      isOpen = {article.id === this.state.openArticleId}
+//                      onButtonClick = {toggleOpenArticle}
+//             />
+//         </li>)
+//         return (
+//             <ul>
+//                 {articleElements}
+//             </ul>
+//         )
+//     }
+
+//     toggleOpenArticle = (openArticleId ) => () => this.setState({ openArticleId: openArticleId === this.state.openArticleId ? null : openArticleId })
+// }
+
