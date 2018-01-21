@@ -25,7 +25,7 @@ class Article extends PureComponent {
 
     render() {
         console.log('---', 'rerendering')
-        const {article, isOpen, onButtonClick} = this.props
+        const {article, isOpen, toggleOpenArticle} = this.props
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
@@ -36,7 +36,7 @@ class Article extends PureComponent {
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={(ev) => onButtonClick(ev, article)}>
+                    <button onClick={() => toggleOpenArticle(article.id)}>
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
