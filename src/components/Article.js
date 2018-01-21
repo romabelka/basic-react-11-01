@@ -45,7 +45,6 @@ class Article extends PureComponent {
             </div>
         )
     }
-
 }
 
 
