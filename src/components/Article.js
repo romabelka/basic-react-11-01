@@ -8,7 +8,7 @@ class Article extends PureComponent {
         defaultOpen: PropTypes.bool, //if Article is open by default
 */
         article: PropTypes.shape({
-//            id: PropTypes.string.isRequired,
+            id: PropTypes.string.isRequired,
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
@@ -25,6 +25,7 @@ class Article extends PureComponent {
 
     render() {
         console.log('---', 'rerendering')
+
         const {article, isOpen, onButtonClick} = this.props
         const body = isOpen && (
             <div>
@@ -36,7 +37,7 @@ class Article extends PureComponent {
             <div>
                 <h2>
                     {article.title}
-                    <button onClick={(ev) => onButtonClick(ev, article)}>
+                    <button onClick={onButtonClick(article.id)}>
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
@@ -47,6 +48,7 @@ class Article extends PureComponent {
     }
 
 }
+
 
 
 export default Article

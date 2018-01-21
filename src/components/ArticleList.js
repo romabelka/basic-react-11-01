@@ -1,7 +1,20 @@
 import React, { Component } from 'react'
 import Article from './Article'
+import PropTypes from 'prop-types'
+
 
 class ArticleList extends Component {
+    static propTypes = {
+        articles: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          title: PropTypes.string.isRequired,
+          text: PropTypes.string,
+          comments: PropTypes.array
+        }).isRequired
+      ).isRequired
+    }
+
     state = {
         error: null,
         openArticleId: null
@@ -19,7 +32,7 @@ class ArticleList extends Component {
             <Article article = {article}
                      defaultOpen = {index === 0}
                      isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                     onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
@@ -29,7 +42,11 @@ class ArticleList extends Component {
         )
     }
 
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
+    toggleOpenArticle = (openArticleId) => () => {
+    this.setState((prevState) => {
+            return openArticleId === prevState.openArticleId && this.state.openArticleId !== null ? {openArticleId: null} : { openArticleId }
+        })
+    }
 }
 
 export default ArticleList
