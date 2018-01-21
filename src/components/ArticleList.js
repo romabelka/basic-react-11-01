@@ -19,7 +19,7 @@ class ArticleList extends Component {
             <Article article = {article}
                      defaultOpen = {index === 0}
                      isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                     onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
@@ -29,7 +29,13 @@ class ArticleList extends Component {
         )
     }
 
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
+    toggleOpenArticle = (openArticleId) => () => {
+        if(openArticleId !== this.state.openArticleId) {
+            this.setState({ openArticleId })
+        } else {
+            this.setState({ openArticleId: null });
+        }
+    }
 }
 
 export default ArticleList
