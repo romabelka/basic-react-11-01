@@ -1,35 +1,65 @@
 import React, { Component } from 'react'
 import Article from './Article'
+import toggleOpenItem from '../decorators/toggleOpenItem';
+import PropTypes from 'prop-types';
+//import ToggleOpenedItem from "./ToggleOpenedItem";
 
-class ArticleList extends Component {
-    state = {
-        error: null,
-        openArticleId: null
-    }
+function ArticleList(props) {
+  if (props.error) return <h2>Some error</h2>;
 
-    componentDidCatch(error) {
-        console.log('---', 123, error)
-        this.setState({ error })
-    }
+  const {toggleOpenItem, currentItemId} = props;
 
-    render() {
-        if (this.state.error) return <h2>Some error</h2>
+  const articleElements = props.articles.map((article, index) => <li key = {article.id}>
+    <Article article={article}
+             defaultOpen={index === 0}
+             isOpen={article.id === currentItemId}
+             onButtonClick={toggleOpenItem}
+    />
+  </li>);
 
-        const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
-            <Article article = {article}
-                     defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
-            />
-        </li>)
-        return (
-            <ul>
-                {articleElements}
-            </ul>
-        )
-    }
-
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
+  return (
+    <ul>
+      {articleElements}
+    </ul>
+  );
 }
 
-export default ArticleList
+/* Наследование */
+/*class ArticleList extends ToggleOpenedItem {
+    render() {
+      if (this.props.error) return <h2>Some error</h2>;
+
+      const {toggleOpenItem, currentItemId} = this.props;
+
+      console.log('props', this.props);
+      const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
+        <Article article={article}
+                 defaultOpen={index === 0}
+                 isOpen={article.id === currentItemId}
+                 onButtonClick={toggleOpenItem}
+        />
+      </li>);
+
+      return (
+        <ul>
+          {articleElements}
+        </ul>
+      );
+    }
+}*/
+
+
+ArticleList.propTypes = {
+  currentItemId: PropTypes.string,
+  toggleOpenItem: PropTypes.func,
+  articles: PropTypes.arrayOf(
+    PropTypes.shape({
+      article: PropTypes.object,
+      defaultOpen: PropTypes.bool,
+      isOpen: PropTypes.bool,
+      onButtonClick: PropTypes.func
+    })
+  )
+};
+
+export default toggleOpenItem(ArticleList)
