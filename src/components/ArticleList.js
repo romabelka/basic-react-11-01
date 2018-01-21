@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
+import Accordion from './Accordion'
 
-class ArticleList extends Component {
-    state = {
-        error: null,
-        openArticleId: null
+class ArticleList extends Accordion {
+    static propTypes = {
+        articles: PropTypes.array.isRequired
     }
 
-    componentDidCatch(error) {
-        console.log('---', 123, error)
-        this.setState({ error })
+    constructor(props) {
+        super(props)
     }
 
     render() {
@@ -19,7 +19,7 @@ class ArticleList extends Component {
             <Article article = {article}
                      defaultOpen = {index === 0}
                      isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                     onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
@@ -28,8 +28,6 @@ class ArticleList extends Component {
             </ul>
         )
     }
-
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
 }
 
 export default ArticleList
