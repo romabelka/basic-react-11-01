@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Article from './Article';
+import Accordion from './Accordion';
 
-class ArticleList extends Component {
+class ArticleList extends Accordion {
     static propTypes = {
         articles: PropTypes.array.isRequired
-    }
-
-    state = {
-        error: null,
-        openArticleId: null
     }
 
     componentDidCatch(error) {
@@ -34,9 +30,6 @@ class ArticleList extends Component {
         )
     }
 
-    toggleOpenArticle = (openArticleId) => {
-      openArticleId === this.state.openArticleId ? this.setState({ openArticleId: null }) : this.setState({ openArticleId });
-    }
 }
 
 export default ArticleList
