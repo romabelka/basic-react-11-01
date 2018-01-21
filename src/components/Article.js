@@ -1,5 +1,6 @@
 import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
+import MyTypes from '../types'
 import CommentList from './CommentList'
 
 class Article extends PureComponent {
@@ -7,12 +8,7 @@ class Article extends PureComponent {
 /*
         defaultOpen: PropTypes.bool, //if Article is open by default
 */
-        article: PropTypes.shape({
-//            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string,
-            comments: PropTypes.array
-        }).isRequired
+        article: MyTypes.ArticleType.isRequired
     }
 
     constructor(props) {
