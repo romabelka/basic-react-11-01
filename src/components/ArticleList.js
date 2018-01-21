@@ -1,8 +1,13 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
 import accordeon from '../decorators/accordeon'
 
 class ArticleList extends Component {
+    static propTypes = {
+        articles: PropTypes.array
+    }
+
     state = {
         error: null,
     }

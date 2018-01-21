@@ -1,8 +1,13 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
 import ArticleListWrapper from './ArticleListWrapper'
 
 class ArticleListInheritance extends ArticleListWrapper {
+    static propTypes = {
+        articles: PropTypes.array
+    }
+
     constructor(props) {
       super(props)
 
