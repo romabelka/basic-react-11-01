@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import Article from './Article'
+import accordeonBehaviour from '../decorators/accordeonBehaviour';
 
-class ArticleList extends Component {
+class ArticleList extends accordeonBehaviour {
     state = {
         error: null,
-        openArticleId: null
     }
 
     componentDidCatch(error) {
@@ -18,8 +18,8 @@ class ArticleList extends Component {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                     isOpen = {article.id === this.state.itemId}
+                     onButtonClick = {this.toggleItem(article.id)}
             />
         </li>)
         return (
@@ -27,11 +27,6 @@ class ArticleList extends Component {
                 {articleElements}
             </ul>
         )
-    }
-
-    toggleOpenArticle = (openArticleId) => () => {
-      openArticleId = this.state.openArticleId === openArticleId ? undefined : openArticleId;
-      this.setState({ openArticleId });
     }
 }
 
