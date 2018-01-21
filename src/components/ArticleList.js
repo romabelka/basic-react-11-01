@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import MyTypes from '../types'
 import Article from './Article'
-import accordion from '../decorators/accordion';
+import AccordionClass from './AccordionClass';
 
-class ArticleList extends Component {
+class ArticleList extends AccordionClass {
     state = {
         error: null
     }
@@ -24,8 +24,8 @@ class ArticleList extends Component {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      defaultOpen = {index === 0}
-                     isOpen = {article.id === this.props.openArticleId}
-                     onButtonClick = {this.props.toggleOpenArticle}
+                     isOpen = {article.id === this.state.openArticleId}
+                     onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
@@ -36,4 +36,4 @@ class ArticleList extends Component {
     }
 }
 
-export default accordion(ArticleList);
+export default ArticleList;
