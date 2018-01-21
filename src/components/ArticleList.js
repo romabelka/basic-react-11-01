@@ -1,10 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types';
 import Article from './Article'
 import accordeonBehaviour from '../decorators/accordeonBehaviour';
 
 class ArticleList extends accordeonBehaviour {
     state = {
         error: null,
+    }
+
+    static propTypes = {
+        articles: PropTypes.array.isRequired,
     }
 
     componentDidCatch(error) {
@@ -19,7 +24,7 @@ class ArticleList extends accordeonBehaviour {
             <Article article = {article}
                      defaultOpen = {index === 0}
                      isOpen = {article.id === this.state.itemId}
-                     onButtonClick = {this.toggleItem(article.id)}
+                     onButtonClick = {this.toggleItem()}
             />
         </li>)
         return (
