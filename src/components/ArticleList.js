@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import Article from './Article'
+import toggleActive from '../decorators/toggleActive'
 
-import {compose} from '../utils/helpers'
-import Toggler from './Toggler'
-
-class ArticleList extends compose(Toggler, Component) {
+class ArticleList extends Component {
     state = {
         error: null
     }
@@ -20,8 +18,8 @@ class ArticleList extends compose(Toggler, Component) {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.activeId}
-                     onButtonClick = {this.toggleActive}
+                     isActive = {article.id === this.props.activeId}
+                     toggleActive = {this.props.toggleActive}
             />
         </li>)
         return (
@@ -32,4 +30,4 @@ class ArticleList extends compose(Toggler, Component) {
     }
 }
 
-export default ArticleList
+export default toggleActive(ArticleList)
