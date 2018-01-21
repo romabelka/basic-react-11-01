@@ -1,8 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
 import toggleActive from '../decorators/toggleActive'
 
 class ArticleList extends Component {
+    static propTypes = {
+      articles: PropTypes.arrayOf(PropTypes.shape.Article).isRequired,
+      toggleActive: PropTypes.func,
+      activeId: PropTypes.string
+    }
+
     state = {
         error: null
     }

@@ -1,20 +1,22 @@
 import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
-
 import toggleOpen from '../decorators/toggleOpen'
+
+PropTypes.shape.Article = PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    text: PropTypes.string,
+    comments: PropTypes.array
+}).isRequired
 
 class Article extends PureComponent {
     static propTypes = {
-/*
+        article: PropTypes.shape.Article,
         defaultOpen: PropTypes.bool, //if Article is open by default
-*/
-        article: PropTypes.shape({
-//            id: PropTypes.string.isRequired,
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string,
-            comments: PropTypes.array
-        }).isRequired
+        isActive: PropTypes.bool,
+        toggleOpen: PropTypes.func,
+        toggleActive: PropTypes.func
     }
 
     constructor(props) {
