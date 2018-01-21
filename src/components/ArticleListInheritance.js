@@ -1,15 +1,20 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Article from './Article'
-import accordeon from '../decorators/accordeon'
+import ArticleListWrapper from './ArticleListWrapper'
 
-class ArticleList extends Component {
+class ArticleListInheritance extends ArticleListWrapper {
     static propTypes = {
         articles: PropTypes.array
     }
 
-    state = {
-        error: null,
+    constructor(props) {
+      super(props)
+
+      this.state = {
+        ...this.state,
+        error: null
+      }
     }
 
     componentDidCatch(error) {
@@ -23,8 +28,8 @@ class ArticleList extends Component {
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                      defaultOpen = {index === 0}
-                     isOpen = {article.id === this.props.openArticleId}
-                     onButtonClick = {this.props.toggleOpenArticle}
+                     isOpen = {article.id === this.state.openArticleId}
+                     onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
@@ -35,4 +40,4 @@ class ArticleList extends Component {
     }
 }
 
-export default accordeon(ArticleList)
+export default ArticleListInheritance
