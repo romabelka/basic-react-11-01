@@ -1,4 +1,3 @@
-//decorator === HOC
 import React from 'react'
 
 export default (OriginalComponent) => class DecoratedComponent extends React.Component {
