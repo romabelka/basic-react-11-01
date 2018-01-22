@@ -36,7 +36,7 @@ class Article extends PureComponent {
             <div>
                 <h2>
                     {article.title}
-                    <button onClick = {() => onButtonClick(article.id)}>
+                    <button onClick={(ev) => onButtonClick(ev, article)}>
                         {isOpen ? 'close' : 'open'}
                     </button>
                 </h2>
