@@ -24,7 +24,7 @@ class App extends Component {
                 <h1>App name</h1>
                 <UserForm />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleChange} multi />
-                <ArticleList articles = {articles} />
+                <ArticleList articles = {articles} defaultOpenItemId = {articles[0].id}/>
                 <ArticlesChart articles = {articles} />
             </div>
         )
