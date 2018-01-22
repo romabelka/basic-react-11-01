@@ -11,6 +11,7 @@ export default (OriginalComponent) => class DecoratedComponent extends React.Com
     })
 
     render() {
-        return <OriginalComponent {...this.props} {...this.state} toggleOpen = {this.toggleOpen}/>
+        return <OriginalComponent {...this.props} {...this.state} toggleOpen = {this.toggleOpen} />
     }
-}
+
+} 

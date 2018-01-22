@@ -1,6 +1,7 @@
 import React from 'react'
 
 export default (OriginalComponent) => class DecoratedComponent extends React.Component {
+
     state = {
         error: null,
         openArticleId: null
@@ -12,13 +13,15 @@ export default (OriginalComponent) => class DecoratedComponent extends React.Com
     }
 
     toggleOpenArticle = (openArticleId) => () => {
-        this.setState( (prevState) => {
+    this.setState((prevState) => {
             return openArticleId === prevState.openArticleId && this.state.openArticleId !== null ? {openArticleId: null} : { openArticleId }
-        } )
+        })
     }
 
     render() {
         return <OriginalComponent {...this.props} {...this.state} toggleOpenArticle = {this.toggleOpenArticle} />
     }
+
 }
+
 
