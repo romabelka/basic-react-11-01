@@ -18,7 +18,8 @@ class Article extends PureComponent {
         super(props)
 
         this.state = {
-            foo: 'bar'
+            foo: 'bar',
+            count: 0
         }
     }
 
@@ -28,12 +29,12 @@ class Article extends PureComponent {
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
-                <CommentList comments = {article.comments} ref = {this.setCommentsRef} />
+                <CommentList comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
             </div>
         )
         return (
             <div>
-                <h2 ref = {this.setTitleRef}>
+                <h2 ref = {this.setTitleRef} onClick = {this.increment}>
                     {article.title}
                     <button onClick={toggleOpen}>
                         {isOpen ? 'close' : 'open'}
@@ -44,6 +45,10 @@ class Article extends PureComponent {
             </div>
         )
     }
+
+    increment = () => this.setState({
+        count: this.state.count + 1
+    })
 
     setTitleRef = (titleRef) => {
         this.titleRef = titleRef
