@@ -1,7 +1,36 @@
 import React, { Component } from 'react'
 import Article from './Article'
+import PropTypes from 'prop-types'
+//import toggleOpenArticle from '../decorators/toggleOpenArticle'
+import Accordion from '../decorators/toggleOpenArticle'
+/*
 
-class ArticleList extends Component {
+function ArticleList(props) {
+
+    const {toggleOpenArticle, openArticleId} = props
+
+    const articleElements = props.articles.map((article, index) => <li key = {article.id}>
+        <Article article = {article}
+                 isOpen = {article.id === openArticleId}
+                 onButtonClick = {toggleOpenArticle}
+        />
+    </li>)
+    return (
+        <ul>
+            {articleElements}
+        </ul>
+    )
+}
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired,
+    toggleOpenArticle: PropTypes.func,
+    openArticleId: PropTypes.string
+}
+*/
+
+class ArticleList extends Accordion {
+
     state = {
         error: null,
         openArticleId: null
@@ -17,9 +46,10 @@ class ArticleList extends Component {
 
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
-                     defaultOpen = {index === 0}
+                     //defaultOpen = {index === 0}
                      isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+
+                     onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
@@ -29,7 +59,7 @@ class ArticleList extends Component {
         )
     }
 
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
+//    toggleOpenArticle = (openArticleId) => this.setState({openArticleId: this.state.openArticleId !== openArticleId ? openArticleId : null})
 }
 
-export default ArticleList
+export default ArticleList//toggleOpenArticle(ArticleList)
