@@ -1,20 +1,20 @@
 import React from 'react'
 
-export default (OriginalComponent) => class DecoratedComponent extends React.Component {
+export default (Accordeon) => class DecoratedAccordeon extends React.Component {
     state = {
-        openArticleId: null
+        openItemId: null
     }
 
-    toggleOpenArticle = (openArticleId) => () => {
+    toggleOpenArticle = (openItemId) => () => {
         this.setState(state => {
             return {
-                openArticleId: openArticleId === state.openArticleId ? null : openArticleId
+                openItemId: openItemId === state.openItemId ? null : openItemId
             }
         })
     }
 
     render() {
-        return <OriginalComponent {...this.props} {...this.state} toggleOpenArticle = {this.toggleOpenArticle}/>
+        return <Accordeon {...this.props} {...this.state} toggleOpenArticle = {this.toggleOpenArticle}/>
     }
 }
 

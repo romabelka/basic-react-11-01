@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 
 export default class toggleOpenClass extends Component {
     state = {
-        openArticleId: null
+        openItemId: null
     }
 
-    toggleOpenArticle = (openArticleId) => () => {
+    toggleOpenArticle = (openItemId) => () => {
         this.setState(state => {
             return {
-                openArticleId: openArticleId === state.openArticleId ? null : openArticleId
+                openItemId: openItemId === state.openItemId ? null : openItemId
             }
         })
     }

@@ -6,11 +6,11 @@ import toggleOpenClass from '../decorators/toggleOpenArticleClass' //аккор�
 
 //Аккордеон - декоратор
 function ArticleList(props) {
-    const{openArticleId, toggleOpenArticle} = props;
+    const{openItemId, toggleOpenArticle} = props;
     const articleElements = props.articles.map((article, index) => <li key = {article.id}>
         <Article article = {article}
             defaultOpen = {index === 0}
-            isOpen = {article.id === openArticleId}
+            isOpen = {article.id === openItemId}
             onButtonClick = {toggleOpenArticle}
         />
     </li>)
@@ -35,11 +35,11 @@ export default toggleOpenArticle(ArticleList);
 //Аккордеон - наследование
 /* class ArticleList extends toggleOpenClass {
     render () {
-        const {openArticleId} = this.props;
+        const {openItemId} = this.props;
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
                 defaultOpen = {index === 0}
-                isOpen = {article.id === this.state.openArticleId}
+                isOpen = {article.id === this.state.openItemId}
                 onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
