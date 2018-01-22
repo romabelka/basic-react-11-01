@@ -1,27 +1,39 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
-//import toggleOpenArticle from '../decorators/toggleOpenArticle'
-import toggleOpenClass from '../decorators/toggleOpenArticleClass'
+import toggleOpenArticle from '../decorators/toggleOpenArticle' //аккордеон - декоратор
+import toggleOpenClass from '../decorators/toggleOpenArticleClass' //аккордеон - наследование
 
-// function ArticleList(props) {
-//     const{openArticleId, toggleOpenArticle} = props;
-//     const articleElements = props.articles.map((article, index) => <li key = {article.id}>
-//         <Article article = {article}
-//             defaultOpen = {index === 0}
-//             isOpen = {article.id === openArticleId}
-//             onButtonClick = {toggleOpenArticle}
-//         />
-//     </li>)
-//     return (
-//         <ul>
-//             {articleElements}
-//         </ul>
-//     )   
-// }
+//Аккордеон - декоратор
+function ArticleList(props) {
+    const{openArticleId, toggleOpenArticle} = props;
+    const articleElements = props.articles.map((article, index) => <li key = {article.id}>
+        <Article article = {article}
+            defaultOpen = {index === 0}
+            isOpen = {article.id === openArticleId}
+            onButtonClick = {toggleOpenArticle}
+        />
+    </li>)
+    return (
+        <ul>
+            {articleElements}
+        </ul>
+    )   
+}
 
-// export default toggleOpenArticle(ArticleList);
+ArticleList.propTypes = {
+    articles: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string,
+        comments: PropTypes.array
+    }).isRequired)
+}
 
-class ArticleList extends toggleOpenClass {
+export default toggleOpenArticle(ArticleList);
+
+//Аккордеон - наследование
+/* class ArticleList extends toggleOpenClass {
     render () {
         const {openArticleId} = this.props;
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
@@ -39,36 +51,5 @@ class ArticleList extends toggleOpenClass {
     }  
 }
 
-export default ArticleList;
-
-// class ArticleList extends toggleOpenArticle {
-//     state = {
-//         error: null,
-//         openArticleId: null
-//     }
-
-//     componentDidCatch(error) {
-//         console.log('---', 123, error)
-//         this.setState({ error })
-//     }
-
-//     render() {
-//         if (this.state.error) return <h2>Some error</h2>
-
-//         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
-//             <Article article = {article}
-//                      defaultOpen = {index === 0}
-//                      isOpen = {article.id === this.state.openArticleId}
-//                      onButtonClick = {toggleOpenArticle}
-//             />
-//         </li>)
-//         return (
-//             <ul>
-//                 {articleElements}
-//             </ul>
-//         )
-//     }
-
-//     toggleOpenArticle = (openArticleId ) => () => this.setState({ openArticleId: openArticleId === this.state.openArticleId ? null : openArticleId })
-// }
+export default ArticleList; */
 
