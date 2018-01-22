@@ -1,10 +1,10 @@
 import React from 'react'
 
-export default (OriginalComponent) => class DecoratedComponent extends React.Component {
+export default (OriginalComponent) => class AccordionDecorator extends React.Component {
 
     state = {
         error: null,
-        openArticleId: null
+        openItemID: null
     }
 
     componentDidCatch(error) {
@@ -12,9 +12,9 @@ export default (OriginalComponent) => class DecoratedComponent extends React.Com
         this.setState({ error })
     }
 
-    toggleOpenArticle = (openArticleId) => () => {
+    toggleOpenArticle = (openItemID) => () => {
     this.setState((prevState) => {
-            return openArticleId === prevState.openArticleId && this.state.openArticleId !== null ? {openArticleId: null} : { openArticleId }
+            return openItemID === prevState.openItemID && this.state.openItemID !== null ? {openItemID: null} : { openItemID }
         })
     }
 

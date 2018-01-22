@@ -15,12 +15,12 @@ function ArticleList(props) {
         )
 }
 
-function getBody({error, articles, openArticleId, toggleOpenArticle} = props) {
+function getBody({error, articles, openItemID, toggleOpenArticle} = props) {
 
   const articleElements = articles.map((article, index) => <li key = {article.id}>
           <Article article = {article}
                    defaultOpen = {index === 0}
-                   isOpen = {article.id === openArticleId}
+                   isOpen = {article.id === openItemID}
                    onButtonClick = {toggleOpenArticle}
           />
         </li>)
