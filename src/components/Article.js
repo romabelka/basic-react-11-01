@@ -1,4 +1,5 @@
 import React, {Component, PureComponent} from 'react'
+import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import CommentList from './CommentList'
 
@@ -27,12 +28,12 @@ class Article extends PureComponent {
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
-                <CommentList comments = {article.comments} />
+                <CommentList comments = {article.comments} ref = {this.setCommentsRef} />
             </div>
         )
         return (
             <div>
-                <h2>
+                <h2 ref = {this.setTitleRef}>
                     {article.title}
                     <button onClick={toggleOpen}>
                         {isOpen ? 'close' : 'open'}
@@ -42,6 +43,20 @@ class Article extends PureComponent {
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
+    }
+
+    setTitleRef = (titleRef) => {
+        this.titleRef = titleRef
+        console.log('---', titleRef)
+    }
+
+    setCommentsRef = commentsRef => {
+        console.log('---', 'comments', commentsRef, findDOMNode(commentsRef))
+/*
+        setInterval(() => {
+            commentsRef.setState({ isOpen: !commentsRef.state.isOpen })
+        }, 500)
+*/
     }
 
 }
