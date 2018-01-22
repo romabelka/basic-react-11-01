@@ -1,35 +1,55 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
+import toggleOpenArticle from '../decorators/toggleOpenArticle' //аккордеон - декоратор
+import toggleOpenClass from '../decorators/toggleOpenArticleClass' //аккордеон - наследование
 
-class ArticleList extends Component {
-    state = {
-        error: null,
-        openArticleId: null
-    }
+//Аккордеон - декоратор
+function ArticleList(props) {
+    const{openItemId, toggleOpenArticle} = props;
+    const articleElements = props.articles.map((article, index) => <li key = {article.id}>
+        <Article article = {article}
+            defaultOpen = {index === 0}
+            isOpen = {article.id === openItemId}
+            onButtonClick = {toggleOpenArticle}
+        />
+    </li>)
+    return (
+        <ul>
+            {articleElements}
+        </ul>
+    )   
+}
 
-    componentDidCatch(error) {
-        console.log('---', 123, error)
-        this.setState({ error })
-    }
+ArticleList.propTypes = {
+    articles: PropTypes.arrayOf(PropTypes.shape({
+        id: PropTypes.string.isRequired,
+        title: PropTypes.string.isRequired,
+        text: PropTypes.string,
+        comments: PropTypes.array
+    }).isRequired)
+}
 
-    render() {
-        if (this.state.error) return <h2>Some error</h2>
+export default toggleOpenArticle(ArticleList);
 
+//Аккордеон - наследование
+/* class ArticleList extends toggleOpenClass {
+    render () {
+        const {openItemId} = this.props;
         const articleElements = this.props.articles.map((article, index) => <li key = {article.id}>
             <Article article = {article}
-                     defaultOpen = {index === 0}
-                     isOpen = {article.id === this.state.openArticleId}
-                     onButtonClick = {this.toggleOpenArticle(article.id)}
+                defaultOpen = {index === 0}
+                isOpen = {article.id === this.state.openItemId}
+                onButtonClick = {this.toggleOpenArticle}
             />
         </li>)
         return (
             <ul>
                 {articleElements}
             </ul>
-        )
-    }
-
-    toggleOpenArticle = (openArticleId) => () => this.setState({ openArticleId })
+        ) 
+    }  
 }
 
-export default ArticleList
+export default ArticleList; */
+
