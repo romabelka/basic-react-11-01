@@ -1,0 +1,6 @@
+.comment-form input{
+  width: 500px;
+}
+.comment-form input.invalid {
+  background-color: salmon
+}

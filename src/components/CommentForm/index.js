@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import './style.css'
 
 class CommentForm extends Component {
     static propTypes = {
@@ -7,17 +8,19 @@ class CommentForm extends Component {
 
     state = {
         user: '',
-        text: ''
+        text: '',
+        userValidSelector: 'invalid',
+        textValidSelector: 'invalid'
     }
 
     render() {
         return (
-            <div>
+            <div className="comment-form">
                 <div>
-                  Username: <input type = "text" value = {this.state.user} onChange = {this.handleChange.bind(this, 'user')}/>
+                  Username: <input type = "text" className = {this.state.userValidSelector} value = {this.state.user} onChange = {this.handleChange.bind(this, 'user')}/>
                 </div>
                 <div>
-                  Comment: <input type = "text" value = {this.state.text} onChange = {this.handleChange.bind(this, 'text')}/>
+                  Comment: <input type = "text" className = {this.state.textValidSelector} value = {this.state.text} onChange = {this.handleChange.bind(this, 'text')}/>
                 </div>
                 <button onClick={this.addComment.bind(this)}>Ok</button>
                 <button onClick={this.cancel.bind(this)}>Cancel</button>
@@ -27,10 +30,11 @@ class CommentForm extends Component {
 
     handleChange = (field, ev) => {
         const value = ev.target.value
-        if (value.length > 10) return
 
-
-        this.setState({[field] : value})
+        this.setState({
+            [field] : value,
+            [field + 'ValidSelector']: (value.length >= 10 && value.length <= 50) ? '' : 'invalid'
+        })
     }
 
     addComment() {
