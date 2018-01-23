@@ -1,0 +1,7 @@
+.no-valid {
+    border: 3px solid rgb(240, 80, 80);
+}
+
+.valid {
+    border: 1px solid #0e0d0d;
+}
