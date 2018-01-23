@@ -31,13 +31,9 @@ class CommentForm extends Component {
         const name = target.name
         const value = target.value
         this.setState({[name]: value})
-        console.log(value.length)
 
         this.validateLength(value.length) ? manageClass(target, 'remove', 'input-invalid') 
         : manageClass(target, 'add', 'input-invalid')
-               
-        console.log(name, value, this.state)
-
     }
 
     handleClick = ev => {
