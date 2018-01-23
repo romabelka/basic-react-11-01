@@ -12,6 +12,15 @@ class ArticleList extends Accordion {
         super(props)
     }
 
+    state = {
+        error: null
+    }
+
+    componentDidCatch(error) {
+        console.log('---', 123, error)
+        this.setState({ error })
+    }
+
     render() {
         if (this.state.error) return <h2>Some error</h2>
 
