@@ -1,5 +1,7 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
+<<<<<<< HEAD
 import PropTypes from 'prop-types'
 import toggleOpenArticle from '../decorators/toggleOpenArticle'
 
@@ -41,6 +43,35 @@ ArticleList.propTypes = {
           comments: PropTypes.array
         }).isRequired
       ).isRequired
+=======
+import Accordion from './common/Accordion'
+
+class ArticleList extends Accordion {
+    render() {
+        const {articles} = this.props
+        if (!articles.length) return <h3>No Articles</h3>
+        const articleElements = articles.map((article) => <li key={article.id}>
+            <Article article={article}
+                     isOpen={article.id === this.state.openItemId}
+                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
+            />
+        </li>)
+        return (
+            <ul>
+                {articleElements}
+            </ul>
+        )
+    }
+}
+
+
+ArticleList.defaultProps = {
+    articles: []
+}
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired
+>>>>>>> ea4c1ecc0f66bee52e07e5405182d36a6c39aac9
 }
 
 export default toggleOpenArticle(ArticleList)
