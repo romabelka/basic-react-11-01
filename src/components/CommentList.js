@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import AddCommentForm from './AddCommentForm'
 
 function CommentList(props) {
     const {isOpen, toggleOpen} = props
@@ -27,6 +28,7 @@ function getBody(props) {
     return (
         <div>
             {body}
+            <AddCommentForm />
         </div>
     )
 }
