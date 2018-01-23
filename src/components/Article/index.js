@@ -2,7 +2,7 @@ import React, {Component, PureComponent} from 'react'
 import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
-import CommentList from '../CommentList'
+import CommentList from '../Comments/index'
 import './style.css'
 
 class Article extends PureComponent {
