@@ -3,9 +3,11 @@ import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
 import UserForm from './UserForm'
 import Select from 'react-select'
+import DayPicker from 'react-day-picker'
 import articles from '../fixtures'
 
 import 'react-select/dist/react-select.css'
+import 'react-day-picker/lib/style.css'
 
 class App extends Component {
     state = {
@@ -24,6 +26,7 @@ class App extends Component {
                 <h1>App name</h1>
                 <UserForm />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleChange} multi />
+                <DayPicker />
                 <ArticleList articles = {articles} defaultOpenItemId = {articles[0].id}/>
                 <ArticlesChart articles = {articles} />
             </div>
