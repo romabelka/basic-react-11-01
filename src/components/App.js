@@ -22,7 +22,7 @@ class App extends Component {
         return (
             <div>
                 <h1>App name</h1>
-                <UserForm />
+                <UserForm min = {0} max = {10} />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleChange} multi />
                 <ArticleList articles = {articles} defaultOpenItemId = {articles[0].id}/>
                 <ArticlesChart articles = {articles} />
