@@ -32,7 +32,7 @@ class InputField extends Component {
     }
     this.setState({
       inputValue: value,
-      isValid: (value.length > 10 && value.length < 50),
+      isValid: (!value.length || value.length > 10 && value.length < 50),
     })
   }
   
@@ -40,7 +40,7 @@ class InputField extends Component {
     const { label, type, placeholder } = this.props
   
     return (
-      <div className='input-field'>
+      <div className='input-field-holder'>
         <label>{label}:</label>
         {
           type === 'textarea' ?
@@ -48,13 +48,13 @@ class InputField extends Component {
               placeholder={placeholder}
               value={this.state.inputValue}
               onChange={this.handlerValue}
-              className={!this.state.isValid ? 'not-valid' : ''}
+              className={`input-field ${!this.state.isValid ? 'not-valid' : ''}`}
             /> :
             <input
               placeholder={placeholder}
               value={this.state.inputValue}
               onChange={this.handlerValue}
-              className={!this.state.isValid ? 'not-valid' : ''}
+              className={`input-field ${!this.state.isValid ? 'not-valid' : ''}`}
             />
         }
       </div>
