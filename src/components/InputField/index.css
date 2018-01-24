@@ -1,0 +1,18 @@
+.input-field-holder {
+  display: flex;
+  flex-direction: column;
+}
+.input-field-holder label {
+  margin-bottom: 5px;
+}
+.input-field {
+  padding: 10px;
+  font-size: 18px;
+  resize: none;
+  box-shadow: none;
+  outline: none;
+  border: 1px solid gray;
+}
+.input-field.not-valid {
+  border-color: red;
+}
