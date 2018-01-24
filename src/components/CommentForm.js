@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
 
 class CommentForm extends Component {
-    static propTypes = {
-
-    };
 
     state = {
         values: {
@@ -13,7 +10,10 @@ class CommentForm extends Component {
         errorInput: {}
     }
 
+    isError = (nameField) => this.state.errorInput[nameField] ? 'error-input' : '';
+
     render() {
+
         return (
             <fieldset>
                 <legend>Add Your Comment:</legend>
@@ -24,7 +24,7 @@ class CommentForm extends Component {
                         type = "text"
                         value = {this.state.name}
                         onChange = {this.handleChangeValidate('name')}
-                        className = {this.state.errorInput.name ? 'error-input' : ''}
+                        className = {this.isError('name')}
                     />
                 </p>
                 <p>
@@ -33,7 +33,7 @@ class CommentForm extends Component {
                     <textarea
                         value = {this.state.text}
                         onChange = {this.handleChangeValidate('text') }
-                        className = {this.state.errorInput.text ? 'error-input' : ''}>
+                        className = {this.isError('text')}>
                     </textarea>
                 </p>
             </fieldset>
