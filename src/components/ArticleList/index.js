@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
-import Article from './Article'
-import Accordion from './common/Accordion'
+import Article from '../Article'
+import Accordion from '../common/Accordion'
 
 class ArticleList extends Accordion {
     render() {
