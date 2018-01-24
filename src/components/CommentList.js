@@ -15,6 +15,11 @@ class CommentList extends Component {
         comments: []
     }
 
+    state={
+        user: '',
+        text: ''
+    }
+
     render() {
         const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
@@ -38,8 +43,8 @@ class CommentList extends Component {
     
         return (
             <div>
-                <Input label = 'Your name' />
-                <Input label = 'Your text' fieldType= 'textarea' />
+                <Input label = 'Your name' value = {this.state.user} />
+                <Input label = 'Your text' fieldType= 'textarea' value = {this.state.text} />
                 {body}
             </div>
         )

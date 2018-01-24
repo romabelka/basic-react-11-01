@@ -2,7 +2,6 @@ import React from 'react'
 
 export default Component => class Validate extends React.Component {
   state = {
-    value: '',
     valid: false
   }
 
