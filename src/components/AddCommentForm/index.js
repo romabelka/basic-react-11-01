@@ -6,7 +6,6 @@ const AddCommentForm = () => {
     <fieldset>
       <InputField
         label='Name'
-        type='text'
         placeholder='Your name'
       />
       <br/>
