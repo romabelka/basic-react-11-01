@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import RangeDatePicker from '../RangeDatePicker';
 
 import './style.css'
 
@@ -44,6 +45,9 @@ class CommentForm extends Component {
         </label><br />
         <label>Text:
           <textarea name="text" placeholder="Your comment" onBlur={this.handleCommentFormChange} className={'input' + (this.state.errors.text ? '' : ' error')}></textarea>
+        </label>
+        <label>Your comment will be visible on these dates:
+          <RangeDatePicker lang="ru"/>
         </label>
         <input type="submit" value="Send" />
       </form>
