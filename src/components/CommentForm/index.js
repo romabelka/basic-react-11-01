@@ -17,7 +17,7 @@ export default class CommentForm extends Component {
 
   render () {
     return (
-      <div>
+      <form>
         <div>
           <label>
             <div>Name</div>
@@ -43,7 +43,10 @@ export default class CommentForm extends Component {
               onChange = {this.handleInputChange}/>
           </label>
         </div>
-      </div>
+        <div>
+          <button type="submit">Add commentary</button>
+        </div>
+      </form>
     )
   }
 }
