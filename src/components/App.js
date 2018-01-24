@@ -7,6 +7,8 @@ import articles from '../fixtures'
 
 import 'react-select/dist/react-select.css'
 
+// test
+
 class App extends Component {
     state = {
         selected: null
