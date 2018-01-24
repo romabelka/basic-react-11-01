@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Comment from './Comment'
-import toggleOpen from '../decorators/toggleOpen'
+import toggleOpen from '../decorators/toggleOpen';
+import NewComment from './NewComment';
 
 function CommentList(props) {
     const {isOpen, toggleOpen} = props
@@ -27,6 +28,7 @@ function getBody(props) {
     return (
         <div>
             {body}
+            <NewComment />
         </div>
     )
 }
