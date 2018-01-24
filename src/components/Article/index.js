@@ -53,6 +53,7 @@ class Article extends PureComponent {
                     {body}
                 </CSSTransition>
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <hr />
             </div>
         )
     }
