@@ -19,13 +19,14 @@ class Input extends Component {
 
     render() {
         const {label, value, onChange, fieldType, valid} = this.props
+        const className = valid ? 'valid' : 'invalid'
         const body = fieldType === 'textarea' ? (
             <label>
-                {label}: <textarea type = "text" value={value} onChange={onChange} className={valid ? 'valid' : 'invalid'}/>
+                {label}: <textarea type="text" value={value} onChange={onChange} className={className}/>
             </label>
         ) : (
             <label>
-                {label}: <input type = "text" value={value} onChange={onChange} className={valid ? 'valid' : 'invalid'}/>
+                {label}: <input type="text" value={value} onChange={onChange} className={className}/>
             </label>
         )
 
