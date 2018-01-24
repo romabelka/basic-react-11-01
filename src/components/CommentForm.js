@@ -10,7 +10,6 @@ class CommentForm extends Component {
             name: '',
             text: ''
         },
-        // Очень не нравится хранение флагов на каждое поле, но не смог придумать как сделать по-другому
         errorInput: {}
     }
 
