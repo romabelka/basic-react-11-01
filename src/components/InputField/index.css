@@ -1,0 +1,10 @@
+.input-field {
+  display: flex;
+  flex-direction: column;
+}
+.input-field label {
+  margin-bottom: 5px;
+}
+.not-valid {
+  border-color: red;
+}
