@@ -6,8 +6,8 @@ function AddCommentForm() {
     return(
         <div>
             <h5>Add new comment</h5>
-            <UserForm />
-            <TextArea label = "Text:" />
+            <UserForm min = {10} max = {50} />
+            <TextArea min = {10} max = {50} label = "Text:" />
         </div>
     )
 }
