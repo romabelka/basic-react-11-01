@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Comment from './Comment'
+import CommentForm from './CommentForm';
 import toggleOpen from '../decorators/toggleOpen'
 
 function CommentList(props) {
@@ -26,6 +27,7 @@ function getBody(props) {
 
     return (
         <div>
+            <CommentForm />
             {body}
         </div>
     )
