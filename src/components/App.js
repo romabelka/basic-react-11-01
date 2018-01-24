@@ -3,6 +3,7 @@ import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
 import UserForm from './UserForm'
 import Select from 'react-select'
+import Calendar from './Calendar'
 import articles from '../fixtures'
 
 import 'react-select/dist/react-select.css'
@@ -23,6 +24,7 @@ class App extends Component {
             <div>
                 <h1>App name</h1>
                 <UserForm />
+                <Calendar />
                 <Select options = {options} value = {this.state.selected} onChange = {this.handleChange} multi />
                 <ArticleList articles = {articles} defaultOpenItemId = {articles[0].id}/>
                 <ArticlesChart articles = {articles} />
