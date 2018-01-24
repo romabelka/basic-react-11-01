@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Comment from './Comment'
+import CommentForm from './Comment/add'
 import toggleOpen from '../decorators/toggleOpen'
 
 function CommentList(props) {
@@ -12,6 +13,34 @@ function CommentList(props) {
             {getBody(props)}
         </div>
     )
+}
+
+function getFormFields() {
+    return {
+        user: {
+            tagName: 'input',
+            attrs: {
+                type: 'text',
+                className: 'form-control',
+                placeholder: 'Your name'
+            },
+            validate: (value) => {
+                return value.length >= 10 &&
+                       value.length <= 50
+            }
+        },
+        text: {
+            tagName: 'textarea',
+            attrs: {
+                placeholder: 'Your comment',
+                className: 'form-control'
+            },
+            validate: (value) => {
+                return value.length >= 10 &&
+                       value.length <= 50
+            }
+        }
+    }
 }
 
 function getBody(props) {
@@ -27,6 +56,8 @@ function getBody(props) {
     return (
         <div>
             {body}
+            <h4>Добавить комментарий:</h4>
+            <CommentForm fields = {getFormFields()} />
         </div>
     )
 }
