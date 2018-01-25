@@ -1,41 +1,32 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-class Input extends Component {
-    static propTypes = {
-        label: PropTypes.string,
-        name: PropTypes.string,
-        type: PropTypes.string.isRequired
+function Input (props) {
+    const {name, type, placeholder, onChange, value, invalid} = props
+    const attrs = {
+        type,
+        value
     }
 
-    static defaultProps = {
-        label: null,
-        name: null,
-        type: 'text'
-    }
-
-    state = {
-        value: ''
-    }
-
-    render() {
-        const label = this.props.label && (<label>{this.props.label}</label>);
-        const attrs = {
-            type: this.props.type
-        }
-        if(this.props.name) {
-            attrs.name = this.props.name
-        }
-        return (
-            <div>
-                {label}<input {...attrs} value={this.state.user} onChange= {this.handleChange}/>
-            </div>
-        )
-    }
-
-    handleChange = ev => {
-        const value = ev.target.value
-        this.setState({ value })
-    }
+    if(name) attrs.name = name
+    if(placeholder) attrs.placeholder = placeholder
+    if(typeof onChange === 'function') attrs.onChange = onChange
+    if(invalid) attrs.className = 'invalid'
+    return (
+        <input {...attrs} />
+    )
 }
 export default Input
+
+Input.propTypes = {
+    name: PropTypes.string,
+    type: PropTypes.string.isRequired,
+    onChange: PropTypes.func,
+    placeholder: PropTypes.string,
+    value: PropTypes.string
+}
+Input.defaultProps = {
+    name: null,
+    type: 'text',
+    value: ''
+}
