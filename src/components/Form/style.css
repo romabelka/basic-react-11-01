@@ -1,0 +1,16 @@
+form {
+    margin: 10px;
+}
+
+form > div {
+    margin-bottom: 10px;
+}
+
+form label {
+    display: inline-block;
+    min-width: 60px;
+}
+
+.invalid {
+    border: 1px solid red;
+}
