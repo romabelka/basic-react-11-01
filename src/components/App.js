@@ -2,10 +2,8 @@ import React, {Component} from 'react'
 import ArticleList from './ArticleList'
 import ArticlesChart from './ArticlesChart'
 import UserForm from './UserForm'
-import Select from 'react-select'
+import Filters from './Filters'
 import articles from '../fixtures'
-
-import 'react-select/dist/react-select.css'
 
 class App extends Component {
     state = {
@@ -23,7 +21,7 @@ class App extends Component {
             <div>
                 <h1>App name</h1>
                 <UserForm />
-                <Select options = {options} value = {this.state.selected} onChange = {this.handleChange} multi />
+                <Filters articles = {articles}/>
                 <ArticleList articles = {articles} defaultOpenItemId = {articles[0].id}/>
                 <ArticlesChart articles = {articles} />
             </div>
