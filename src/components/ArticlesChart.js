@@ -16,8 +16,8 @@ class ArticlesChart extends Component {
 
     render() {
         //this.refs.container
-        return <div ref = "container"/>
-//        return <div ref = {this.setContainerRef}/>
+//        return <div ref = "container"/>
+        return <div ref = {this.setContainerRef}/>
     }
 
     setContainerRef = container => {

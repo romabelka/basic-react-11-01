@@ -11,7 +11,7 @@ class Accordion extends Component {
         })
     }
 
-    toggleOpenItemMemoized = (openItemId) => {
+    toggleOpenItemMemorized = (openItemId) => {
         if (this.memoizedTogglers.get(openItemId)) return this.memoizedTogglers.get(openItemId)
         const toggler = this.toggleOpenItem(openItemId)
         this.memoizedTogglers.set(openItemId, toggler)

@@ -1,0 +1,7 @@
+.commentForm {
+    color: black;
+}
+
+.commentForm .invalid {
+    color: red;
+}

@@ -1,7 +1,9 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
+import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import CommentForm from './CommentForm'
 
 function CommentList(props) {
     const {isOpen, toggleOpen} = props
@@ -24,10 +26,13 @@ function getBody(props) {
         </ul>
     ) : <h3>No comments yet</h3>
 
+
     return (
         <div>
             {body}
+            <CommentForm />
         </div>
+
     )
 }
 

@@ -10,7 +10,7 @@ class ArticleList extends Accordion {
         const articleElements = articles.map((article) => <li key={article.id}>
             <Article article={article}
                      isOpen={article.id === this.state.openItemId}
-                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
+                     toggleOpen={this.toggleOpenItemMemorized(article.id)}
             />
         </li>)
         return (
