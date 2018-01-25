@@ -1,3 +1,5 @@
+import {INCREMENT} from '../constants'
+
 export default (counterState = 0, action) => {
-    return action.type === 'increment' ? counterState + 1 : counterState
+    return action.type === INCREMENT ? counterState + 1 : counterState
 }
