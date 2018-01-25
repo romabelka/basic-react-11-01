@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import './style.css'
-import {manageClass} from '../common/manageClass'
 
 class CommentForm extends Component {
     static propTypes = {
@@ -31,9 +30,7 @@ class CommentForm extends Component {
         const name = target.name
         const value = target.value
         this.setState({[name]: value})
-
-        this.validateLength(value.length) ? manageClass(target, 'remove', 'input-invalid') 
-        : manageClass(target, 'add', 'input-invalid')
+        this.validateLength(value.length) ? target.className = '' : target.className = 'input-invalid'
     }
 
     handleClick = ev => {

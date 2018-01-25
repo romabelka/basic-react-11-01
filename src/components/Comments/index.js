@@ -7,6 +7,7 @@ import CommentForm from './CommentForm'
 function CommentList(props) {
     const {isOpen, toggleOpen} = props
     const text = isOpen ? 'hide comments' : 'show comments'
+
     return (
         <div>
             <button onClick={toggleOpen}>{text}</button>
