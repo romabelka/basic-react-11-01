@@ -4,9 +4,8 @@ import ArticlesChart from './ArticlesChart'
 import UserForm from './UserForm'
 import Select from 'react-select'
 import articles from '../fixtures'
-import DayPicker from 'react-day-picker';
+import DayPicker from './DayPicker'
 
-import 'react-day-picker/lib/style.css';
 import 'react-select/dist/react-select.css'
 
 // test

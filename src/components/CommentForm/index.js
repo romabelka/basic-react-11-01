@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {findDOMNode} from 'react-dom'
 import './style.css'
 
 class CommentForm extends Component {
