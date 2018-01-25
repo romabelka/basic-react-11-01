@@ -4,4 +4,5 @@
 
 .commentForm .invalid {
     color: red;
+    border-color: red;
 }
