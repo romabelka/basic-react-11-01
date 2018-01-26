@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import Article from './Article'
 import Accordion from './common/Accordion'
 
@@ -30,4 +31,6 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default ArticleList
+export default connect(state => ({
+    articles: state.articles
+}))(ArticleList)
