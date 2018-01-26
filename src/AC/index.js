@@ -13,16 +13,9 @@ export function deleteArticle(id) {
     }
 }
 
-export function selectArticle(selected) {
+export function setFilters(filters) {
     return {
-        type: TYPES.SELECT_ARTICLE,
-        payload: { selected }
-    }
-}
-
-export function selectDateRange(range) {
-    return {
-        type: TYPES.SELECT_DATE_RANGE,
-        payload: { range }
+        type: TYPES.SET_FILTERS,
+        payload: { filters }
     }
 }
