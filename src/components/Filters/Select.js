@@ -13,7 +13,12 @@ class SelectFilter extends Component {
 
     handleChange = selected => {
         const {setFilters} = this.props
-        setFilters({ selected })
+        setFilters({
+            selected: {
+                data: selected,
+                ids: selected.map((o) => o.value)
+            }
+        })
     }
 
     render() {
@@ -25,7 +30,7 @@ class SelectFilter extends Component {
 
         return <Select
             options={options}
-            value={this.props.selected}
+            value={this.props.selected.data}
             onChange={this.handleChange}
             multi
         />

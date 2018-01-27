@@ -1,7 +1,10 @@
 import {SET_FILTERS} from '../constants'
 
 const defaultFilters = {
-    selected: null,
+    selected: {
+        data: [],
+        ids: []
+    },
     range: {
         from: null,
         to: null
