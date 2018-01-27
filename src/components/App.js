@@ -1,14 +1,20 @@
-import React from 'react'
+import React, {Component} from 'react'
 import ArticleList from './ArticleList'
-import articles from '../fixtures'
+import UserForm from './UserForm'
+import Filters from './Filters'
+import Counter from './Counter'
 
-function App() {
-    return (
-        <div>
-            <h1>App name</h1>
-            <ArticleList articles = {articles} />
-        </div>
-    )
+class App extends Component {
+    render() {
+        return (
+            <div>
+                <h1>App name</h1>
+                <UserForm />
+                <Counter />
+                <Filters articles = {[]}/>
+                <ArticleList />
+            </div>
+        )
+    }
 }
-
 export default App

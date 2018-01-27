@@ -1,19 +1,18 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import Article from './Article'
+import Accordion from './common/Accordion'
 
-class ArticleList extends Component {
-    state = {
-        error: null
-    }
-    componentDidCatch(error) {
-        console.log('---', 123, error)
-        this.setState({ error })
-    }
+class ArticleList extends Accordion {
     render() {
-        if (this.state.error) return <h2>Some error</h2>
-
-        const articleElements = this.props.articles.map((article, index) => <li key={article.id}>
-            <Article article = {article} defaultOpen = {index === 0}/>
+        const {articles} = this.props
+        if (!articles.length) return <h3>No Articles</h3>
+        const articleElements = articles.map((article) => <li key={article.id}>
+            <Article article={article}
+                     isOpen={article.id === this.state.openItemId}
+                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
+            />
         </li>)
         return (
             <ul>
@@ -23,4 +22,15 @@ class ArticleList extends Component {
     }
 }
 
-export default ArticleList
+
+ArticleList.defaultProps = {
+    articles: []
+}
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired
+}
+
+export default connect(state => ({
+    articles: state.articles
+}))(ArticleList)
