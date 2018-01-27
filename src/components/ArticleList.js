@@ -31,6 +31,28 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default connect(state => ({
-    articles: state.articles
-}))(ArticleList)
+function getDate(date) {
+    const d = new Date(date)
+    d.setHours(0,0,0,0)
+    return d
+}
+
+function cmpDates(firstDate, secondDate) {
+    return (getDate(firstDate)).getTime() <= (getDate(secondDate)).getTime()
+}
+
+function mapStateToProps(state) {
+    let { articles, filters: { selected, range } } = state
+    return {
+        articles: articles.filter((article) => {
+            let isSelected = !selected.ids.length ||
+                            !!~selected.ids.indexOf(article.id)
+            let isInRange = !range.from || !range.to ||
+                            (cmpDates(range.from, article.date) &&
+                            cmpDates(article.date, range.to))
+            return isSelected && isInRange
+        })
+    }
+}
+
+export default connect(mapStateToProps)(ArticleList)
