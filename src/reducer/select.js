@@ -1,6 +1,6 @@
-import {CHANGE_SELECT} from '../constants'
+import {SET_FILTERS, SELECT} from '../constants'
 
 export default (selectState = null, action) => {
     const {type, payload} = action
-    return type === CHANGE_SELECT ? payload : selectState
+    return type === SET_FILTERS && payload.typeFilter === SELECT ? payload.filters.selectedArticle : selectState
 }

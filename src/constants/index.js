@@ -2,6 +2,8 @@ export const INCREMENT = 'INCREMENT'
 
 export const DELETE_ARTICLE = 'DELETE_ARTICLE'
 
-export const CHANGE_SELECT = 'CHANGE_SELECT'
+export const SET_FILTERS = 'SET_FILTERS'
 
-export const CHANGE_RANGE = 'CHANGE_RANGE'
+export const SELECT = 'SELECT'
+
+export const DATE_RANGE = 'DATE_RANGE'
