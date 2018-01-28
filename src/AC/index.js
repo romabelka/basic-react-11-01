@@ -1,4 +1,4 @@
-import {INCREMENT, DELETE_ARTICLE} from '../constants'
+import {INCREMENT, DELETE_ARTICLE, SET_FILTERS} from '../constants'
 
 export function increment() {
     return {
@@ -10,5 +10,15 @@ export function deleteArticle(id) {
     return {
         type: DELETE_ARTICLE,
         payload: { id }
+    }
+}
+
+export function setFilters(TYPE_FILTER, filters) {
+    return {
+        type: SET_FILTERS,
+        payload: {
+            TYPE_FILTER,
+            filters
+        }
     }
 }

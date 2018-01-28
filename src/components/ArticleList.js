@@ -22,7 +22,6 @@ class ArticleList extends Accordion {
     }
 }
 
-
 ArticleList.defaultProps = {
     articles: []
 }
@@ -31,6 +30,37 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default connect(state => ({
-    articles: state.articles
-}))(ArticleList)
+const isRange = (date, from, to) => {
+    const dateWithoutTime = date && new Date(date.getFullYear(), date.getMonth(), date.getDate())
+    const fromWithoutTime = from && new Date(from.getFullYear(), from.getMonth(), from.getDate())
+    const toWithoutTime = to && new Date(to.getFullYear(), to.getMonth(), to.getDate())
+
+    if (toWithoutTime) {
+      return dateWithoutTime >= fromWithoutTime && dateWithoutTime <= toWithoutTime
+    } else if (fromWithoutTime) {
+      return dateWithoutTime.getTime() == fromWithoutTime.getTime()
+    }
+    return true
+  }
+
+const mapStateToProps = ({articles, filters}) => {
+    return {
+        articles: articles
+        .filter(article => {
+            if (filters.selectedArticle && filters.selectedArticle.length) {
+                return filters.selectedArticle.some(i=>{
+                    return i.value === article.id
+                })
+            }
+            return true
+        })
+        .filter(article => {
+            if (filters.dateRange) {
+                const {from, to} = filters.dateRange
+                return isRange(new Date(article.date), from, to)
+            }
+        })
+    }
+}
+
+export default connect(mapStateToProps)(ArticleList)

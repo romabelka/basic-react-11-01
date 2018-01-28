@@ -11,10 +11,11 @@ class App extends Component {
                 <h1>App name</h1>
                 <UserForm />
                 <Counter />
-                <Filters articles = {[]}/>
+                <Filters />
                 <ArticleList />
             </div>
         )
     }
 }
+
 export default App
