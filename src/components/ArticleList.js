@@ -1,9 +1,11 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import Article from './Article'
 import Accordion from './common/Accordion'
 
 class ArticleList extends Accordion {
+    
     render() {
         const {articles} = this.props
         if (!articles.length) return <h3>No Articles</h3>
@@ -30,4 +32,14 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default ArticleList
+export default connect(({ articles, filters }) => {
+    return {
+        articles: filterArticles(articles, filters)
+    }
+})(ArticleList)
+
+function filterArticles(articles, { from, to, selectedArticles }) {
+    return articles
+        .filter((article) => selectedArticles.length ? selectedArticles.includes(article.id) : true)
+        .filter(article => (!from || Date.parse(article.date) > from) && (!to || Date.parse(article.date) < to))
+}

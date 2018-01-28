@@ -2,6 +2,8 @@ import React, {Component, PureComponent} from 'react'
 import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
+import {connect} from 'react-redux'
+import {deleteArticle} from '../../AC'
 import CommentList from '../Comments/index'
 import './style.css'
 
@@ -41,6 +43,9 @@ class Article extends PureComponent {
                     <button onClick={toggleOpen}>
                         {isOpen ? 'close' : 'open'}
                     </button>
+                    <button onClick = {this.handleDelete}>
+                        delete
+                    </button>
                 </h2>
                 <CSSTransition
                     transitionAppear
@@ -57,13 +62,18 @@ class Article extends PureComponent {
         )
     }
 
+    handleDelete = () => {
+        const {deleteArticle,article} = this.props
+        deleteArticle(article.id)
+    }
+
     increment = () => this.setState({
         count: this.state.count + 1
     })
 
     setTitleRef = (titleRef) => {
         this.titleRef = titleRef
-        console.log('---', titleRef)
+        // console.log('---', titleRef)
     }
 
     setCommentsRef = commentsRef => {
@@ -78,4 +88,4 @@ class Article extends PureComponent {
 }
 
 
-export default Article
+export default connect(null, { deleteArticle })(Article)
