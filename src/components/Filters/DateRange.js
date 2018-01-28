@@ -5,8 +5,14 @@ import 'react-day-picker/lib/style.css'
 
 
 import {connect} from 'react-redux'
-import {selectRangeDateFilter}  from '../../AC'
-// подключим наш AC для фильтра даты 
+// import {selectRangeDateFilter}  from '../../AC'
+// // подключим наш AC для фильтра даты 
+
+
+import { setFilterForArticles }   from '../../AC'
+
+
+
 
 class DateRange extends Component {
     // state = {
@@ -15,10 +21,8 @@ class DateRange extends Component {
     // }
 
     handleDayClick = (day) => {
-         const {selectRangeDateFilter} = this.props
-         selectRangeDateFilter( DateUtils.addDayToRange(day, this.props.range ) )        
-         
-        //              this.setState(DateUtils.addDayToRange(day, this.state))
+         const {setFilterForArticles} = this.props
+         setFilterForArticles({range: DateUtils.addDayToRange(day, this.props.range)})     
     }
     render() {
         const { from, to } = this.props.range
@@ -36,4 +40,4 @@ class DateRange extends Component {
 
 }
 
-export default   connect ( state=> ( { range: state.dateRange } ), { selectRangeDateFilter } )(DateRange)
+export default   connect ( state=> ( { range: state.articlesFilters.range} ), { setFilterForArticles } )(DateRange)

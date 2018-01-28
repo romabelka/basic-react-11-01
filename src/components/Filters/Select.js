@@ -5,8 +5,10 @@ import Select from 'react-select'
 import 'react-select/dist/react-select.css'
 
 import {connect} from 'react-redux'
-import {selectArticleFilter} from '../../AC'
-// подключим AC 
+// import {selectArticleFilter} from '../../AC'
+// // подключим AC 
+import {setFilterForArticles} from '../../AC'
+
 
 
 class SelectFilter extends Component {
@@ -14,14 +16,11 @@ class SelectFilter extends Component {
         articles: PropTypes.array.isRequired
     };
 
-    // state = {
-    //     selected: null
-    // }
 
     handleChange = selected => {
          
-        const  { selectArticleFilter } = this.props
-        selectArticleFilter(selected)
+        const  { setFilterForArticles } = this.props
+        setFilterForArticles({selected})
     
         // this.setState({ selected })
     }
@@ -42,4 +41,7 @@ class SelectFilter extends Component {
     }
 }
 
-export default  connect(state => ({ articles: state.articles, selected: state.select}),  {selectArticleFilter} )(SelectFilter)
+export default  connect(state => ({ 
+    articles: state.articles,
+    selected: state.articlesFilters.selected}), 
+     {setFilterForArticles})(SelectFilter)

@@ -1,4 +1,4 @@
-import { INCREMENT, DELETE_ARTICLE, SELECT_ARTICLE_DATE_FILTER, SELECT_ARTICLE_FILTER } from '../constants'
+import { INCREMENT, DELETE_ARTICLE, SELECT_ARTICLE_DATE_FILTER, SELECT_ARTICLE_FILTER, FILTER_ARCICLES } from '../constants'
 
 export function increment() {
     return {
@@ -12,17 +12,27 @@ export function deleteArticle(id) {
         payload: { id }
     }
 }
-//  action creater for filter      
-export function selectArticleFilter(selected) {
+//  ac for all filter
+export function setFilterForArticles(filter) {
     return {
-        type: SELECT_ARTICLE_FILTER,
-        payload: { selected }
+        type: FILTER_ARCICLES,
+        payload: { filter }
     }
 }
 
-export function selectRangeDateFilter(range) {
-    return {
-        type: SELECT_ARTICLE_DATE_FILTER,
-        payload: { range }
-    }
-}
+
+
+//  action creater for filter      
+// export function selectArticleFilter(selected) {
+//     return {
+//         type: SELECT_ARTICLE_FILTER,
+//         payload: { selected }
+//     }
+// }
+
+// export function selectRangeDateFilter(range) {
+//     return {
+//         type: SELECT_ARTICLE_DATE_FILTER,
+//         payload: { range }
+//     }
+// }
