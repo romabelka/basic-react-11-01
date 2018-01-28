@@ -13,14 +13,14 @@ export function deleteArticle(id) {
     }
 }
 //  action creater for filter      
-export function selectArticleFilter() {
+export function selectArticleFilter(selected) {
     return {
         type: SELECT_ARTICLE_FILTER,
         payload: { selected }
     }
 }
 
-export function selectRangeDateFilter() {
+export function selectRangeDateFilter(range) {
     return {
         type: SELECT_ARTICLE_DATE_FILTER,
         payload: { range }
