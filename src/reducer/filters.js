@@ -1,7 +1,7 @@
-import {FILTER_DATERANGE, FILTER_SELECT} from '../constants'
+import {FILTER_DATERANGE, FILTER_SELECTED} from '../constants'
 
 export default (state = {from: null, to: null, selected: null}, action) => {
-    console.log(JSON.stringify(action.payload))
+//    console.log(JSON.stringify(action.payload))
 
     const {type, payload} = action
 
@@ -12,7 +12,7 @@ export default (state = {from: null, to: null, selected: null}, action) => {
                 selected: state.selected
             };
 
-        case FILTER_SELECT:
+        case FILTER_SELECTED:
             return {
                 ...state,
                 selected: payload.selected

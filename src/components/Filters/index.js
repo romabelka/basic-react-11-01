@@ -8,19 +8,20 @@ class Filters extends Component {
     };
 
     render() {
+        const { from, to } = this.props.filters
         return (
             <div>
                 <SelectFilter articles = {this.props.articles}/>
-                <DateRange {...this.props.filters}/>
+                <DateRange from = {from}
+                           to = {to}/>
+
             </div>
         )
     }
 }
 
-export default connect(storeState => ({
-    articles: storeState.articles,
-    filters: storeState.filters
-}))(Filters)
+
+export default connect( storeState => ({...storeState}) )(Filters)
 
 /*
 export default Filters*/

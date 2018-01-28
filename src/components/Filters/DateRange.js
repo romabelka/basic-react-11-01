@@ -18,9 +18,12 @@ class DateRange extends Component {
 
     handleDayClick = (day) => {
 
-        console.log('handleclick', this.props)
+
+
         const {filterDateRange} = this.props
         filterDateRange(DateUtils.addDayToRange(day, this.props))
+
+
     }
 
 /*    handleDayClick = () => {
@@ -29,6 +32,7 @@ class DateRange extends Component {
     }*/
 
     render() {
+        console.log('DateRange --- \n', this.props)
 //        const { from, to } = this.state
         const { from, to } = this.props
         const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
