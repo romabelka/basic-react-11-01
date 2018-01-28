@@ -6,7 +6,6 @@ import Accordion from './common/Accordion'
 
 class ArticleList extends Accordion {
     render() {
-        console.log('this.props ArticleList--', this.props)
         const {articles} = this.props
         if (!articles.length) return <h3>No Articles</h3>
         const articleElements = articles.map((article) => <li key={article.id}>
@@ -45,7 +44,6 @@ const isRange = (date, from, to) => {
   }
 
 const mapStateToProps = ({articles, filters}) => {
-    console.log('--', filters)
     return {
         articles: articles
         .filter(article => {
