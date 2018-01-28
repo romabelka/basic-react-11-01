@@ -32,5 +32,5 @@ ArticleList.propTypes = {
 }
 
 export default connect(state => ({
-    articles: state.articles
+    articles: state.filteredArticles
 }))(ArticleList)
