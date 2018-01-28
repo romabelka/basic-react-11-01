@@ -9,5 +9,6 @@ export default (articlesState = defaultArticles, action) => {
             return articlesState.filter(article => article.id !== payload.id)
     }
 
+
     return articlesState
 }

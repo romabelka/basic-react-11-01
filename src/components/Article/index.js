@@ -63,7 +63,7 @@ class Article extends PureComponent {
     }
 
     handleDelete = () => {
-        const {deleteArticle,article} = this.props
+        const {deleteArticle, article} = this.props
         deleteArticle(article.id)
     }
 
