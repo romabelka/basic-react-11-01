@@ -6,7 +6,6 @@ import Counter from './Counter'
 
 class App extends Component {
     render() {
-        const {articles} = this.props
         return (
             <div>
                 <h1>App name</h1>
