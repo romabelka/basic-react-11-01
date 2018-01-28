@@ -31,6 +31,35 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default connect(state => ({
-    articles: state.articles
-}))(ArticleList)
+
+
+function mapStateToProps( state )  {
+
+    const {articles, articlesFilters: {selected, range }} = state
+    
+      let selectedIds = selected.map(item => item.value)
+   
+   let filteredArticles = articles.filter(
+       article => {
+        let selectedArticles = !selected.length || selectedIds.includes(article.id)    
+        let articlesInRange = !range.from || !range.to || DateInRange( range.from, range.to, article.date,)
+        return selectedArticles && articlesInRange
+       }
+   )
+
+    return ({articles : filteredArticles })
+}
+
+function convertData(d){
+    return new Date(d).getTime()
+}
+function DateInRange ( from , to , dateAr ){
+    const dateArConvert =convertData(dateAr)
+    const fromConvert =  convertData(from)
+    const toConvert =  convertData(to) 
+    return   fromConvert <= dateArConvert && dateArConvert <= toConvert
+
+}
+
+
+export default connect(mapStateToProps)(ArticleList)
