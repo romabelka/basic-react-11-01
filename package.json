@@ -18,17 +18,19 @@
   },
   "homepage": "https://github.com/romabelka/basic-react-11-01",
   "devDependencies": {
-    "babel-core": "^6.13.2",
-    "babel-loader": "^6.2.4",
-    "babel-preset-env": "^1.6.0",
-    "babel-preset-react": "^6.11.1",
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
-    "webpack": "^3.0.0",
-    "webpack-dev-server": "^2.9.1"
+    "css-loader": "^0.28.9",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.11.1"
   },
   "dependencies": {
-    "css-loader": "^0.28.9",
+    "all": "0.0.0",
     "prop-types": "^15.6.0",
     "react": "^16.0.0",
     "react-addons-css-transition-group": "^15.6.2",
@@ -36,6 +38,7 @@
     "react-dom": "^16.0.0",
     "react-redux": "^5.0.6",
     "react-select": "^1.2.1",
+    "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
     "style-loader": "^0.19.1"
   }
