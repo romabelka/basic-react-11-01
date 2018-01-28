@@ -13,12 +13,13 @@ export function deleteArticle(id) {
     }
 }
 
-export function setFilters(typeFilter, filters) {
+export function setFilters(typeFilter, filters, filterArticles) {
     return {
         type: SET_FILTERS,
         payload: {
             typeFilter,
-            filters
+            filters,
+            filterArticles
         }
     }
 }

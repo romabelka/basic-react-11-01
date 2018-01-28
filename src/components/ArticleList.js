@@ -7,9 +7,10 @@ import {filterArticle} from '../AC'
 
 class ArticleList extends Accordion {
     render() {
-        let {articles} = this.props
-        if (!articles.length) return <h3>No Articles</h3>
-        const articleElements = articles.map((article) => <li key={article.id}>
+        const {articles, filterArticles} = this.props
+        let articleList = filterArticles.length <= articles.length ? filterArticles : articles
+        if (!articleList.length) return <h3>No Articles</h3>
+        const articleElements = articleList.map((article) => <li key={article.id}>
             <Article article={article}
                      isOpen={article.id === this.state.openItemId}
                      toggleOpen={this.toggleOpenItemMemoized(article.id)}
@@ -32,7 +33,7 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default connect(({articles, filters}) => ({
+export default connect(({articles, filterArticles}) => ({
     articles,
-    filters
+    filterArticles
 }))(ArticleList)

@@ -17,7 +17,7 @@ class SelectFilter extends Component {
         const action = setFilters(SELECT, {
             selectedArticle: selected,
             dateRange: this.props.filters.dateRange
-        })
+        }, this.props.articles)
         this.props.dispatch(action)
     }
 
@@ -39,8 +39,9 @@ class SelectFilter extends Component {
     }
 }
 
-const mapStateToProps = ({filters}) => ({
-    filters
+const mapStateToProps = ({filters, articles}) => ({
+    filters,
+    articles
 })
 
 export default connect(mapStateToProps)(SelectFilter)

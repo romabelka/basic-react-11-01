@@ -11,7 +11,7 @@ class DateRange extends Component {
         const action = setFilters(DATE_RANGE, {
             selectedArticle: this.props.filters.selectedArticle,
             dateRange: DateUtils.addDayToRange(day, this.props.filters.dateRange)
-        })
+        }, this.props.articles)
         this.props.dispatch(action)
     }
 
@@ -31,8 +31,9 @@ class DateRange extends Component {
     }
 }
 
-const mapStateToProps = ({filters}) => ({
-    filters
+const mapStateToProps = ({filters, articles}) => ({
+    filters,
+    articles
 })
 
 export default connect(mapStateToProps)(DateRange)
