@@ -9,7 +9,6 @@ import 'react-day-picker/lib/style.css'
 
 class DateRange extends Component {
     static propTypes = {
-        articles: PropTypes.array.isRequired,
         filters: PropTypes.object
     }
 
@@ -17,7 +16,7 @@ class DateRange extends Component {
         const action = setFilters(DATE_RANGE, {
             selectedArticle: this.props.filters.selectedArticle,
             dateRange: DateUtils.addDayToRange(day, this.props.filters.dateRange)
-        }, this.props.articles)
+        })
         this.props.dispatch(action)
     }
 
@@ -36,9 +35,4 @@ class DateRange extends Component {
     }
 }
 
-const mapStateToProps = ({filters, articles}) => ({
-    filters,
-    articles
-})
-
-export default connect(mapStateToProps)(DateRange)
+export default connect(({filters}) => ({filters}))(DateRange)
