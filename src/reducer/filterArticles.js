@@ -27,7 +27,6 @@ export default (filterArticles = defaultArticles, action) => {
           if (payload.filters.dateRange) {
             const {from, to} = payload.filters.dateRange
             let range = isRange(new Date(article.date), from, to)
-            console.log('range--', range)
             result = result && range
           }
           return result

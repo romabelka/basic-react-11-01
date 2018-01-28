@@ -10,8 +10,8 @@ import 'react-select/dist/react-select.css'
 class SelectFilter extends Component {
     static propTypes = {
         articles: PropTypes.array.isRequired,
-        selectedArticle: PropTypes.array
-    };
+        filters: PropTypes.object
+    }
 
     handleChange = selected => {
         const action = setFilters(SELECT, {
@@ -22,7 +22,6 @@ class SelectFilter extends Component {
     }
 
     render() {
-        console.log('render select')
         const { articles } = this.props
         const { selectedArticle } = this.props.filters
         const options = articles.map(article => ({
