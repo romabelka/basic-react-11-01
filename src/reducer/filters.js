@@ -1,6 +1,6 @@
 import {FILTER_DATERANGE, FILTER_SELECT} from '../constants'
 
-export default (state = {from: null, to: null, selected: null}, action) => {
+export default (state = {from: null, to: null, selected: []}, action) => {
     console.log(JSON.stringify(action.payload))
 
     const {type, payload} = action

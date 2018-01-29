@@ -38,4 +38,6 @@ class SelectFilter extends Component {
     }
 }
 
-export default connect(null, { filterSelect })(SelectFilter)
+export default connect(storeState => ({
+    selected: storeState.filters.selected
+}), { filterSelect })(SelectFilter)
