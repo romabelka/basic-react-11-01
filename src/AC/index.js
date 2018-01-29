@@ -1,7 +1,8 @@
 import {
   INCREMENT,
   DELETE_ARTICLE,
-  FILTER_ARTICLES,
+  FILTER_ARTICLES_BY_ID,
+  FILTER_ARTICLES_BY_RANGE,
 } from '../constants'
 
 export function increment() {
@@ -17,9 +18,16 @@ export function deleteArticle(id) {
   }
 }
 
-export function filterArticles(selected) {
+export function filterArticlesById(id) {
   return {
-    type: FILTER_ARTICLES,
-    payload: selected,
+    type: FILTER_ARTICLES_BY_ID,
+    payload: id,
+  }
+}
+
+export function filterArticlesByRange({from, to}) {
+  return {
+    type: FILTER_ARTICLES_BY_RANGE,
+    payload: {from, to},
   }
 }

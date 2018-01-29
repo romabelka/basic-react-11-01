@@ -6,14 +6,18 @@ import Accordion from './common/Accordion'
 
 class ArticleList extends Accordion {
   render() {
-    const {articles, selectedArticles} = this.props
+    const {articles, selectedArticles, datesRange} = this.props
+  
+    const isSelected = (article) => !selectedArticles.length
+      ? true : selectedArticles.find(item => item.value === article.id)
+  
+    const isInDatesRange = (article) => !datesRange
+      ? true : true /* dates logic here */
+    
     if (!articles.length) return <h3>No Articles</h3>
     const articleElements = articles
-      .filter(article => {
-        return !selectedArticles.length
-          ? true
-          : selectedArticles.find(item => item.value === article.id)
-      })
+      .filter(isSelected)
+      .filter(isInDatesRange)
       .map(article =>
         <li key={article.id}>
           <Article article={article}
@@ -21,8 +25,6 @@ class ArticleList extends Accordion {
                    toggleOpen={this.toggleOpenItemMemoized(article.id)}
           />
         </li>)
-    setTimeout(() => console.log('articles', articles), 1000)
-    setTimeout(() => console.log('this.props', this.props), 2000)
     return (
       <ul>
         {articleElements}

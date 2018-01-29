@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 import {connect} from 'react-redux'
-import {filterArticles} from '../../AC'
+import {filterArticlesById} from '../../AC'
 
 import 'react-select/dist/react-select.css'
 
@@ -12,12 +12,7 @@ class SelectFilter extends Component {
   }
   
   handleChange = selected => {
-    this.props.dispatch(filterArticles(selected))
-    const options = this.props.articles.map(article => ({
-      label: article.title,
-      id: article.id
-    }))
-    console.log('options', options)
+    this.props.dispatch(filterArticlesById(selected))
   }
   
   render() {
@@ -27,7 +22,6 @@ class SelectFilter extends Component {
       label: article.title,
       value: article.id
     }))
-    // setTimeout(() => console.log('options', options), 1000)
   
     return <Select
       options={options}
