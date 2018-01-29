@@ -33,6 +33,7 @@ function filterArticles({articles, filters}) {
         return byDate && bySelect
 
     } )
+
 }
 
 

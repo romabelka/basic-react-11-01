@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Select from 'react-select'
 import {connect} from 'react-redux'
-import {filterSelected} from '../../AC'
+import {filterSelect} from '../../AC'
 
 import 'react-select/dist/react-select.css'
 
@@ -17,17 +17,12 @@ class SelectFilter extends Component {
 
     //handleChange = selected => (console.log(selected), this.setState({ selected }))
 
-    handleChange = (selected) => {
-
-        const {filterSelected} = this.props
-        filterSelected(selected)
-
-
-
+    handleChange = () => {
+        const {selectArticles, selected} = this.props
+        selectArticles(selected)
     }
 
     render() {
-        console.log('Select --- \n', this.props)
         const { articles } = this.props
         const options = articles.map(article => ({
             label: article.title,
@@ -44,6 +39,5 @@ class SelectFilter extends Component {
 }
 
 export default connect(storeState => ({
-//    articles: storeState.articles,
     selected: storeState.filters.selected
-}), { filterSelected })(SelectFilter)
+}), { filterSelect })(SelectFilter)
