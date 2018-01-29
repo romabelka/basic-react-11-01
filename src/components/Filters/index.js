@@ -9,6 +9,7 @@ class Filters extends Component {
 
     render() {
         const { from, to } = this.props.filters
+
         return (
             <div>
                 <SelectFilter articles = {this.props.articles}/>

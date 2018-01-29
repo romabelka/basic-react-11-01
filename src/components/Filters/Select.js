@@ -44,6 +44,6 @@ class SelectFilter extends Component {
 }
 
 export default connect(storeState => ({
-    articles: storeState.articles,
+//    articles: storeState.articles,
     selected: storeState.filters.selected
 }), { filterSelected })(SelectFilter)
