@@ -7,7 +7,7 @@ export const idSelector = (_, props) => props.id
 
 export const createCommentSelector = () => createSelector(commentsSelector, idSelector, (comments, id) => {
     console.log('---', 'searching for comment', id)
-    return comments.find(comment => comment.id === id)
+    return comments[id]
 })
 
 export const filtratedArticlesSelector = createSelector(articlesSelector, filtersSelector, (articles, filters) => {
