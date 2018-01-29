@@ -28,7 +28,6 @@ class Article extends PureComponent {
     }
 
     render() {
-        // console.log('---', 'rerendering')
         const {article, isOpen, toggleOpen} = this.props
         const body = isOpen && (
             <div>

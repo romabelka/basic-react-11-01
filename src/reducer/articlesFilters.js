@@ -11,7 +11,6 @@ export default (
   action,
 ) => {
   const {type, payload} = action
-  console.log('articlesFilters: ', articlesFilters)
   switch (type) {
     case FILTER_ARTICLES_BY_ID:
       return {
