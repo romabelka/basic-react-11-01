@@ -9,8 +9,7 @@ class ArticleList extends Accordion {
     const {articles} = this.props
     const {selected, range} = this.props.articlesFilters
   
-    const isSelected = (article) => !selected.length
-      ? true : selected.find(item => item.value === article.id)
+    const isSelected = (article) => selected.find(item => item.value === article.id)
   
     const isInDatesRange = (article) => {
       const {from, to} = range
@@ -23,8 +22,7 @@ class ArticleList extends Accordion {
     
     if (!articles.length) return <h3>No Articles</h3>
     const articleElements = articles
-      .filter(isSelected)
-      .filter(isInDatesRange)
+      .filter(article => isSelected(article) || isInDatesRange(article))
       .map(article =>
         <li key={article.id}>
           <Article article={article}
