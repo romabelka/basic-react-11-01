@@ -7,4 +7,5 @@ export default combineReducers({
     counter,
     articles,
     filters
+
 })
