@@ -23,7 +23,6 @@ class SelectFilter extends Component {
         filterSelected(selected)
 
 
-
     }
 
     render() {
