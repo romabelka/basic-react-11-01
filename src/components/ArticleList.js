@@ -31,7 +31,9 @@ function filterArticles({articles, filters}) {
         const bySelect = !selected.length || selected.map( ({ value }) => value ).includes(id)
 
         return byDate && bySelect
+
     } )
+
 }
 
 

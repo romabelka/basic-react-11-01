@@ -17,17 +17,12 @@ class SelectFilter extends Component {
 
     //handleChange = selected => (console.log(selected), this.setState({ selected }))
 
-    handleChange = (selected) => {
-
-        const {filterSelected} = this.props
+    handleChange = () => {
+        const {filterSelected, selected} = this.props
         filterSelected(selected)
-
-
-
     }
 
     render() {
-        console.log('Select --- \n', this.props)
         const { articles } = this.props
         const options = articles.map(article => ({
             label: article.title,
@@ -44,6 +39,5 @@ class SelectFilter extends Component {
 }
 
 export default connect(storeState => ({
-//    articles: storeState.articles,
     selected: storeState.filters.selected
 }), { filterSelected })(SelectFilter)

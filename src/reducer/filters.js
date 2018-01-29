@@ -1,23 +1,21 @@
-import {FILTER_DATERANGE, FILTER_SELECTED} from '../constants'
-import defaultArticles from '../fixtures'
+import {FILTER_DATERANGE, FILTER_SELECT} from '../constants'
 
 export default (state = {from: null, to: null, selected: []}, action) => {
-//    console.log(JSON.stringify(action.payload))
+    console.log(JSON.stringify(action.payload))
 
     const {type, payload} = action
-
 
     switch (type) {
         case FILTER_DATERANGE:
             return {
                 ...payload,
-                selected: state.selected,
+                selected: state.selected
             };
 
-        case FILTER_SELECTED:
+        case FILTER_SELECT:
             return {
                 ...state,
-                selected: payload.selected,
+                selected: payload.selected
             }
     }
 
