@@ -11,14 +11,13 @@ class SelectFilter extends Component {
         articles: PropTypes.array.isRequired
     };
 
-    state = {
-        selected: null
+    handleChange = selected => {
+        const {selectArticle} = this.props
+        selectArticle(selected)
     }
 
-    handleChange = selected => this.setState({ selected })
-
     render() {
-        const { articles } = this.props
+        const { articles, selected } = this.props
         const options = articles.map(article => ({
             label: article.title,
             value: article.id
@@ -26,7 +25,7 @@ class SelectFilter extends Component {
 
         return <Select
             options={options}
-            value={this.state.selected}
+            value={selected}
             onChange={this.handleChange}
             multi
         />
