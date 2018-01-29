@@ -27,13 +27,11 @@ function filterArticles({articles, filters}) {
     const {from, to, selected} = filters;
 
     return articles.filter( ({date, id}) => {
-        const byDate = !from && !to || new Date(date) >= from && new Date(date) < to;
+        const byDate = !from && !to || new Date(date) >= from && new Date(date) <= to;
         const bySelect = !selected.length || selected.map( ({ value }) => value ).includes(id)
 
         return byDate && bySelect
-
     } )
-
 }
 
 
