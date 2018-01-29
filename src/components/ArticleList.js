@@ -6,13 +6,20 @@ import Accordion from './common/Accordion'
 
 class ArticleList extends Accordion {
   render() {
-    const {articles, articlesFilters} = this.props
+    const {articles} = this.props
+    const {selected, range} = this.props.articlesFilters
   
-    const isSelected = (article) => !articlesFilters.selected.length
-      ? true : articlesFilters.selected.find(item => item.value === article.id)
+    const isSelected = (article) => !selected.length
+      ? true : selected.find(item => item.value === article.id)
   
-    const isInDatesRange = (article) => !articlesFilters.datesRange
-      ? true : true /* dates logic here */
+    const isInDatesRange = (article) => {
+      const {from, to} = range
+      if (!from || !to) {
+        return true
+      }
+      const articleDate = new Date(article.date)
+      return articleDate >= from && articleDate <= to
+    }
     
     if (!articles.length) return <h3>No Articles</h3>
     const articleElements = articles

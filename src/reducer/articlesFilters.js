@@ -1,6 +1,15 @@
 import {FILTER_ARTICLES_BY_ID, FILTER_ARTICLES_BY_RANGE} from '../constants'
 
-export default (articlesFilters = {selected: [], range: {from: null, to: null}}, action) => {
+export default (
+  articlesFilters = {
+    selected: [],
+    range: {
+      from: null,
+      to: null
+    }
+  },
+  action,
+) => {
   const {type, payload} = action
   console.log('articlesFilters: ', articlesFilters)
   switch (type) {
