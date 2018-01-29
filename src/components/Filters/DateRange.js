@@ -14,22 +14,12 @@ class DateRange extends Component {
     }
 */
 
-//    handleDayClick = (day) => this.setState(DateUtils.addDayToRange(day, this.state))
-
     handleDayClick = (day) => {
-
-
 
         const {filterDateRange} = this.props
         filterDateRange(DateUtils.addDayToRange(day, this.props))
 
-
     }
-
-/*    handleDayClick = () => {
-        const {filterDateRange, range} = this.props
-        filterDateRange(range)
-    }*/
 
     render() {
         console.log('DateRange --- \n', this.props)
@@ -48,14 +38,6 @@ class DateRange extends Component {
     }
 
 }
-/*
-
-const mapStateToProps = (storeState) => ({
-    range: storeState.filters
-})
-
-export default connect(mapStateToProps)(DateRange)
-*/
 
 
 export default connect(null, { filterDateRange })(DateRange)
