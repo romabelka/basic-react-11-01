@@ -5,7 +5,6 @@ export default (selectedArticles = [], action) => {
   
   switch (type) {
     case FILTER_ARTICLES:
-      console.log('FILTER_ARTICLE: ', payload)
       return payload
     default:
       return selectedArticles

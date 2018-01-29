@@ -5,32 +5,42 @@ import Article from './Article'
 import Accordion from './common/Accordion'
 
 class ArticleList extends Accordion {
-    render() {
-        const {articles} = this.props
-        if (!articles.length) return <h3>No Articles</h3>
-        const articleElements = articles.map((article) => <li key={article.id}>
-            <Article article={article}
-                     isOpen={article.id === this.state.openItemId}
-                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
-            />
+  render() {
+    const {articles, selectedArticles} = this.props
+    if (!articles.length) return <h3>No Articles</h3>
+    const articleElements = articles
+      .filter(article => {
+        return !selectedArticles.length
+          ? true
+          : selectedArticles.find(item => item.value === article.id)
+      })
+      .map(article =>
+        <li key={article.id}>
+          <Article article={article}
+                   isOpen={article.id === this.state.openItemId}
+                   toggleOpen={this.toggleOpenItemMemoized(article.id)}
+          />
         </li>)
-        return (
-            <ul>
-                {articleElements}
-            </ul>
-        )
-    }
+    setTimeout(() => console.log('articles', articles), 1000)
+    setTimeout(() => console.log('this.props', this.props), 2000)
+    return (
+      <ul>
+        {articleElements}
+      </ul>
+    )
+  }
 }
 
 
 ArticleList.defaultProps = {
-    articles: []
+  articles: []
 }
 
 ArticleList.propTypes = {
-    articles: PropTypes.array.isRequired
+  articles: PropTypes.array.isRequired
 }
 
 export default connect(state => ({
-    articles: state.articles
+  articles: state.articles,
+  selectedArticles: state.selectedArticles,
 }))(ArticleList)

@@ -28,7 +28,7 @@ class Article extends PureComponent {
     }
 
     render() {
-        console.log('---', 'rerendering')
+        // console.log('---', 'rerendering')
         const {article, isOpen, toggleOpen} = this.props
         const body = isOpen && (
             <div>
@@ -73,11 +73,11 @@ class Article extends PureComponent {
 
     setTitleRef = (titleRef) => {
         this.titleRef = titleRef
-        console.log('---', titleRef)
+        // console.log('---', titleRef)
     }
 
     setCommentsRef = commentsRef => {
-        console.log('---', 'comments', commentsRef, findDOMNode(commentsRef))
+        // console.log('---', 'comments', commentsRef, findDOMNode(commentsRef))
 /*
         setInterval(() => {
             commentsRef.setState({ isOpen: !commentsRef.state.isOpen })

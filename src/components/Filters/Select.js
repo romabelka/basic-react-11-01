@@ -13,6 +13,11 @@ class SelectFilter extends Component {
   
   handleChange = selected => {
     this.props.dispatch(filterArticles(selected))
+    const options = this.props.articles.map(article => ({
+      label: article.title,
+      id: article.id
+    }))
+    console.log('options', options)
   }
   
   render() {
@@ -22,7 +27,8 @@ class SelectFilter extends Component {
       label: article.title,
       value: article.id
     }))
-    
+    // setTimeout(() => console.log('options', options), 1000)
+  
     return <Select
       options={options}
       value={selectedArticles}
