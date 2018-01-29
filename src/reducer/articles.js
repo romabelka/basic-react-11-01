@@ -1,8 +1,8 @@
-import {DELETE_ARTICLE} from '../constants'
+import { DELETE_ARTICLE } from '../constants'
 import defaultArticles from '../fixtures'
 
 export default (articlesState = defaultArticles, action) => {
-    const {type, payload} = action
+    const { type, payload } = action
 
     switch (type) {
         case DELETE_ARTICLE:
