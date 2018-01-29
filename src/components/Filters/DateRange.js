@@ -6,17 +6,20 @@ import {filterArticlesByRange} from '../../AC'
 import 'react-day-picker/lib/style.css'
 
 class DateRange extends Component {
-  state = {
-    from: null,
-    to: null
-  }
+  // state = {
+  //   from: null,
+  //   to: null
+  // }
   
   handleDayClick = (day) => {
-    this.setState(DateUtils.addDayToRange(day, this.state))
+    this.props.dispatch(
+      filterArticlesByRange(DateUtils.addDayToRange(day, this.props.range))
+    )
   }
   
   render() {
-    const {from, to} = this.state
+    const {from, to} = this.props.range
+    console.log('this.props.range', this.props.range)
     const selectedRange = from && to && `${from.toDateString()} - ${to.toDateString()}`
     return (
       <div className="date-range">
@@ -31,4 +34,6 @@ class DateRange extends Component {
   
 }
 
-export default connect()(DateRange)
+export default connect((storeState) => ({
+  range: storeState.articlesFilters.range,
+}))(DateRange)
