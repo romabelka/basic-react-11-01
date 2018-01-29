@@ -22,7 +22,6 @@ class SelectFilter extends Component {
         const {filterSelected} = this.props
         filterSelected(selected)
 
-
     }
 
     render() {
