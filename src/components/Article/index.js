@@ -73,11 +73,9 @@ class Article extends PureComponent {
 
     setTitleRef = (titleRef) => {
         this.titleRef = titleRef
-        console.log('---', titleRef)
     }
 
     setCommentsRef = commentsRef => {
-        console.log('---', 'comments', commentsRef, findDOMNode(commentsRef))
 /*
         setInterval(() => {
             commentsRef.setState({ isOpen: !commentsRef.state.isOpen })
