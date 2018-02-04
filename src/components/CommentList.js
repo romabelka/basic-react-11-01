@@ -12,6 +12,10 @@ class CommentList extends Component {
         toggleOpen: PropTypes.func
     }
 
+    static defaultProps = {
+        comments: []
+    }
+
     render() {
         const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
@@ -24,7 +28,7 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {comments, isOpen} = this.props
+        const {comments, isOpen, articleId} = this.props
         if (!isOpen) return null
 
         const body = comments.length ? (
@@ -36,7 +40,7 @@ class CommentList extends Component {
         return (
             <div>
                 {body}
-                <CommentForm />
+                <CommentForm articleId={articleId} />
             </div>
         )
     }

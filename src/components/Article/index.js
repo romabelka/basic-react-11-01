@@ -5,15 +5,13 @@ import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import {deleteArticle} from '../../AC'
+import {createFiltratedArticlesSelector} from '../../selectors'
 import './style.css'
 
 class Article extends PureComponent {
     static propTypes = {
-        article: PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string,
-            comments: PropTypes.array
-        }).isRequired,
+        id: PropTypes.string.isRequired,
+        article: PropTypes.object.isRequired,
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }
@@ -30,10 +28,13 @@ class Article extends PureComponent {
     render() {
         console.log('---', 'rerendering')
         const {article, isOpen, toggleOpen} = this.props
+
+        if(!Object.keys(article).length) return null
+
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
-                <CommentList comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
+                <CommentList articleId = {article.id} comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
             </div>
         )
         return (
@@ -63,8 +64,8 @@ class Article extends PureComponent {
     }
 
     handleDelete = () => {
-        const {deleteArticle,article} = this.props
-        deleteArticle(article.id)
+        const {deleteArticle, id} = this.props
+        deleteArticle(id)
     }
 
     increment = () => this.setState({
@@ -85,5 +86,14 @@ class Article extends PureComponent {
 
 }
 
+const mapStateToProps = (state, ownProps) => {
+    const filtratedArticlesSelector = createFiltratedArticlesSelector()
+    return (state, ownProps) => {
+        return {
+            article: filtratedArticlesSelector(state, ownProps)
+        }
+    }
+}
 
-export default connect(null, { deleteArticle })(Article)
+
+export default connect(mapStateToProps, { deleteArticle })(Article)
