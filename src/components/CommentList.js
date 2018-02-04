@@ -10,7 +10,11 @@ class CommentList extends Component {
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
-    }
+    };
+
+    static defaultProps = {
+        comments: []
+    };
 
     render() {
         const {isOpen, toggleOpen} = this.props
@@ -36,7 +40,7 @@ class CommentList extends Component {
         return (
             <div>
                 {body}
-                <CommentForm />
+                <CommentForm targetArticle = {this.props.targetArticle}/>
             </div>
         )
     }

@@ -10,13 +10,19 @@ export const createCommentSelector = () => createSelector(commentsSelector, idSe
     return comments[id]
 })
 
+export const createArticleSelector = () => createSelector(articlesSelector, idSelector, (articles, id) => {
+    console.log('---', 'searching for article', id)
+    return articles[id]
+})
+
 export const filtratedArticlesSelector = createSelector(articlesSelector, filtersSelector, (articles, filters) => {
     console.log('---', 'computing filters')
     const {selected, dateRange: {from, to}} = filters
 
-    return articles.filter(article => {
+    return Object.values(articles).filter(article => {
         const published = Date.parse(article.date)
         return (!selected.length || selected.includes(article.id)) &&
             (!from || !to || (published > from && published < to))
     })
 })
+
