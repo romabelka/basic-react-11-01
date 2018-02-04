@@ -30,11 +30,11 @@ class Article extends PureComponent {
 
     render() {
         console.log('---', 'rerendering')
-        const {article, isOpen, toggleOpen} = this.props
+        const {article, isOpen, toggleOpen, id} = this.props
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
-                <CommentList comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
+                <CommentList articleId = {id} comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
             </div>
         )
         return (
