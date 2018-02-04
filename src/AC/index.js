@@ -1,8 +1,15 @@
-import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION} from '../constants'
+import {INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT, OPEN_ARTICLE} from '../constants'
 
 export function increment() {
     return {
         type: INCREMENT
+    }
+}
+
+export function openArticle(id) {
+    return {
+        type: OPEN_ARTICLE,
+        payload: { id }
     }
 }
 
@@ -24,5 +31,12 @@ export function changeSelection(selected) {
     return {
         type: CHANGE_SELECTION,
         payload: { selected }
+    }
+}
+
+export function addComment(comment) {
+    return {
+        type: ADD_COMMENT,
+        payload: { comment }
     }
 }

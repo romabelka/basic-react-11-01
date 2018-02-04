@@ -10,9 +10,9 @@ class ArticleList extends Accordion {
         console.log('---', 'rerendering article list')
         const {articles} = this.props
         if (!articles.length) return <h3>No Articles</h3>
-        const articleElements = articles.map((article) => <li key={article.id}>
+        const articleElements = Object.values(articles).map((article) => <li key={article.id}>
             <Article article={article}
-                     isOpen={article.id === this.state.openItemId}
+                     isOpen={article.id === this.props.openItemId}
                      toggleOpen={this.toggleOpenItemMemoized(article.id)}
             />
         </li>)
@@ -36,6 +36,7 @@ ArticleList.propTypes = {
 export default connect(state => {
     console.log('---', 'connect updated')
     return {
+        openItemId: state.openArticleId,
         articles: filtratedArticlesSelector(state)
     }
 })(ArticleList)
