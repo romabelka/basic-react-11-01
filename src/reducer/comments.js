@@ -1,4 +1,4 @@
-import {  } from '../constants'
+import { ADD_COMMENT } from '../constants'
 import {normalizedComments as defaultComments} from '../fixtures'
 
 const commentsMap = defaultComments.reduce((acc, comment) => ({
@@ -7,10 +7,11 @@ const commentsMap = defaultComments.reduce((acc, comment) => ({
 }), {})
 
 export default (state = commentsMap, action) => {
-    const { type } = action
+    const { type, payload } = action
 
-    switch (type) {
-
+    if (type === ADD_COMMENT) {
+        const {id, comment} = payload
+        return {...state, [id]: {...comment, id}}
     }
 
     return state

@@ -10,10 +10,10 @@ class ArticleList extends Accordion {
         console.log('---', 'rerendering article list')
         const {articles} = this.props
         if (!articles.length) return <h3>No Articles</h3>
-        const articleElements = articles.map((article) => <li key={article.id}>
-            <Article article={article}
-                     isOpen={article.id === this.state.openItemId}
-                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
+        const articleElements = articles.map(id => <li key={id}>
+            <Article id={id}
+                     isOpen={id === this.state.openItemId}
+                     toggleOpen={this.toggleOpenItemMemoized(id)}
             />
         </li>)
         return (
