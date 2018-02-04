@@ -7,16 +7,18 @@ import CommentList from '../CommentList'
 import {deleteArticle} from '../../AC'
 import './style.css'
 
+import {createArticleSelector}  from  '../../selectors'
+
 class Article extends PureComponent {
-    static propTypes = {
-        article: PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            text: PropTypes.string,
-            comments: PropTypes.array
-        }).isRequired,
-        isOpen: PropTypes.bool,
-        toggleOpen: PropTypes.func
-    }
+    // static propTypes = {
+    //     article: PropTypes.shape({
+    //         title: PropTypes.string.isRequired,
+    //         text: PropTypes.string,
+    //         comments: PropTypes.array
+    //     }).isRequired,
+    //     isOpen: PropTypes.bool,
+    //     toggleOpen: PropTypes.func
+    // }
 
     constructor(props) {
         super(props)
@@ -84,6 +86,28 @@ class Article extends PureComponent {
     }
 
 }
+const createMapStateToProps = (state, ownProps) =>{
+
+    const articleSelector = createArticleSelector()
+    
+    return ( state, ownProps )  => {
+        return {
+            article: articleSelector(state , ownProps)
+        }
+    }
 
 
-export default connect(null, { deleteArticle })(Article)
+}
+
+// const createMapStateToProps = () => {
+//     const commentSelector = createCommentSelector()
+//     return (state, ownProps) => {
+//         return {
+//             comment: commentSelector(state, ownProps)
+//         }
+//     }
+// }
+
+
+// export default connect(createMapStateToProps)(Article)
+export default connect(createMapStateToProps, { deleteArticle })(Article) 
