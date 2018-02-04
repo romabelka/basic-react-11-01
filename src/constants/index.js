@@ -8,3 +8,5 @@ export const CHANGE_DATE_RANGE = 'CHANGE_DATE_RANGE'
 
 
 export const ADD_NEW_COMMENT = 'ADD_NEW_COMMENT'
+
+export const ADD_NEW_ID_COMMENT_TO_ARCTICLE = "ADD_NEW_ID_COMMENT_TO_ARCTICLE" // это врятли получится

@@ -1,4 +1,4 @@
-import { DELETE_ARTICLE } from '../constants'
+import { DELETE_ARTICLE, ADD_NEW_ID_COMMENT_TO_ARCTICLE } from '../constants'
 import { normalizedArticles as defaultArticles } from '../fixtures'
 
 
@@ -20,7 +20,13 @@ export default (articlesState = articleMap, action) => {
             }, {})
 
             return articles
+        case ADD_NEW_ID_COMMENT_TO_ARCTICLE:
+            console.log("  тут будет логика добавления ")
 
+
+
+
+            return articlesState
 
 
             // return articlesState.filter(article => article.id !== payload.id)

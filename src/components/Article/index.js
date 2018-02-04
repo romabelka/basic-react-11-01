@@ -35,7 +35,7 @@ class Article extends PureComponent {
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
-                <CommentList comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
+                <CommentList  idarticle = {article.id}  comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
             </div>
         )
         return (

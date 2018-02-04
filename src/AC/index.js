@@ -1,4 +1,4 @@
-import { INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_NEW_COMMENT } from '../constants'
+import { INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_NEW_COMMENT, ADD_NEW_ID_COMMENT_TO_ARCTICLE } from '../constants'
 
 export function increment() {
     return {
@@ -34,4 +34,11 @@ export function addNewComment(id, comment) {
         payload: { id, comment }
     }
 
+}
+
+export function addIdNewCommentToArticle(idarcticle) {
+    return {
+        type: ADD_NEW_ID_COMMENT_TO_ARCTICLE,
+        payload: { idarcticle }
+    }
 }
