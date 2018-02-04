@@ -12,12 +12,12 @@ export default (state = commentsMap, action) => {
     switch (type) {
         case ADD_NEW_COMMENT:
             {
-                console.log("==new data" + action.payload.id)
+                // console.log("==new data" + action.payload.id)
                 // return state
 
                 return {
                     ...state,
-                    [action.payload.id]: { user: action.payload.comment.user, text: action.payload.comment.text }
+                    [action.payload.id]: { id: action.payload.id, user: action.payload.comment.user, text: action.payload.comment.text }
                 }
 
             }
