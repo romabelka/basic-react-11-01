@@ -13,7 +13,17 @@ export default (articlesState = articleMap, action) => {
     /// исправить потом
     switch (type) {
         case DELETE_ARTICLE:
-            return articlesState //.filter(article => article.id !== payload.id)
+
+            const articles = Object.keys(articlesState).reduce((obj, key) => {
+                if (key !== payload.id) return {...obj, [key]: articlesState[key] }
+                return obj
+            }, {})
+
+            return articles
+
+
+
+            // return articlesState.filter(article => article.id !== payload.id)
     }
 
     return articlesState
