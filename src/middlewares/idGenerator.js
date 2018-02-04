@@ -14,7 +14,12 @@ export default store => next => action => {
         return result;
     }
 
-    console.log('--- new id: ', genId(10))
+    switch (action.type) {
+        case ADD_COMMENT:
+            action.payload.id = genId(10)
+            action.payload.articleId = store.getState().openArticleId
+            break;
+    }
 
     next(action)
 }

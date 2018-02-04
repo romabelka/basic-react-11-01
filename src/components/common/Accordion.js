@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import {openArticle} from '../../AC'
+import store from '../../store'
 
 class Accordion extends Component {
     state = {
@@ -6,9 +8,7 @@ class Accordion extends Component {
     }
 
     toggleOpenItem = openItemId => ev => {
-        this.setState({
-            openItemId: openItemId === this.state.openItemId ? null : openItemId
-        })
+        store.dispatch(openArticle(openItemId === this.props.openItemId ? null : openItemId))
     }
 
     toggleOpenItemMemoized = (openItemId) => {
