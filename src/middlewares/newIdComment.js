@@ -13,9 +13,12 @@ export default store => next => action => {
 
 
     if (action.type === ADD_NEW_COMMENT) {
-        console.log("new id" + randId())
-    }
 
+        console.log("new id" + randId())
+
+        action.payload.id = randId()
+    }
+    console.log('--- new   pay  ac', action)
 
 
     next(action)
