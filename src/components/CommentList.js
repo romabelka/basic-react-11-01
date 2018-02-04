@@ -13,30 +13,35 @@ class CommentList extends Component {
     }
 
     render() {
-        const {isOpen, toggleOpen} = this.props
-        const text = isOpen ? 'hide comments' : 'show comments'
+        const {isOpen, toggleOpen, idarticle } = this.props
+        const text = isOpen ? 'hide comments' : 'show comments' 
+     
         return (
             <div>
                 <button onClick={toggleOpen}>{text}</button>
-                {this.getBody()}
+                {this.getBody(idarticle)}
             </div>
         )
     }
 
-    getBody() {
+    getBody(idarticle) {
         const {comments, isOpen} = this.props
         if (!isOpen) return null
 
         const body = comments.length ? (
             <ul>
-                {comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
+                {comments.map(id => <li key = {id}><Comment  id = {id} /></li>)}
             </ul>
         ) : <h3>No comments yet</h3>
 
-        return (
-            <div>
+       
+
+        // console.log("idarticle------------" +  idarticle)  
+        return ( 
+          
+             <div>
                 {body}
-                <CommentForm />
+                <CommentForm  idarticle = { idarticle} />
             </div>
         )
     }

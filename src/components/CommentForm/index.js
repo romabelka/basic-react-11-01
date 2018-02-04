@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import './style.css'
 
+import {connect} from 'react-redux'
+import  {addNewComment, addIdNewCommentToArticle} from '../../AC'
+
+
+
 class CommentForm extends Component {
     static propTypes = {
     };
@@ -30,6 +35,14 @@ class CommentForm extends Component {
             user: '',
             text: ''
         })
+         const {addNewComment, addIdNewCommentToArticle ,  idarticle }  = this.props    // подключим нашу функцию из пропса конеекта
+          
+         const id = ""  // сделаем его пустым и подменим его в миделваре 
+       
+         addNewComment(id,  { user: this.state.user, text: this.state.text }  )
+        //  console.log("idarticle" + idarticle )
+         addIdNewCommentToArticle(  idarticle )
+
     }
 
     isValidForm = () => ['user', 'text'].every(this.isValidField)
@@ -58,4 +71,5 @@ const limits = {
     }
 }
 
-export default CommentForm
+// подключим к стору (редаксу)
+export default connect(null, { addNewComment , addIdNewCommentToArticle })(CommentForm)
