@@ -1,13 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes  } from 'react'
 import './style.css'
 
 class CommentForm extends Component {
-    static propTypes = {
-    };
 
     state = {
-        user: '',
-        text: ''
+        text: '',
+        user: ''
     }
 
     render() {
@@ -26,6 +24,12 @@ class CommentForm extends Component {
 
     handleSubmit = ev => {
         ev.preventDefault()
+        const { addComment, articleId } = this.props
+        addComment({
+            user: this.state.user,
+            text: this.state.text
+        }, articleId)
+
         this.setState({
             user: '',
             text: ''

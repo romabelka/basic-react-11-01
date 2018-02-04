@@ -3,17 +3,21 @@ import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
+import {createArticleSelector} from '../../selectors'
 import CommentList from '../CommentList'
 import {deleteArticle} from '../../AC'
 import './style.css'
 
 class Article extends PureComponent {
     static propTypes = {
+        id: PropTypes.string,
+
         article: PropTypes.shape({
             title: PropTypes.string.isRequired,
             text: PropTypes.string,
             comments: PropTypes.array
         }).isRequired,
+
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
     }
@@ -33,7 +37,7 @@ class Article extends PureComponent {
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
-                <CommentList comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
+                <CommentList article = {article} ref = {this.setCommentsRef} key = {this.state.count}/>
             </div>
         )
         return (
@@ -63,7 +67,6 @@ class Article extends PureComponent {
     }
 
     handleDelete = () => {
-        const {deleteArticle,article} = this.props
         deleteArticle(article.id)
     }
 
@@ -85,5 +88,14 @@ class Article extends PureComponent {
 
 }
 
+const createMapStateToProps = () => {
+    const articleSelector = createArticleSelector()
+    return (state, ownProps) => {
+        return {
+            article: articleSelector(state, ownProps)
+        }
+    }
+}
 
-export default connect(null, { deleteArticle })(Article)
+
+export default connect(createMapStateToProps, { deleteArticle })(Article)

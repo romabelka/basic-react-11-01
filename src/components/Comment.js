@@ -12,7 +12,7 @@ function Comment({comment}) {
 }
 
 Comment.propTypes = {
-    id: PropTypes.string,
+    id: PropTypes.string.isRequired,
     //from connect
     comment: PropTypes.shape({
         text: PropTypes.string.isRequired,
