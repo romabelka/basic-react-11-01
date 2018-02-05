@@ -9,21 +9,22 @@ class CommentList extends Component {
         comments: PropTypes.array.isRequired,
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
-        toggleOpen: PropTypes.func
+        toggleOpen: PropTypes.func,
+        articleId: PropTypes.string,
     }
 
     render() {
-        const {isOpen, toggleOpen} = this.props
+        const {isOpen, toggleOpen, articleId} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
                 <button onClick={toggleOpen}>{text}</button>
-                {this.getBody()}
+                {this.getBody(articleId)}
             </div>
         )
     }
 
-    getBody() {
+    getBody(articleId) {
         const {comments, isOpen} = this.props
         if (!isOpen) return null
 
@@ -36,7 +37,7 @@ class CommentList extends Component {
         return (
             <div>
                 {body}
-                <CommentForm />
+                <CommentForm articleId={articleId}/>
             </div>
         )
     }
