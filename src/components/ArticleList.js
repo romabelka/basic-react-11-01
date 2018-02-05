@@ -4,10 +4,14 @@ import Article from './Article'
 import Accordion from './common/Accordion'
 import {connect} from 'react-redux'
 import {filtratedArticlesSelector} from '../selectors'
+import {loadAllArticles} from '../AC'
 
 class ArticleList extends Accordion {
+    componentDidMount() {
+        this.props.loadAllArticles()
+    }
+
     render() {
-        console.log('---', 'rerendering article list')
         const {articles} = this.props
         if (!articles.length) return <h3>No Articles</h3>
         const articleElements = articles.map((article) => <li key={article.id}>
@@ -38,4 +42,4 @@ export default connect(state => {
     return {
         articles: filtratedArticlesSelector(state)
     }
-})(ArticleList)
+}, { loadAllArticles })(ArticleList)
