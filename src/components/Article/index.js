@@ -10,7 +10,7 @@ import './style.css'
 
 class Article extends PureComponent {
     static propTypes = {
-        id: PropTypes.string,
+        id: PropTypes.string.isRequired,
 
         article: PropTypes.shape({
             title: PropTypes.string.isRequired,
@@ -29,11 +29,14 @@ class Article extends PureComponent {
             foo: 'bar',
             count: 0
         }
+        
     }
 
     render() {
         console.log('---', 'rerendering')
-        const {article, isOpen, toggleOpen} = this.props
+    
+        const {article, id, isOpen, toggleOpen} = this.props
+
         const body = isOpen && (
             <div>
                 <section>{article.text}</section>
@@ -67,6 +70,7 @@ class Article extends PureComponent {
     }
 
     handleDelete = () => {
+        const {deleteArticle,article} = this.props
         deleteArticle(article.id)
     }
 

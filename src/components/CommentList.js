@@ -32,7 +32,7 @@ class CommentList extends Component {
         
         if (!isOpen) return null
 
-        const body = comments ? (
+        const body = comments && comments.length !== 0 ? (
             <ul>
                 {comments.map(comment => <li key = {comment.id}><Comment id = {comment.id} /></li>)}
             </ul>
@@ -47,6 +47,11 @@ class CommentList extends Component {
     }
 }
 
+CommentList.defaultProps = {
+    comments: []
+}
+
+
 
 export default connect((state, { article }) => {
    if (article.comments) {
@@ -55,7 +60,7 @@ export default connect((state, { article }) => {
         }
     } else {
         return {
-            comments: undefined
+            comments: []
         }
     }
 }, {

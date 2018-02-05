@@ -11,7 +11,6 @@ export default (articlesState = articlesMap, action) => {
     
     switch (type) {
         case DELETE_ARTICLE:
-
             const obj = Object.keys(articlesState).reduce((obj, key) => {
                 if (key !== payload.id) return {...obj, [key]: articlesState[key] }
                 return obj
@@ -20,10 +19,14 @@ export default (articlesState = articlesMap, action) => {
             return obj
 
         case ADD_COMMENT:
+            const articleId = payload.articleId
+            const article = articlesState[articleId]
 
-            articlesState[payload.articleId].comments.concat(randomId)
-
-            return articlesState
+            const updatedArticle = Object.assign({}, article, {
+                comments: [...article.comments, randomId]
+              })
+            
+            return Object.assign({}, articlesState, {[articleId]: updatedArticle})
 
     }
 
