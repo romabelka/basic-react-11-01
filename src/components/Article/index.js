@@ -4,7 +4,8 @@ import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
 import CommentList from '../CommentList'
-import {deleteArticle} from '../../AC'
+import Loader from '../common/Loader'
+import {deleteArticle, loadArticle} from '../../AC'
 import './style.css'
 
 class Article extends PureComponent {
@@ -27,15 +28,12 @@ class Article extends PureComponent {
         }
     }
 
+    componentWillReceiveProps({ isOpen, article, loadArticle }) {
+        if (!this.props.isOpen && isOpen) loadArticle(article.id)
+    }
+
     render() {
-        console.log('---', 'rerendering')
         const {article, isOpen, toggleOpen} = this.props
-        const body = isOpen && (
-            <div>
-                <section>{article.text}</section>
-                <CommentList comments = {article.comments} ref = {this.setCommentsRef} key = {this.state.count}/>
-            </div>
-        )
         return (
             <div>
                 <h2 ref = {this.setTitleRef} onClick = {this.increment}>
@@ -55,11 +53,25 @@ class Article extends PureComponent {
                     transitionLeaveTimeout = {300}
                     transitionAppearTimeout = {1000}
                 >
-                    {body}
+                    {this.getBody()}
                 </CSSTransition>
                 <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
+    }
+
+    getBody() {
+        const { isOpen, article } = this.props
+        if (!isOpen) return null
+        if (article.loading) return <Loader/>
+
+        return (
+            <div>
+                <section>{article.text}</section>
+                <CommentList article = {article} ref = {this.setCommentsRef} key = {this.state.count}/>
+            </div>
+        )
+
     }
 
     handleDelete = () => {
@@ -86,4 +98,4 @@ class Article extends PureComponent {
 }
 
 
-export default connect(null, { deleteArticle })(Article)
+export default connect(null, { deleteArticle, loadArticle })(Article)
