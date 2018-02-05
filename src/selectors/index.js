@@ -5,7 +5,7 @@ export const filtersSelector = state => state.filters
 export const commentListSelector = state => state.comments
 export const idSelector = (_, props) => props.id
 
-export const articlesSelector = createSelector(articlesMapSelector, articles => Object.values(articles))
+export const articlesSelector = createSelector(articlesMapSelector, articles => articles.valueSeq().toArray())
 
 export const filtratedArticlesSelector = createSelector(articlesSelector, filtersSelector, (articles, filters) => {
     const {selected, dateRange: {from, to}} = filters
@@ -18,5 +18,5 @@ export const filtratedArticlesSelector = createSelector(articlesSelector, filter
 })
 
 export const createCommentSelector = () => createSelector(commentListSelector, idSelector, (comments, id) => {
-    return comments[id]
+    return comments.get(id)
 })
