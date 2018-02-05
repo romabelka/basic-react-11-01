@@ -5,7 +5,7 @@ import Accordion from './common/Accordion'
 import {connect} from 'react-redux'
 import {filtratedArticlesSelector, articlesLoadingSelector} from '../selectors'
 import {loadAllArticles} from '../AC'
-import Loader from './Loader'
+import Loader from './common/Loader'
 
 class ArticleList extends Accordion {
     componentDidMount() {
