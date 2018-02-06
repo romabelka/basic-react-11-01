@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --hot --inline",
+    "start": "concurrently \"npm run dev\" \"npm run api\"",
+    "api": "node simple_api/server.js",
+    "dev": "webpack-dev-server --hot --inline",
     "build": "webpack"
   },
   "repository": {
@@ -24,11 +26,23 @@
     "babel-preset-react": "^6.11.1",
     "babel-preset-react-hmre": "^1.1.1",
     "babel-preset-stage-0": "^6.5.0",
+    "concurrently": "^3.5.1",
     "webpack": "^3.0.0",
     "webpack-dev-server": "^2.9.1"
   },
   "dependencies": {
+    "css-loader": "^0.28.9",
+    "immutable": "^4.0.0-rc.9",
+    "prop-types": "^15.6.0",
     "react": "^16.0.0",
-    "react-dom": "^16.0.0"
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-day-picker": "^7.0.7",
+    "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
+    "react-select": "^1.2.1",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
+    "style-loader": "^0.19.1"
   }
 }

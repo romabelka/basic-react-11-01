@@ -1,19 +1,27 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import Article from './Article'
+import Accordion from './common/Accordion'
+import {connect} from 'react-redux'
+import {filtratedArticlesSelector, articlesLoadingSelector} from '../selectors'
+import {loadAllArticles} from '../AC'
+import Loader from './common/Loader'
 
-class ArticleList extends Component {
-    state = {
-        error: null
+class ArticleList extends Accordion {
+    componentDidMount() {
+        this.props.loadAllArticles()
     }
-    componentDidCatch(error) {
-        console.log('---', 123, error)
-        this.setState({ error })
-    }
+
     render() {
-        if (this.state.error) return <h2>Some error</h2>
+        const {articles, loading} = this.props
 
-        const articleElements = this.props.articles.map((article, index) => <li key={article.id}>
-            <Article article = {article} defaultOpen = {index === 0}/>
+        if (loading) return <Loader />
+        if (!articles.length) return <h3>No Articles</h3>
+        const articleElements = articles.map((article) => <li key={article.id}>
+            <Article article={article}
+                     isOpen={article.id === this.state.openItemId}
+                     toggleOpen={this.toggleOpenItemMemoized(article.id)}
+            />
         </li>)
         return (
             <ul>
@@ -23,4 +31,18 @@ class ArticleList extends Component {
     }
 }
 
-export default ArticleList
+
+ArticleList.defaultProps = {
+    articles: []
+}
+
+ArticleList.propTypes = {
+    articles: PropTypes.array.isRequired
+}
+
+export default connect(state => {
+    return {
+        articles: filtratedArticlesSelector(state),
+        loading: articlesLoadingSelector(state)
+    }
+}, { loadAllArticles })(ArticleList)
