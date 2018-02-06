@@ -18,16 +18,12 @@ export default (articlesState = articlesMap, action) => {
 
     switch (type) {
         case DELETE_ARTICLE:
-            /* const newArticlesState = {...articlesState}
-            delete newArticlesState[payload.id]
-            return newArticlesState; */
             return arrToObj(Object.values(articlesState).filter(article => article.id !== payload.id))
         
         case ADD_COMMENT:
             const {id, articleId} = payload.comment;
-            const newArticlesState = {...articlesState}
-            newArticlesState[articleId].comments.push(id);
-            return newArticlesState;
+            const newArticle = articlesState[articleId];
+            return {...articlesState, [articleId]: {...newArticle, comments: (newArticle.comments || []).concat(id)}}
     }
 
     return articlesState

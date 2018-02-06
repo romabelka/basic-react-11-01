@@ -9,7 +9,6 @@ class ArticleList extends Accordion {
     render() {
         console.log('---', 'rerendering article list')
         const {articles} = this.props
-        console.log(articles)
         if (!articles.length) return <h3>No Articles</h3>
         const articleElements = Object.values(articles).map((article) => <li key={article.id}>
             <Article //article={article}

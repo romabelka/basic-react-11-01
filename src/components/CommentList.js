@@ -1,10 +1,10 @@
-import React, {Component} from 'react'
+import React, {Component, PureComponent} from 'react'
 import PropTypes from 'prop-types'
 import CommentForm from './CommentForm'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
-class CommentList extends Component {
+class CommentList extends PureComponent {
     static propTypes = {
         comments: PropTypes.array.isRequired,
         //from toggleOpen decorator
@@ -14,6 +14,7 @@ class CommentList extends Component {
     }
 
     render() {
+        console.log('---render commentsList')
         const {isOpen, toggleOpen, articleId} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
