@@ -23,7 +23,7 @@ export default (articlesState = articlesMap, action) => {
             const article = articlesState[articleId]
 
             const updatedArticle = Object.assign({}, article, {
-                comments: [...article.comments, randomId]
+                comments: (article.comments || []).concat(randomId)
               })
             
             return Object.assign({}, articlesState, {[articleId]: updatedArticle})
