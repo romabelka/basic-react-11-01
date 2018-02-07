@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {createCommentSelector} from '../selectors'
 
-function Comment({comment}) {
+export default function Comment({comment}) {
     return (
         <div>
             {comment.text} <b>by {comment.user}</b>
@@ -20,7 +20,7 @@ Comment.propTypes = {
     }).isRequired
 }
 
-const createMapStateToProps = () => {
+/* const createMapStateToProps = () => {
     const commentSelector = createCommentSelector()
     return (state, ownProps) => {
         return {
@@ -29,4 +29,4 @@ const createMapStateToProps = () => {
     }
 }
 
-export default connect(createMapStateToProps)(Comment)
+export default connect(createMapStateToProps)(Comment) */

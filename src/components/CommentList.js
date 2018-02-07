@@ -3,6 +3,11 @@ import PropTypes from 'prop-types'
 import CommentForm from './CommentForm'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import { loadAllComments } from '../AC';
+import { connect } from 'react-redux';
+import Loader from './common/Loader';
+import { commentListSelector } from '../selectors';
+import { commentsLoadingSelector } from '../selectors/';
 
 class CommentList extends Component {
     static propTypes = {
@@ -23,24 +28,36 @@ class CommentList extends Component {
         )
     }
 
-    getBody() {
-        const {article: { comments, id }, isOpen} = this.props
-        if (!isOpen) return null
+    componentWillReceiveProps(nextProps) {
+        if(!this.props.comments.loaded && nextProps.isOpen && !this.props.isOpen) {
+            const { loadAllComments } = this.props;
+            loadAllComments(this.props.article.id);
+        }
+    }
 
-        const body = comments.length ? (
+    getBody() {
+        const {article: { id: articleId }, comments, isOpen, loading, error } = this.props
+        if (!isOpen) return null
+        if(loading) return <Loader />
+        if(error) return <h3>Error</h3>
+
+        const body = comments.entities.size > 0 ? (
             <ul>
-                {comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
+                {comments.entities.valueSeq().map(comment => <li key = {comment.id}><Comment comment={comment} /></li>)}
             </ul>
         ) : <h3>No comments yet</h3>
 
         return (
             <div>
                 {body}
-                <CommentForm articleId = {id} />
+                <CommentForm articleId = {articleId} />
             </div>
         )
     }
 }
 
 
-export default toggleOpen(CommentList)
+export default connect(state => ({
+    loading: commentsLoadingSelector(state),
+    comments: commentListSelector(state),
+}), {loadAllComments})(toggleOpen(CommentList));
