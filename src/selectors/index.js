@@ -6,7 +6,7 @@ export const filtersSelector = state => state.filters
 export const commentListMapSelector = state => state.comments.entities
 export const commentsLoadingSelector = state => state.comments.loading
 export const commentsLoadedIdSelector = state => state.comments.loadedId
-export const commentsCacheSelector = state => state.comments.cache
+//export const commentsCacheSelector = state => state.comments.cache
 export const idSelector = (_, props) => props.id
 
 export const articlesSelector = createSelector(articlesMapSelector, articles => articles.valueSeq().toArray())

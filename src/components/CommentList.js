@@ -57,7 +57,7 @@ export default connect(state => {
     return {
         loading: commentsLoadingSelector(state),
         comments: commentListSelector(state),
-        cache: commentsCacheSelector(state),
+        //cache: commentsCacheSelector(state),
         loadedId: commentsLoadedIdSelector(state)
     }
 }, {loadComments})(toggleOpen(CommentList))
