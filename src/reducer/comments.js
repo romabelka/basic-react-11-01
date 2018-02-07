@@ -5,41 +5,19 @@ import {arrToMap} from './utils'
 const CommentRecord = Record({
     id: null,
     user: null,
-    text: null,
-    loading: false
+    text: null
 })
 
-const ReducerRecord = Record({
-    entities: arrToMap([], CommentRecord),
-    loading: false,
-    loaded: false,
-    error: null
-})
-
-export default (comments = new ReducerRecord(), action) => {
-    const { type, payload, randomId, response, error } = action
+export default (state = new CommentRecord(), action) => {
+    const {type, payload, randomId, response} = action
 
     switch (type) {
-        case LOAD_COMMENTS + START:
-            return comments.set('loading', true)
-        
-        case LOAD_COMMENTS + FAIL:
-            return comments
-                .set('loading', false)
-                .set('error', error)
-        
-        case LOAD_COMMENTS + SUCCESS: 
-            return comments
-                .set('loading', false)
-                .set('loaded', true)
-                .set('entities', arrToMap(payload.response, CommentRecord))
+        case LOAD_COMMENTS + SUCCESS:
+            return arrToMap(response, CommentRecord).mergeDeep(state)
 
         case ADD_COMMENT:
-            return comments.set(randomId, {
-                ...payload.comment,
-                id: randomId
-            })
+            return state.set(randomId, new CommentRecord(payload.comment))
     }
 
-    return comments
+    return state
 }

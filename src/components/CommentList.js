@@ -4,7 +4,6 @@ import CommentForm from './CommentForm'
 import Comment from './Comment'
 import {connect} from 'react-redux'
 import toggleOpen from '../decorators/toggleOpen'
-import {commentsSelector, commentsLoadingSelector, commentsLoadedSelector} from '../selectors'
 import {loadComments} from '../AC'
 import Loader from './common/Loader'
 
@@ -16,16 +15,12 @@ class CommentList extends Component {
         toggleOpen: PropTypes.func
     }
 
-    componentWillReceiveProps({isOpen, article, loadComments}) {
-        if (!this.props.isOpen && isOpen && !article.commentsLoaded) {
-            loadComments(article.get('id'))
-        }
+    componentWillReceiveProps({isOpen, loadComments, article:{commentsLoading, commentsLoaded, id}}) {
+            if (isOpen && !commentsLoaded && !commentsLoading) loadComments(id)
     }
 
     render() {
-        
-        const {isOpen, toggleOpen, comments} = this.props
-
+        const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
 
         return (
@@ -37,31 +32,24 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {article, comments, loading, loaded, isOpen} = this.props
+        const {article: {id, comments, commentsLoaded, commentsLoading}, isOpen} = this.props
        
         if (!isOpen) return null
-        if (loading) return <Loader />
+        if (commentsLoading || !commentsLoaded) return <Loader/>
 
         const body = comments.length ? (
             <ul>
-                {comments.map(comment => <li key = {comment['id']}><Comment id = {comment['id']} comment = {comment} /></li>)}
+                 {comments.map(id => <li key={id}> <Comment id={id}/> </li>)}
             </ul>
         ) : <h3>No comments yet</h3>
 
         return (
             <div>
                 {body}
-                <CommentForm articleId = {article.get('id')} />
+                <CommentForm articleId = {id} />
             </div>
         )
     }
 }
-// const commentList = toggleOpen(CommentList)
 
-export default connect(state => {
-    return {
-        comments: commentsSelector(state),
-        loading: commentsLoadingSelector(state),
-        loaded: commentsLoadedSelector(state)
-    }
-}, { loadComments })(toggleOpen(CommentList))
+export default toggleOpen(CommentList)

@@ -75,20 +75,10 @@ export function loadArticle(id) {
     }
 }
 
-export function loadComments(articleId) {
-    return (dispatch) => {
-        dispatch({
-            type: LOAD_COMMENTS + START,
-            payload: { articleId }
-        })
-
-        setTimeout(() => {
-            fetch(`/api/comment?article=${articleId}`)
-                .then(res => res.json())
-                .then(response => dispatch({
-                    type: LOAD_COMMENTS + SUCCESS,
-                    payload: { articleId, response }
-                }))
-        }, 1000);
-    }
+export function loadComments(id) {
+        return {
+            type: LOAD_COMMENTS,
+            payload: {id},
+            callAPI: `/api/comment?article=${id}`
+         }
 }

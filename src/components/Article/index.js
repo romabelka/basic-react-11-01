@@ -34,6 +34,7 @@ class Article extends PureComponent {
 
     render() {
         const {article, isOpen, toggleOpen} = this.props
+
         return (
             <div>
                 <h2 ref = {this.setTitleRef} onClick = {this.increment}>
@@ -45,7 +46,7 @@ class Article extends PureComponent {
                         delete
                     </button>
                 </h2>
-                <CSSTransition
+                <CSSTransition 
                     transitionAppear
                     component = "div"
                     transitionName = "article"
@@ -68,7 +69,7 @@ class Article extends PureComponent {
         return (
             <div>
                 <section>{article.text}</section>
-                <CommentList article = {article} ref = {this.setCommentsRef} key = {this.state.count}/>
+                <CommentList article = {article} ref = {this.setCommentsRef} key = {this.state.count} loadComments={this.props.loadComments} />
             </div>
         )
 
@@ -98,4 +99,4 @@ class Article extends PureComponent {
 }
 
 
-export default connect(null, { deleteArticle, loadArticle, loadComments})(Article)
+export default connect(null, { deleteArticle, loadArticle, loadComments })(Article)
