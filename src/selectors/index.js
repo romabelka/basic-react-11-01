@@ -1,10 +1,15 @@
 import {createSelector} from 'reselect'
 
 export const articlesMapSelector = state => state.articles.entities
-export const articlesLoadingSelector = state => state.articles.loading
+export const articlesLoadingSelector = state => {
+    return state.articles.loading;
+}
 export const filtersSelector = state => state.filters
 export const commentListSelector = state => state.comments
 export const idSelector = (_, props) => props.id
+export const commentsLoadingSelector = state => {
+    return state.comments.loading;
+}
 
 export const articlesSelector = createSelector(articlesMapSelector, articles => articles.valueSeq().toArray())
 
