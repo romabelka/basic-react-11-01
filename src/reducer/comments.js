@@ -34,18 +34,15 @@ export default (comments = new ReducerRecord(), action) => {
                 .set('loaded', false)
 
         case LOAD_ALL_COMMENTS + FAIL:
-            debugger;
             return comments
                 .set('loading', false)
                 .set('error', error)
 
         case LOAD_ALL_COMMENTS + SUCCESS:
-            debugger;
             return comments
                 .set('loading', false)
                 .set('loaded', true)
-                // .set('entities', arrToMap(response, CommentRecord))
-                .set('entities', response);
+                .set('entities', arrToMap(response, CommentRecord));
     }
 
     return comments

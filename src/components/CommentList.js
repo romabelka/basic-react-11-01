@@ -29,23 +29,21 @@ class CommentList extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        const { loadAllComments } = this.props;
-        if(nextProps.isOpen && !this.props.isOpen) {
+        if(!this.props.comments.loaded && nextProps.isOpen && !this.props.isOpen) {
+            const { loadAllComments } = this.props;
             loadAllComments(this.props.article.id);
-            debugger;
         }
     }
 
     getBody() {
-        const {article: { id: articleId }, comments, isOpen, loading, error, loaded} = this.props
+        const {article: { id: articleId }, comments, isOpen, loading, error } = this.props
         if (!isOpen) return null
         if(loading) return <Loader />
         if(error) return <h3>Error</h3>
 
-        debugger;
-        const body = comments.length ? (
+        const body = comments.entities.size > 0 ? (
             <ul>
-                {comments.map(comment => <li key = {comment.id}><Comment>{comment.text}</Comment></li>)}
+                {comments.entities.valueSeq().map(comment => <li key = {comment.id}><Comment comment={comment} /></li>)}
             </ul>
         ) : <h3>No comments yet</h3>
 
