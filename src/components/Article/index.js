@@ -6,6 +6,7 @@ import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import Loader from '../common/Loader'
 import {deleteArticle, loadArticle} from '../../AC'
+import {commentsLoadingSelector, commentsLoadedSelector} from '../../selectors'
 import './style.css'
 
 class Article extends PureComponent {
@@ -61,14 +62,15 @@ class Article extends PureComponent {
     }
 
     getBody() {
-        const { isOpen, article } = this.props
+        const { isOpen, article, loadingComments, loadedComments } = this.props
         if (!isOpen) return null
         if (article.loading) return <Loader/>
 
         return (
             <div>
                 <section>{article.text}</section>
-                <CommentList article = {article} ref = {this.setCommentsRef} key = {this.state.count}/>
+                <CommentList article = {article} loading = {loadingComments} loaded = {loadedComments}
+                    ref = {this.setCommentsRef} key = {this.state.count}/>
             </div>
         )
 
@@ -97,5 +99,18 @@ class Article extends PureComponent {
 
 }
 
+const createMapStateToProps = () => {
+    return (state, ownProps) => {
+        const articleId = ownProps.article.id
+        const loading = commentsLoadingSelector(state)
+        const loadingComments = loading.get(articleId) != null ? loading.get(articleId) : true
+        const loaded = commentsLoadedSelector(state)
+        const loadedComments = loaded.get(articleId)
+        return {
+            loadingComments: loadingComments,
+            loadedComments: loadedComments
+        }
+    }
+}
 
-export default connect(null, { deleteArticle, loadArticle })(Article)
+export default connect(createMapStateToProps, { deleteArticle, loadArticle })(Article)
