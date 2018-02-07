@@ -14,9 +14,9 @@ class ArticleList extends Accordion {
 
     render() {
         const {articles, loading} = this.props
-
         if (loading) return <Loader />
         if (!articles.length) return <h3>No Articles</h3>
+       
         const articleElements = articles.map((article) => <li key={article.id}>
             <Article article={article}
                      isOpen={article.id === this.state.openItemId}

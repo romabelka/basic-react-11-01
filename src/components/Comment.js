@@ -12,8 +12,6 @@ function Comment({comment}) {
 }
 
 Comment.propTypes = {
-    id: PropTypes.string,
-    //from connect
     comment: PropTypes.shape({
         text: PropTypes.string.isRequired,
         user: PropTypes.string
@@ -22,11 +20,10 @@ Comment.propTypes = {
 
 const createMapStateToProps = () => {
     const commentSelector = createCommentSelector()
-    return (state, ownProps) => {
-        return {
-            comment: commentSelector(state, ownProps)
-        }
-    }
+
+    return (state, ownProps) => ({
+        comment: commentSelector(state, ownProps)
+    })
 }
 
 export default connect(createMapStateToProps)(Comment)

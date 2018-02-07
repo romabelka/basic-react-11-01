@@ -5,7 +5,7 @@ import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import Loader from '../common/Loader'
-import {deleteArticle, loadArticle} from '../../AC'
+import {deleteArticle, loadArticle, loadComments} from '../../AC'
 import './style.css'
 
 class Article extends PureComponent {
@@ -34,6 +34,7 @@ class Article extends PureComponent {
 
     render() {
         const {article, isOpen, toggleOpen} = this.props
+
         return (
             <div>
                 <h2 ref = {this.setTitleRef} onClick = {this.increment}>
@@ -45,7 +46,7 @@ class Article extends PureComponent {
                         delete
                     </button>
                 </h2>
-                <CSSTransition
+                <CSSTransition 
                     transitionAppear
                     component = "div"
                     transitionName = "article"
@@ -62,13 +63,13 @@ class Article extends PureComponent {
 
     getBody() {
         const { isOpen, article } = this.props
+ 
         if (!isOpen) return null
         if (article.loading) return <Loader/>
-
         return (
             <div>
                 <section>{article.text}</section>
-                <CommentList article = {article} ref = {this.setCommentsRef} key = {this.state.count}/>
+                <CommentList article = {article} ref = {this.setCommentsRef} key = {this.state.count} loadComments={this.props.loadComments} />
             </div>
         )
 
@@ -98,4 +99,4 @@ class Article extends PureComponent {
 }
 
 
-export default connect(null, { deleteArticle, loadArticle })(Article)
+export default connect(null, { deleteArticle, loadArticle, loadComments })(Article)
