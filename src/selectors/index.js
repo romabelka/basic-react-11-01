@@ -1,5 +1,6 @@
 import { createSelector } from 'reselect'
 import comments from '../reducer/comments';
+import articles from '../reducer/articles';
 
 export const articlesMapSelector = state => state.articles.entities
 
@@ -33,4 +34,9 @@ export const commentsLoadingSelector = state => state.comments.loading
 
 export const commentSelectorId = createSelector(commentsSelector, idSelector, (comments, id) => {
     return comments.find(comment => comment.id == id)
+})
+
+/// непонятно как получить  комеенты кеша которые там есть в
+export const commentsSelectorCasheArt = createSelector(articlesSelector, idSelector, (articles, id) => {
+    return (articles.find(article => article.id == id)).comments
 })

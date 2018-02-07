@@ -9,7 +9,8 @@ import {
     START,
     SUCCESS,
     FAIL,
-    LOAD_COMMENT
+    LOAD_COMMENT,
+    LOAD_COMMENT_TO_CASHE
 } from '../constants'
 
 export function increment() {
@@ -102,6 +103,15 @@ export function loadCommentForArticle(idArticle) {
         }, 1000)
 
 
+    }
+
+}
+
+export function loadCommentToCashe(CasheComment, id) {
+
+    return {
+        type: LOAD_COMMENT_TO_CASHE,
+        payload: { CasheComment, id }
     }
 
 }

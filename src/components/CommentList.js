@@ -5,8 +5,8 @@ import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
 
 import { connect  } from 'react-redux'
-import { loadCommentForArticle } from  '../AC'
-import {commentsSelector, commentsLoadingSelector} from '../selectors'
+import { loadCommentForArticle , loadCommentToCashe } from  '../AC' 
+import {commentsSelector, commentsLoadingSelector, commentsSelectorCashe} from '../selectors'
 
 import Loader from './common/Loader' 
 class CommentList extends Component {
@@ -21,9 +21,8 @@ class CommentList extends Component {
 
     componentWillReceiveProps({ isOpen, article, loadCommentForArticle }){
           
-          if( !this.props.isOpen && isOpen  ) loadCommentForArticle( article.id ) 
+          if( !this.props.isOpen && isOpen && !article.get('commentInCashe')  )    loadCommentForArticle( article.id ) 
           
-     
 
     }
 
@@ -39,9 +38,19 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const { comments ,  article, isOpen, loading} = this.props
+        const { comments ,  article, isOpen, loading ,  loadCommentToCashe } = this.props
+        console.log(comments)
 
-           console.log(comments)
+        if( !article.get('commentInCashe') ) {
+            console.log(  "before" + article.get('commentInCashe'))
+            loadCommentToCashe(comments,  article.get('id'))
+            console.log(  "after" + article.get('commentInCashe'))
+            // сейчас коменты в кеше 
+             console.log(article.comments)
+        }   
+       
+
+      
 
 
         if (!isOpen) return null
@@ -62,9 +71,19 @@ class CommentList extends Component {
 }
 
 
-export default connect( state => { 
-    return {
-        comments : commentsSelector(state), 
+export default connect( (state, ownProps  ) => { 
+    const { article }  = ownProps
+    console.log(article.get('commentInCashe'))
+     if (!  article.get('commentInCashe') ) {
+        return {
+            comments : commentsSelector(state), 
+            loading: commentsLoadingSelector(state)
+        }
+     } 
+
+     return {
+        comments : commentsSelectorCashe(state, ownProps ), 
         loading: commentsLoadingSelector(state)
     }
-}, { loadCommentForArticle } ) (toggleOpen(CommentList))
+  
+}, { loadCommentForArticle, loadCommentToCashe } ) (toggleOpen(CommentList))

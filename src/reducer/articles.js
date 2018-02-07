@@ -1,6 +1,6 @@
 import { Map, Record } from 'immutable'
-import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL } from '../constants'
-import {arrToMap} from './utils'
+import { DELETE_ARTICLE, ADD_COMMENT, LOAD_ALL_ARTICLES, LOAD_ARTICLE, START, SUCCESS, FAIL, LOAD_COMMENT_TO_CASHE } from '../constants'
+import { arrToMap } from './utils'
 
 const ArticleRecord = Record({
     id: null,
@@ -8,7 +8,8 @@ const ArticleRecord = Record({
     text: null,
     date: null,
     loading: false,
-    comments: []
+    comments: [],
+    commentInCashe: false
 })
 
 const ReducerRecord = Record({
@@ -50,7 +51,25 @@ export default (articles = new ReducerRecord(), action) => {
 
         case LOAD_ARTICLE + SUCCESS:
             return articles.setIn(['entities', payload.id], new ArticleRecord(payload.response))
-   }
+
+
+        case LOAD_COMMENT_TO_CASHE:
+            {
+
+                // console.log(payload.CasheComment)
+                // console.log(payload.id)
+                // articles: articles.updateIn(
+                //     ['entities', payload.id, 'commentInCashe'],
+                //     true
+                // )
+
+                return articles.updateIn(
+                    ['entities', payload.id, 'comments'],
+                    (comments) => payload.CasheComment
+                ).setIn(['entities', payload.id, 'commentInCashe'], true)
+            }
+
+    }
 
     return articles
 }
