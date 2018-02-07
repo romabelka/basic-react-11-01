@@ -6,7 +6,7 @@ import toggleOpen from '../decorators/toggleOpen'
 
 class CommentList extends Component {
     static propTypes = {
-        comments: PropTypes.array.isRequired,
+        article: PropTypes.object.isRequired,
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
@@ -24,7 +24,7 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {comments, isOpen} = this.props
+        const {article: { comments, id }, isOpen} = this.props
         if (!isOpen) return null
 
         const body = comments.length ? (
@@ -36,7 +36,7 @@ class CommentList extends Component {
         return (
             <div>
                 {body}
-                <CommentForm />
+                <CommentForm articleId = {id} />
             </div>
         )
     }
