@@ -41,12 +41,6 @@ export default (state = new ReducerRecord(), action) => {
                 .set('loaded', true)
                 //.set('cache', true)
                 .set('entities', arrToMap(payload.response, CommentsRecord))
-
-        //case LOAD_ARTICLE + START:
-        //    return articles.setIn(['entities', payload.id, 'loading'], true)
-        //
-        //case LOAD_ARTICLE + SUCCESS:
-        //    return articles.setIn(['entities', payload.id], new ArticleRecord(payload.response))
     }
 
     return state
