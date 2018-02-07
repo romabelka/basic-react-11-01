@@ -5,7 +5,7 @@ import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import Loader from '../common/Loader'
-import {deleteArticle, loadArticle} from '../../AC'
+import {  deleteArticle, loadArticle} from '../../AC'
 import './style.css'
 
 class Article extends PureComponent {
@@ -68,7 +68,7 @@ class Article extends PureComponent {
         return (
             <div>
                 <section>{article.text}</section>
-                <CommentList article = {article} ref = {this.setCommentsRef} key = {this.state.count}/>
+                <CommentList article = {article}  ref = {this.setCommentsRef} key = {this.state.count}/>
             </div>
         )
 

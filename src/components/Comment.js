@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {createCommentSelector} from '../selectors'
+import {commentSelectorId} from '../selectors'
 
 function Comment({comment}) {
+  
+
+
     return (
         <div>
             {comment.text} <b>by {comment.user}</b>
@@ -13,20 +16,24 @@ function Comment({comment}) {
 
 Comment.propTypes = {
     id: PropTypes.string,
-    //from connect
+    
     comment: PropTypes.shape({
         text: PropTypes.string.isRequired,
         user: PropTypes.string
     }).isRequired
 }
 
-const createMapStateToProps = () => {
-    const commentSelector = createCommentSelector()
-    return (state, ownProps) => {
-        return {
-            comment: commentSelector(state, ownProps)
-        }
-    }
-}
+// const createMapStateToProps = () => {
+//     const commentSelector = createCommentSelector()
+//     return (state, ownProps) => {
+//         return {
+//             comment: commentSelector(state, ownProps)
+//         }
+//     }
+// }
 
-export default connect(createMapStateToProps)(Comment)
+export default connect (  ( state, ownProps )  => {
+    return {
+        comment: commentSelectorId( state, ownProps )
+    }
+}   )   (Comment)
