@@ -3,6 +3,9 @@ import PropTypes from 'prop-types'
 import CommentForm from './CommentForm'
 import Comment from './Comment'
 import toggleOpen from '../decorators/toggleOpen'
+import {loadComments} from '../AC'
+import Loader from './common/Loader'
+import store from '../store'
 
 class CommentList extends Component {
     static propTypes = {
@@ -10,6 +13,10 @@ class CommentList extends Component {
         //from toggleOpen decorator
         isOpen: PropTypes.bool,
         toggleOpen: PropTypes.func
+    }
+
+    componentWillReceiveProps({ isOpen, article, loaded}) {
+        if (!this.props.isOpen && isOpen && !loaded) store.dispatch(loadComments(article.id))
     }
 
     render() {
@@ -24,9 +31,10 @@ class CommentList extends Component {
     }
 
     getBody() {
-        const {article: { comments, id }, isOpen} = this.props
+        const {article: { comments, id }, isOpen, loading} = this.props
         if (!isOpen) return null
 
+        if (loading) return <Loader />
         const body = comments.length ? (
             <ul>
                 {comments.map(id => <li key = {id}><Comment id = {id} /></li>)}
