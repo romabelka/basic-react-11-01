@@ -5,7 +5,7 @@ import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import Loader from '../common/Loader'
-import {deleteArticle, loadArticle} from '../../AC'
+import {deleteArticle, loadArticle, loadComments} from '../../AC'
 import './style.css'
 
 class Article extends PureComponent {
@@ -62,9 +62,9 @@ class Article extends PureComponent {
 
     getBody() {
         const { isOpen, article } = this.props
+ 
         if (!isOpen) return null
         if (article.loading) return <Loader/>
-
         return (
             <div>
                 <section>{article.text}</section>
@@ -98,4 +98,4 @@ class Article extends PureComponent {
 }
 
 
-export default connect(null, { deleteArticle, loadArticle })(Article)
+export default connect(null, { deleteArticle, loadArticle, loadComments})(Article)

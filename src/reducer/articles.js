@@ -50,6 +50,7 @@ export default (articles = new ReducerRecord(), action) => {
 
         case LOAD_ARTICLE + SUCCESS:
             return articles.setIn(['entities', payload.id], new ArticleRecord(payload.response))
+        
    }
 
     return articles
