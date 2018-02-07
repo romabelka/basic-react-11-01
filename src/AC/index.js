@@ -75,7 +75,6 @@ export function loadArticle(id) {
 }
 
 export function loadComments(id) {
-    console.log('loadComments')
     return (dispatch) => {
         dispatch({
             type: LOAD_COMMENTS + START,
