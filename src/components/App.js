@@ -1,8 +1,9 @@
 import React, {Component} from 'react'
-import ArticleList from './ArticleList'
+import ArticleListPage from './routes/ArticleList'
 import UserForm from './UserForm'
-import Filters from './Filters'
-import Counter from './Counter'
+import FiltersPage from './routes/Filters'
+import CounterPage from './routes/Counter'
+import { Route } from 'react-router-dom'
 
 class App extends Component {
     render() {
@@ -10,9 +11,9 @@ class App extends Component {
             <div>
                 <h1>App name</h1>
                 <UserForm />
-                <Counter />
-                <Filters />
-                <ArticleList />
+                <Route path = "/counter" component = {CounterPage}/>
+                <Route path = "/filters" component = {FiltersPage}/>
+                <Route path = "/articles" component = {ArticleListPage}/>
             </div>
         )
     }

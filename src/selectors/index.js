@@ -18,6 +18,10 @@ export const filtratedArticlesSelector = createSelector(articlesSelector, filter
     })
 })
 
+export const articleSelector = createSelector(articlesMapSelector, idSelector,
+    (articles, id) => articles.get(id)
+)
+
 export const createCommentSelector = () => createSelector(commentMapSelector, idSelector, (comments, id) => {
     return comments.get(id)
 })
