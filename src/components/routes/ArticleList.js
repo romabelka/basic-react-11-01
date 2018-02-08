@@ -13,12 +13,13 @@ class ArticleListPage extends Component {
             <div>
                 <h2>Article list:</h2>
                 <ArticleList/>
-                <Route path = "/articles/:id" render = {this.getArticle} />
+                <Route path = {`${this.props.match.path}/:id`} children = {this.getArticle} />
             </div>
         )
     }
 
     getArticle = ({ match }) => {
+        if (!match) return <h2>Please select an article</h2>
         return <Article id = {match.params.id} isOpen key = {match.params.id} />
     }
 }
