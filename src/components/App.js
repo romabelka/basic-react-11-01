@@ -3,13 +3,18 @@ import ArticleListPage from './routes/ArticleList'
 import UserForm from './UserForm'
 import FiltersPage from './routes/Filters'
 import CounterPage from './routes/Counter'
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, NavLink } from 'react-router-dom'
 
 class App extends Component {
     render() {
         return (
             <div>
                 <h1>App name</h1>
+                <ul>
+                    <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>Articles</NavLink></li>
+                    <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>Filters</NavLink></li>
+                    <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>Counter</NavLink></li>
+                </ul>
                 <UserForm />
                 <Switch>
                     <Route path = "/counter" component = {CounterPage} exact/>
