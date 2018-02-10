@@ -1,4 +1,4 @@
-import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS, SUCCESS } from '../constants'
+import { ADD_COMMENT, LOAD_ARTICLE_COMMENTS, START, SUCCESS, LOAD_ALL_COMMENTS } from '../constants'
 import { arrToMap } from './utils'
 import { OrderedMap, Record } from 'immutable'
 
@@ -12,7 +12,6 @@ const ReducerState = Record({
     entities: new OrderedMap({})
 })
 
-
 export default (state = new ReducerState(), action) => {
     const { type, payload, response, randomId } = action
 
@@ -22,6 +21,9 @@ export default (state = new ReducerState(), action) => {
 
         case LOAD_ARTICLE_COMMENTS + SUCCESS:
             return state.mergeIn(['entities'], arrToMap(response, CommentRecord))
+
+        case LOAD_ALL_COMMENTS + SUCCESS:
+            return state.mergeIn(['entities'], arrToMap(response.records, CommentRecord))
     }
 
     return state
