@@ -10,7 +10,6 @@ export const pageSelector = (_, props) => props.match.params.page || 1
 
 export const articlesSelector = createSelector(articlesMapSelector, articles => articles.valueSeq().toArray())
 export const contentSelector = createSelector(contentMapSelector, pageSelector, (content, page) => {
-    console.log(content.has(page) ? content.get(page).toJS() : [])
     return content.has(page) ? content.get(page).toJS() : []
 })
 export const loadingContentSelector = (state, props) => {

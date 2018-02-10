@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import { Route, Switch, NavLink } from 'react-router-dom'
 import {loadAllComments} from '../AC'
@@ -6,15 +7,18 @@ import {contentSelector} from '../selectors'
 
 class Pagination extends Component {
     static propTypes = {
-
+        currentPage: PropTypes.string,
+        pages: PropTypes.number,
+        perPage: PropTypes.number,
+        contentLoading: PropTypes.bool,
+        contentLoaded: PropTypes.bool
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('nextProps--', nextProps)
         if (this.props.currentPage === nextProps.currentPage) return
         const limit = nextProps.perPage
         const currentPage = nextProps.currentPage
-        const offset = ((currentPage-1)) * limit
+        const offset = (currentPage-1) * limit
         if (!nextProps.contentLoading && !nextProps.contentLoaded) {
             this.props.loadAllComments(currentPage || 1, {limit, offset})
         }

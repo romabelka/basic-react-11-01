@@ -8,16 +8,11 @@ import {loadAllComments} from '../../AC'
 import {contentSelector} from '../../selectors'
 
 class CommentListPage extends Component {
-    static propTypes = {
-
-    }
-
     state = {
         perPage: 5
     }
 
     componentDidMount() {
-        console.log(this.props)
         const limit = this.state.perPage
         const currentPage = this.props.match.params.page
         const offset = (currentPage-1) * limit
@@ -37,7 +32,7 @@ class CommentListPage extends Component {
             <div>
                 <h2>Comment list</h2>
                 {body}
-                <Pagination 
+                <Pagination
                     currentPage = {this.props.match.params.page}
                     pages = {Math.ceil(total/perPage)}
                     perPage = {this.state.perPage}

@@ -12,7 +12,6 @@ const ReducerState = Record({
     entities: new OrderedMap({})
 })
 
-
 export default (state = new ReducerState(), action) => {
     const { type, payload, response, randomId } = action
 
