@@ -1,62 +1,46 @@
 import React, { Component } from 'react'
-import Comment from '../Comment'
+import Comment from './Comment'
 import {connect} from 'react-redux'
 import {Route} from 'react-router-dom'
-import {commentsSelector} from '../../selectors'
-import {loadCommentsPage} from '../../AC'
 import {commentsTotal} from '../../selectors'
 import {NavLink} from 'react-router-dom'
+import {propTypes} from 'prop-types'
 
 class CommentsPagination extends Component {
     static propTypes = {
 
     };
 
-    componentDidMount() {
-        const {loadCommentsPage} = this.props;
-        //console.log('---total', comments.total)
-        loadCommentsPage(`/api/comment?limit=5&offset=0`);
-    }
-
     render() {
         const {comments, total} = this.props
-        const number = 5;
+        let pagination = [];
 
-        if (!comments.length) return <h3>loading...</h3>
-
-        const commentElements = comments.map((comment) => <li key={comment.id}>
-            {comment.text} <b>by {comment.user}</b>
-        </li>)
-
-        /*let pagination = [];
-
-        for (let i = 0; i < total; i+5) {
-            pagination.push(<NavLink to = {`/comment?limit=5&offset=${i}`} activeStyle = {{color: 'red'}}>{i}</NavLink>)
-        }*/
+        for (let i = 0; i < total; i += 5) {
+            pagination.push(<li key={i}>
+                <NavLink to = {`/comments/${i/5 + 1}`} activeStyle = {{color: 'red'}}>{i/5 + 1}</NavLink>
+            </li>)
+        }
 
         return (
             <div>
-            <ul>
-                
-            </ul>
-            <ul>
-                {commentElements}
-            </ul>
+                <ul>
+                    {pagination}
+                </ul>
+                <Route path = {`/comments/:page`} children = {this.getComment} />
             </div>
         )
-        /*return (
-            <div>
-                <h2>Comments: {comments.length}, {total}</h2>
-            </div>
-        )*/
     }
 
+    getComment = ({ match }) => {
+        console.log('match', match);
+        if (!match) return <h2>Please select an comment</h2>
+        return <Comment page = {match.params.page - 1} key = {match.params.page} />
+    }
 }
 
 export default connect(state => {
     return {
         total: commentsTotal(state),
-        comments: commentsSelector(state),
     }
-}, {loadCommentsPage})(CommentsPagination)
+})(CommentsPagination)
 

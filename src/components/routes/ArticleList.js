@@ -19,6 +19,7 @@ class ArticleListPage extends Component {
     }
 
     getArticle = ({ match }) => {
+        console.log('---match', match)
         if (!match) return <h2>Please select an article</h2>
         return <Article id = {match.params.id} isOpen key = {match.params.id} />
     }

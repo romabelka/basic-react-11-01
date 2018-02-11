@@ -21,10 +21,10 @@ class App extends Component {
                 <Switch>
                     <Route path = "/counter" component = {CounterPage} exact/>
                     <Route path = "/filters" component = {FiltersPage}/>
-                    <Route path = "/comments/1" component = {CommentsPage}/>
+                    <Route path = "/comments" component = {CommentsPage}/>
                     <Route path = "/articles/new" render = {() => <h2>Add new Article form</h2>}/>
-                    <Route path = "/articles" component = {ArticleListPage}/>
-                    <Route path = "*" render = {() => <h1>Nor found</h1>}/>
+                    <Route path = "/articles/1" component = {ArticleListPage}/>
+                    <Route path = "*" render = {() => <h1>Not found</h1>}/>
                 </Switch>
             </div>
         )
