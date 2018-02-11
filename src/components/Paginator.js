@@ -15,7 +15,7 @@ export default class Paginator extends Component {
 
 
    const body   = paginatorMas.map((linkPaginator, index) => 
-      <li key={index}>    <NavLink to = {linkPaginator.to}  >  {linkPaginator.text.toString()}  </NavLink>  </li> 
+      <li key={index}>    <NavLink to = {linkPaginator.to} >  {linkPaginator.text.toString()}  </NavLink>  </li> 
        )
     
 

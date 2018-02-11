@@ -1,4 +1,4 @@
-import {createSelector} from 'reselect'
+import { createSelector } from 'reselect'
 
 export const articlesMapSelector = state => state.articles.entities
 export const articlesLoadingSelector = state => state.articles.loading
@@ -9,7 +9,7 @@ export const idSelector = (_, props) => props.id
 export const articlesSelector = createSelector(articlesMapSelector, articles => articles.valueSeq().toArray())
 
 export const filtratedArticlesSelector = createSelector(articlesSelector, filtersSelector, (articles, filters) => {
-    const {selected, dateRange: {from, to}} = filters
+    const { selected, dateRange: { from, to } } = filters
 
     return articles.filter(article => {
         const published = Date.parse(article.date)
@@ -25,3 +25,6 @@ export const articleSelector = createSelector(articlesMapSelector, idSelector,
 export const createCommentSelector = () => createSelector(commentMapSelector, idSelector, (comments, id) => {
     return comments.get(id)
 })
+
+export const commentsAllSelector = createSelector(commentMapSelector, comments => comments.valueSeq().toArray())
+export const commentsGetTotal = state => state.comments.get('total')
