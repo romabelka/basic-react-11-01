@@ -6,24 +6,32 @@ import {  loadAllCommentsForPaginator} from '../AC'
 import {  commentsAllSelector, commentsGetTotal } from '../selectors'
 
  class AllComments extends Component {
-  
-    componentDidMount() { 
-        const { page ,  path ,  loadAllCommentsForPaginator}  = this.props 
+     
+
+    
+
+    componentDidMount() { // 
+        const { page ,  path , total,  loadAllCommentsForPaginator}  = this.props 
         console.log("===="+  page )
         const {limit}  =  0   
         const {offset}  = 0
-        this.props.loadAllCommentsForPaginator ( page, 0 , 0  );
+        if( total ==0 ){ 
+        this.props.loadAllCommentsForPaginator ( page, 0 , 0  );  }
+        // можно менять лимит и оффсет но это будет сново загрузка это плохо 
     } 
 
 
 
   render() {
       const { page ,  path,  comments, total }  = this.props  
-      if (!comments.length) return <h3>loading...</h3>
+     
+    
+      if (!comments.length) return <h3>load</h3>
+      const maxpage = Math.floor(total / 5) + 1;
+    //   console.log("==="+maxpage);
 
 
-
-console.log(comments)
+    //    console.log(comments)
       const body =  comments.map(comment => <li key = {comment.id}><Comment id = {comment.id} /> <br/>  </li>)    
 
 
@@ -33,16 +41,17 @@ console.log(comments)
     totalcom = {total}
 <ul>
 {body}
-</ul>
-      <Paginator path = {path}  page = {page} maxpage = {16}  />
+</ul>  
+      <Paginator path = {path}  page = {page} maxpage = {maxpage}  />
       </div>
     )
   }
 }
 
-export default connect(  state=>{
+export default connect(  (state, ownProps)=>{
+    // console.log(ownProps.page)
     return{ 
-       comments: commentsAllSelector(state), 
+       comments: commentsAllSelector( state, ownProps), 
        total :  commentsGetTotal(state),
     }
 } , { loadAllCommentsForPaginator} )  (AllComments)
