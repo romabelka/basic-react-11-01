@@ -5,7 +5,8 @@ import UserForm from './UserForm'
 import FiltersPage from './routes/Filters'
 import CounterPage from './routes/Counter'
 import CommentsPage from './routes/CommentsPage'
-import { Route, Redirect, Switch, NavLink } from 'react-router-dom'
+import { Route, Redirect, Switch } from 'react-router-dom'
+import Menu, { MenuItem } from './Menu'
 
 class App extends Component {
     static childContextTypes = {
@@ -29,12 +30,12 @@ class App extends Component {
         return (
             <div>
                 <h1>App name</h1>
-                <ul>
-                    <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>Articles</NavLink></li>
-                    <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>Filters</NavLink></li>
-                    <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>Counter</NavLink></li>
-                    <li><NavLink to = "/comments/1" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
-                </ul>
+                <Menu>
+                    <MenuItem to = "/articles">Articles</MenuItem>
+                    <MenuItem to = "/filters">Filters</MenuItem>
+                    <MenuItem to = "/counter">Counter</MenuItem>
+                    <MenuItem to = "/comments">Comments</MenuItem>
+                </Menu>
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <Switch>
                     <Route path = "/counter" component = {CounterPage} exact/>
