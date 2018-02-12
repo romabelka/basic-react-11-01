@@ -4,7 +4,7 @@ import UserForm from './UserForm'
 import FiltersPage from './routes/Filters'
 import CounterPage from './routes/Counter'
 import CommentsPage from './routes/CommentsPage'
-import { Route, Switch, NavLink } from 'react-router-dom'
+import { Route, Redirect, Switch, NavLink } from 'react-router-dom'
 
 class App extends Component {
     render() {
@@ -15,6 +15,7 @@ class App extends Component {
                     <li><NavLink to = "/articles" activeStyle = {{ color: 'red' }}>Articles</NavLink></li>
                     <li><NavLink to = "/filters" activeStyle = {{ color: 'red' }}>Filters</NavLink></li>
                     <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>Counter</NavLink></li>
+                    <li><NavLink to = "/comments/1" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
                 </ul>
                 <UserForm />
                 <Switch>
@@ -22,7 +23,9 @@ class App extends Component {
                     <Route path = "/filters" component = {FiltersPage}/>
                     <Route path = "/articles/new" render = {() => <h2>Add new Article form</h2>}/>
                     <Route path = "/articles" component = {ArticleListPage}/>
-                    <Route path = '/comments' component = {CommentsPage}/>
+                    <Route path = "/comments" component = {CommentsPage}/>
+                    <Route path = "/error" render = {() => <h1>Error page</h1>}/>
+                    <Redirect from = "/" exact to = "/articles" />
                     <Route path = "*" render = {() => <h1>Nor found</h1>}/>
                 </Switch>
             </div>
