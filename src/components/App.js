@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import PropTypes from 'prop-types'
 import ArticleListPage from './routes/ArticleList'
 import UserForm from './UserForm'
 import FiltersPage from './routes/Filters'
@@ -7,7 +8,24 @@ import CommentsPage from './routes/CommentsPage'
 import { Route, Redirect, Switch, NavLink } from 'react-router-dom'
 
 class App extends Component {
+    static childContextTypes = {
+        user: PropTypes.string
+    }
+
+    state = {
+        username: 'Roma'
+    }
+
+    getChildContext() {
+        return {
+            user: this.state.username
+        }
+    }
+
+    handleUserChange = username => this.setState({ username })
+
     render() {
+        console.log('---', 1)
         return (
             <div>
                 <h1>App name</h1>
@@ -17,7 +35,7 @@ class App extends Component {
                     <li><NavLink to = "/counter" activeStyle = {{ color: 'red' }}>Counter</NavLink></li>
                     <li><NavLink to = "/comments/1" activeStyle = {{ color: 'red' }}>comments</NavLink></li>
                 </ul>
-                <UserForm />
+                <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <Switch>
                     <Route path = "/counter" component = {CounterPage} exact/>
                     <Route path = "/filters" component = {FiltersPage}/>

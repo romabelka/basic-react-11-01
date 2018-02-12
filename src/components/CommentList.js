@@ -15,6 +15,12 @@ class CommentList extends Component {
         toggleOpen: PropTypes.func
     }
 
+    static contextTypes = {
+        store: PropTypes.object,
+        router: PropTypes.object,
+        user: PropTypes.string
+    }
+
     componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
         if (!this.props.isOpen && isOpen && !article.commentsLoading && !article.commentsLoaded) {
             loadArticleComments(article.id)
@@ -22,11 +28,13 @@ class CommentList extends Component {
     }
 
     render() {
+        console.log('---', 'context: ', this.context)
         const {isOpen, toggleOpen} = this.props
         const text = isOpen ? 'hide comments' : 'show comments'
         return (
             <div>
                 <button onClick={toggleOpen}>{text}</button>
+                <h2>User: {this.context.user}</h2>
                 {this.getBody()}
             </div>
         )
@@ -54,4 +62,4 @@ class CommentList extends Component {
 }
 
 
-export default connect(null, { loadArticleComments })(toggleOpen(CommentList))
+export default connect(null, { loadArticleComments }, null, { pure: false })(toggleOpen(CommentList))

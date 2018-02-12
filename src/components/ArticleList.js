@@ -5,7 +5,7 @@ import {connect} from 'react-redux'
 import {filtratedArticlesSelector, articlesLoadingSelector} from '../selectors'
 import {loadAllArticles} from '../AC'
 import Loader from './common/Loader'
-import {NavLink} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 
 class ArticleList extends Accordion {
     componentDidMount() {
@@ -37,9 +37,10 @@ ArticleList.propTypes = {
     articles: PropTypes.array.isRequired
 }
 
-export default connect(state => {
+export default withRouter(connect(state => {
     return {
         articles: filtratedArticlesSelector(state),
-        loading: articlesLoadingSelector(state)
+        loading: articlesLoadingSelector(state),
+//        router: state.router
     }
-}, { loadAllArticles })(ArticleList)
+}, { loadAllArticles })(ArticleList))
