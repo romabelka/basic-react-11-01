@@ -1,4 +1,4 @@
-import React, {Component, PureComponent} from 'react'
+import React, {Component} from 'react'
 import {findDOMNode} from 'react-dom'
 import PropTypes from 'prop-types'
 import CSSTransition from 'react-addons-css-transition-group'
@@ -9,7 +9,7 @@ import {deleteArticle, loadArticle} from '../../AC'
 import { articleSelector } from '../../selectors'
 import './style.css'
 
-class Article extends PureComponent {
+class Article extends Component {
     static propTypes = {
         id: PropTypes.string,
         isOpen: PropTypes.bool,
@@ -37,6 +37,7 @@ class Article extends PureComponent {
     }
 
     render() {
+        console.log('---', 4)
         const {article, isOpen, toggleOpen} = this.props
         if (!article) return null
 
@@ -106,4 +107,4 @@ class Article extends PureComponent {
 
 export default connect((state, props) => ({
     article: articleSelector(state, props)
-}), { deleteArticle, loadArticle })(Article)
+}), { deleteArticle, loadArticle }, null, { pure: false })(Article)
