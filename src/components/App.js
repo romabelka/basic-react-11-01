@@ -3,6 +3,7 @@ import ArticleListPage from './routes/ArticleList'
 import UserForm from './UserForm'
 import FiltersPage from './routes/Filters'
 import CounterPage from './routes/Counter'
+import CommentsPage from './routes/CommentsPage'
 import { Route, Switch, NavLink } from 'react-router-dom'
 
 class App extends Component {
@@ -21,6 +22,7 @@ class App extends Component {
                     <Route path = "/filters" component = {FiltersPage}/>
                     <Route path = "/articles/new" render = {() => <h2>Add new Article form</h2>}/>
                     <Route path = "/articles" component = {ArticleListPage}/>
+                    <Route path = '/comments' component = {CommentsPage}/>
                     <Route path = "*" render = {() => <h1>Nor found</h1>}/>
                 </Switch>
             </div>
