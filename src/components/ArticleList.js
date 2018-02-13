@@ -47,4 +47,4 @@ export default withRouter(connect(state => {
         loading: articlesLoadingSelector(state),
 //        router: state.router
     }
-}, { loadAllArticles })(ArticleList))
+}, { loadAllArticles }, null, { pure: false })(ArticleList))
