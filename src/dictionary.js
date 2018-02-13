@@ -1,0 +1,23 @@
+export default {
+    'App_name': 'Название приложения',
+    'Articles': 'Статьи',
+    'Filters': 'Фильтры',
+    'Counter': 'Счетчик',
+    'Comments': 'Комментарии',
+    'Add_new_Article_form': 'Добавить новую статью',
+    'Error_page': 'Ошбика',
+    'Nor_found': 'Не найдено',
+    'Main_menu': 'Главное меню',
+    'Username': 'Имя пользователя',
+    'No_Articles': 'Нет статей',
+    'Article_list': 'Список статей',
+    'Please_select_an_article': 'Пожалуйста, выберите статью',
+    'Loading': 'Загрузка',
+    'User': 'Пользователь',
+    'No_comments_yet': 'Пока нет комментариев',
+    'hide_comments': 'скрыть комментарии',
+    'show_comments': 'показать комметарии',
+    'close': 'закрыть',
+    'open': 'открыть',
+    'delete': 'удалить'
+}

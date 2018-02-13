@@ -8,6 +8,10 @@ import Loader from './common/Loader'
 import {NavLink, withRouter} from 'react-router-dom'
 
 class ArticleList extends Accordion {
+    static contextTypes = {
+        dictionary: PropTypes.object
+    }
+    
     componentDidMount() {
         this.props.loadAllArticles()
     }
@@ -16,7 +20,7 @@ class ArticleList extends Accordion {
         const {articles, loading} = this.props
 
         if (loading) return <Loader />
-        if (!articles.length) return <h3>No Articles</h3>
+        if (!articles.length) return <h3>{this.context.dictionary.No_Articles}</h3>
         const articleElements = articles.map((article) => <li key={article.id}>
             <NavLink to = {`/articles/${article.id}`} activeStyle = {{color: 'red'}}>{article.title}</NavLink>
         </li>)
@@ -43,4 +47,4 @@ export default withRouter(connect(state => {
         loading: articlesLoadingSelector(state),
 //        router: state.router
     }
-}, { loadAllArticles })(ArticleList))
+}, { loadAllArticles }, null, { pure: false })(ArticleList))
