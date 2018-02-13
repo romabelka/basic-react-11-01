@@ -22,6 +22,10 @@ class Article extends Component {
         }),
     }
 
+    static contextTypes = {
+        dictionary: PropTypes.object
+    }
+
     constructor(props) {
         super(props)
 
@@ -39,6 +43,7 @@ class Article extends Component {
     render() {
         console.log('---', 4)
         const {article, isOpen, toggleOpen} = this.props
+        const { dictionary } = this.context
         if (!article) return null
 
         return (
@@ -46,10 +51,10 @@ class Article extends Component {
                 <h2 ref = {this.setTitleRef} onClick = {this.increment}>
                     {article.title}
                     <button onClick={toggleOpen}>
-                        {isOpen ? 'close' : 'open'}
+                        {isOpen ? dictionary.close : dictionary.open}
                     </button>
                     <button onClick = {this.handleDelete}>
-                        delete
+                        {dictionary.delete}
                     </button>
                 </h2>
                 <CSSTransition

@@ -13,6 +13,10 @@ class App extends Component {
         user: PropTypes.string
     }
 
+    static contextTypes = {
+        dictionary: PropTypes.object
+    }
+
     state = {
         username: 'Roma'
     }
@@ -27,25 +31,26 @@ class App extends Component {
 
     render() {
         console.log('---', 1)
+        const { dictionary } = this.context
         return (
             <div>
-                <h1>App name</h1>
+                <h1>{dictionary.App_name}</h1>
                 <Menu>
-                    <MenuItem to = "/articles">Articles</MenuItem>
-                    <MenuItem to = "/filters">Filters</MenuItem>
-                    <MenuItem to = "/counter">Counter</MenuItem>
-                    <MenuItem to = "/comments">Comments</MenuItem>
+                    <MenuItem to = "/articles">{dictionary.Articles}</MenuItem>
+                    <MenuItem to = "/filters">{dictionary.Filters}</MenuItem>
+                    <MenuItem to = "/counter">{dictionary.Counter}</MenuItem>
+                    <MenuItem to = "/comments">{dictionary.Comments}</MenuItem>
                 </Menu>
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <Switch>
                     <Route path = "/counter" component = {CounterPage} exact/>
                     <Route path = "/filters" component = {FiltersPage}/>
-                    <Route path = "/articles/new" render = {() => <h2>Add new Article form</h2>}/>
+                    <Route path = "/articles/new" render = {() => <h2>{dictionary.Add_new_Article_form}</h2>}/>
                     <Route path = "/articles" component = {ArticleListPage}/>
                     <Route path = "/comments" component = {CommentsPage}/>
-                    <Route path = "/error" render = {() => <h1>Error page</h1>}/>
+                    <Route path = "/error" render = {() => <h1>{dictionary.Error_page}</h1>}/>
                     <Redirect from = "/" exact to = "/articles" />
-                    <Route path = "*" render = {() => <h1>Nor found</h1>}/>
+                    <Route path = "*" render = {() => <h1>{dictionary.Nor_found}</h1>}/>
                 </Switch>
             </div>
         )
