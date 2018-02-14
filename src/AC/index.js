@@ -1,6 +1,7 @@
 import {
     INCREMENT, DELETE_ARTICLE, CHANGE_DATE_RANGE, CHANGE_SELECTION, ADD_COMMENT,
-    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL
+    LOAD_ALL_ARTICLES, LOAD_ARTICLE, LOAD_ARTICLE_COMMENTS, LOAD_COMMENTS_FOR_PAGE, START, SUCCESS, FAIL,
+    LOAD_DICTIONARY
 } from '../constants'
 import {replace} from 'react-router-redux'
 
@@ -93,5 +94,13 @@ export function checkAndLoadCommentsForPage(page) {
             payload: { page },
             callAPI: `/api/comment?limit=5&offset=${(page - 1) * 5}`
         })
+    }
+}
+
+export function loadDictionary(langCode) {
+    return {
+        type: LOAD_DICTIONARY,
+        payload: { langCode },
+        callAPI: `/api/i18n/${langCode}`
     }
 }
