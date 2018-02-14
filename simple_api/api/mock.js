@@ -133,7 +133,19 @@ var articles = [
 
 ]
 
+const i18n = {
+    "en": {
+        "NOT_FOUND": "Not found",
+        "LOADING": "Loading..."
+    },
+    "ru": {
+        "NOT_FOUND": "Не найдено",
+        "LOADING": "Загрузка..."
+    }
+}
+
 module.exports = {
     comments: comments,
-    articles: articles
+    articles: articles,
+    i18n: i18n
 };

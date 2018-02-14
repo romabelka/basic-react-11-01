@@ -72,4 +72,10 @@ router.post('/report', function (req, res) {
     res.json({})
 })
 
+router.get('/i18n/:lang', function (req, res, next) {
+    var i18n = mocks.i18n[req.params.lang]
+    if (i18n) return res.json(i18n);
+    res.status(404).json({error: "not found"});
+});
+
 module.exports = router;
