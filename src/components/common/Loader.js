@@ -1,13 +1,20 @@
-import React from 'react'
+import React, {Component} from 'react'
 import PropTypes from 'prop-types'
+import {getLocaleText} from '../utils'
 
-function Loader(props) {
-    return (
-        <h2>Loading...</h2>
-    )
+class Loader extends Component {
+    render() {
+        return (
+            <h2>{getLocaleText(this)('Loading') + '...'}</h2>
+        )
+    }
 }
 
 Loader.propTypes = {
+}
+
+Loader.contextTypes = {
+    locale: PropTypes.object
 }
 
 export default Loader

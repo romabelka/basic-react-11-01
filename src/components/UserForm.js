@@ -1,9 +1,15 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import {getLocaleText} from './utils'
 
 class UserForm extends Component {
     static propTypes = {
 
     };
+
+    static contextTypes = {
+        locale: PropTypes.object
+    }
 
     state = {
         user: ''
@@ -13,7 +19,7 @@ class UserForm extends Component {
         const {value} = this.props
         return (
             <div>
-                Username: <input type = "text" value = {value} onChange = {this.handleChange}/>
+                {getLocaleText(this)('Username')}: <input type = "text" value = {value} onChange = {this.handleChange}/>
             </div>
         )
     }
