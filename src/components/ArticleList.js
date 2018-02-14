@@ -11,12 +11,14 @@ class ArticleList extends Accordion {
     componentDidMount() {
         this.props.loadAllArticles()
     }
-
+    static contextTypes = { 
+        dict : PropTypes.object
+    }
     render() {
         const {articles, loading} = this.props
 
         if (loading) return <Loader />
-        if (!articles.length) return <h3>No Articles</h3>
+        if (!articles.length) return <h3>{ this.context.dict.ERROR_NO_ART}</h3>
         const articleElements = articles.map((article) => <li key={article.id}>
             <NavLink to = {`/articles/${article.id}`} activeStyle = {{color: 'red'}}>{article.title}</NavLink>
         </li>)

@@ -30,7 +30,9 @@ class Article extends Component {
             count: 0
         }
     }
-
+    static contextTypes = { 
+        dict : PropTypes.object
+    }
     componentDidMount() {
         const { id, isOpen, article, loadArticle } = this.props
         if (isOpen && (!article || !article.text)) loadArticle(id)
@@ -46,10 +48,10 @@ class Article extends Component {
                 <h2 ref = {this.setTitleRef} onClick = {this.increment}>
                     {article.title}
                     <button onClick={toggleOpen}>
-                        {isOpen ? 'close' : 'open'}
+                        {isOpen ? this.context.dict.BTN_CLOSE : this.context.dict.BTN_OPEN }
                     </button>
                     <button onClick = {this.handleDelete}>
-                        delete
+                     {this.context.dict.BTN_DEL}
                     </button>
                 </h2>
                 <CSSTransition
@@ -62,7 +64,7 @@ class Article extends Component {
                 >
                     {this.getBody()}
                 </CSSTransition>
-                <h3>creation date: {(new Date(article.date)).toDateString()}</h3>
+                <h3>{this.context.dict.DATE_CREATE_ARTICLE} {(new Date(article.date)).toDateString()}</h3>
             </div>
         )
     }

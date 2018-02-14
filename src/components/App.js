@@ -23,18 +23,28 @@ class App extends Component {
         }
     }
 
+// static contextTypes = {
+//     user: PropTypes.string
+// }
+static contextTypes = { 
+    dict : PropTypes.object
+}
+
+
     handleUserChange = username => this.setState({ username })
 
     render() {
+        // console.log("12", this.context.dict  )
         console.log('---', 1)
         return (
             <div>
-                <h1>App name</h1>
+                <h1>{this.context.dict.APP_NAME}</h1>
+               
                 <Menu>
-                    <MenuItem to = "/articles">Articles</MenuItem>
-                    <MenuItem to = "/filters">Filters</MenuItem>
-                    <MenuItem to = "/counter">Counter</MenuItem>
-                    <MenuItem to = "/comments">Comments</MenuItem>
+                    <MenuItem to = "/articles">{this.context.dict.LINK_ARTICLE}</MenuItem>
+                    <MenuItem to = "/filters">{this.context.dict.LINK_FILTERS}</MenuItem>
+                    <MenuItem to = "/counter">{this.context.dict.LINK_COUNTER}</MenuItem>
+                    <MenuItem to = "/comments">{this.context.dict.LINK_COMMENTS}</MenuItem>
                 </Menu>
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <Switch>
