@@ -7,7 +7,7 @@ import CounterPage from './routes/Counter'
 import CommentsPage from './routes/CommentsPage'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import Menu, { MenuItem } from './Menu'
-
+import Language from './Language'
 class App extends Component {
     static childContextTypes = {
         user: PropTypes.string
@@ -23,13 +23,23 @@ class App extends Component {
         }
     }
 
+// static contextTypes = {
+//     user: PropTypes.string
+// }
+static contextTypes = { 
+    dict : PropTypes.object
+}
+
+
     handleUserChange = username => this.setState({ username })
 
     render() {
+        console.log("12", this.context.dict  )
         console.log('---', 1)
         return (
             <div>
                 <h1>App name</h1>
+                <Language />
                 <Menu>
                     <MenuItem to = "/articles">Articles</MenuItem>
                     <MenuItem to = "/filters">Filters</MenuItem>
