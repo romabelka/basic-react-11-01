@@ -41,7 +41,7 @@ static contextTypes = {
     return (
       <div>
           <LanguageBtn  chooseLang = { this.chooseLang  }   lang = { this.state.lang } />
-       
+          {this.props.children}
       </div>
     )
   }

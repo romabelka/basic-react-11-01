@@ -6,9 +6,12 @@ import {ConnectedRouter} from 'react-router-redux'
 //import {HashRouter, BrowserRouter} from 'react-router-dom'
 import store from './store'
 import history from './history'
+import Language from './components/Language' 
 
 render(<Provider store = {store}>
     <ConnectedRouter history = {history}>
+    <Language > 
         <App/>
+        </Language>
     </ConnectedRouter>
 </Provider>, document.getElementById('container'))

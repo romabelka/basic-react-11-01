@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 class UserForm extends Component {
     static propTypes = {
 
@@ -8,12 +8,15 @@ class UserForm extends Component {
     state = {
         user: ''
     }
-
+    static contextTypes = { 
+        dict : PropTypes.object
+    }
+    
     render() {
         const {value} = this.props
         return (
             <div>
-                Username: <input type = "text" value = {value} onChange = {this.handleChange}/>
+               {this.context.dict.USERNAME} <input type = "text" value = {value} onChange = {this.handleChange}/>
             </div>
         )
     }

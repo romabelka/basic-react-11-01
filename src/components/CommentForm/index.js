@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux'
 import {addComment} from '../../AC'
 import './style.css'
-
+import PropTypes from 'prop-types'
 class CommentForm extends Component {
     static propTypes = {
     };
@@ -11,17 +11,19 @@ class CommentForm extends Component {
         user: '',
         text: ''
     }
-
+    static contextTypes = { 
+        dict : PropTypes.object
+    }
     render() {
         return (
             <form onSubmit = {this.handleSubmit}>
-                user: <input value = {this.state.user}
+              {this.context.dict.USER  } <input value = {this.state.user}
                              onChange = {this.handleChange('user')}
                              className = {this.getClassName('user')} />
-                comment: <input value = {this.state.text}
+                 {this.context.dict.COMMENT  } <input value = {this.state.text}
                                 onChange = {this.handleChange('text')}
                                 className = {this.getClassName('text')} />
-                <input type = "submit" value = "submit" disabled = {!this.isValidForm()}/>
+                <input type = "submit" value = {this.context.dict.SUBMIT} disabled = {!this.isValidForm()}/>
             </form>
         )
     }

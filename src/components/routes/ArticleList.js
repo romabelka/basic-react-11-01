@@ -2,17 +2,19 @@ import React, { Component } from 'react'
 import ArticleList from '../ArticleList'
 import Article from '../Article'
 import {Route} from 'react-router-dom'
-
+import PropTypes from 'prop-types'
 class ArticleListPage extends Component {
     static propTypes = {
 
     };
-
+    static contextTypes = { 
+        dict : PropTypes.object
+    }
     render() {
         console.log('---', 2)
         return (
             <div>
-                <h2>Article list:</h2>
+                <h2>{this.context.dict.LIST_ARTICLE}</h2>
                 <ArticleList/>
                 <Route path = {`${this.props.match.path}/:id`} children = {this.getArticle} />
             </div>
