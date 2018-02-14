@@ -2,6 +2,7 @@ import {createSelector} from 'reselect'
 
 export const articlesMapSelector = state => state.articles.entities
 export const articlesLoadingSelector = state => state.articles.loading
+export const articlesLoadedSelector = state => state.articles.loaded
 export const filtersSelector = state => state.filters
 export const commentMapSelector = state => state.comments.get('entities')
 export const idSelector = (_, props) => props.id
