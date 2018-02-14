@@ -13,6 +13,10 @@ class App extends Component {
         user: PropTypes.string
     }
 
+    static contextTypes = {
+        dictionary: PropTypes.object
+    }
+
     state = {
         username: 'Roma'
     }
@@ -27,14 +31,15 @@ class App extends Component {
 
     render() {
         console.log('---', 1)
+        const { dictionary } = this.context
         return (
             <div>
-                <h1>App name</h1>
+                <h1>{dictionary.APP_NAME}</h1>
                 <Menu>
-                    <MenuItem to = "/articles">Articles</MenuItem>
-                    <MenuItem to = "/filters">Filters</MenuItem>
-                    <MenuItem to = "/counter">Counter</MenuItem>
-                    <MenuItem to = "/comments">Comments</MenuItem>
+                    <MenuItem to = "/articles">{dictionary.ARTICLES}</MenuItem>
+                    <MenuItem to = "/filters">{dictionary.FILTERS}</MenuItem>
+                    <MenuItem to = "/counter">{dictionary.COUNTER}</MenuItem>
+                    <MenuItem to = "/comments">{dictionary.COMMENTS}</MenuItem>
                 </Menu>
                 <UserForm value = {this.state.username} onChange = {this.handleUserChange}/>
                 <Switch>
