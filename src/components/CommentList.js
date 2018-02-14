@@ -6,6 +6,7 @@ import CommentForm from './CommentForm'
 import Loader from './common/Loader'
 import {connect} from 'react-redux'
 import {loadArticleComments} from '../AC'
+import {getLocaleText} from './utils'
 
 class CommentList extends Component {
     static propTypes = {
@@ -18,7 +19,8 @@ class CommentList extends Component {
     static contextTypes = {
         store: PropTypes.object,
         router: PropTypes.object,
-        user: PropTypes.string
+        user: PropTypes.string,
+        locale: PropTypes.object
     }
 
     componentWillReceiveProps({ isOpen, article, loadArticleComments }) {
@@ -30,11 +32,12 @@ class CommentList extends Component {
     render() {
         console.log('---', 'context: ', this.context)
         const {isOpen, toggleOpen} = this.props
-        const text = isOpen ? 'hide comments' : 'show comments'
+        const text = isOpen ? getLocaleText(this)('hide comments') :
+            getLocaleText(this)('show comments')
         return (
             <div>
                 <button onClick={toggleOpen}>{text}</button>
-                <h2>User: {this.context.user}</h2>
+                <h2>{getLocaleText(this)('User')}: {this.context.user}</h2>
                 {this.getBody()}
             </div>
         )

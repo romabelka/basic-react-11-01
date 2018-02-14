@@ -6,7 +6,8 @@ import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import Loader from '../common/Loader'
 import {deleteArticle, loadArticle} from '../../AC'
-import { articleSelector } from '../../selectors'
+import { articleSelector, articlesLoadingSelector, articlesLoadedSelector } from '../../selectors'
+import {getLocaleText} from '../utils'
 import './style.css'
 
 class Article extends Component {
@@ -31,9 +32,19 @@ class Article extends Component {
         }
     }
 
+    static contextTypes = {
+        locale: PropTypes.object
+    }
+
     componentDidMount() {
         const { id, isOpen, article, loadArticle } = this.props
         if (isOpen && (!article || !article.text)) loadArticle(id)
+    }
+
+    componentWillReceiveProps({id, isOpen, article, articlesLoaded, loadArticle}) {
+        if (isOpen && this.props.articlesLoading && articlesLoaded && article && !article.text) {
+            loadArticle(id)
+        }
     }
 
     render() {
@@ -46,10 +57,10 @@ class Article extends Component {
                 <h2 ref = {this.setTitleRef} onClick = {this.increment}>
                     {article.title}
                     <button onClick={toggleOpen}>
-                        {isOpen ? 'close' : 'open'}
+                        {isOpen ? getLocaleText(this)('close') : getLocaleText(this)('open')}
                     </button>
                     <button onClick = {this.handleDelete}>
-                        delete
+                        {getLocaleText(this)('delete')}
                     </button>
                 </h2>
                 <CSSTransition
@@ -106,5 +117,7 @@ class Article extends Component {
 
 
 export default connect((state, props) => ({
-    article: articleSelector(state, props)
+    article: articleSelector(state, props),
+    articlesLoading: articlesLoadingSelector(state),
+    articlesLoaded: articlesLoadedSelector(state)
 }), { deleteArticle, loadArticle }, null, { pure: false })(Article)

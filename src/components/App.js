@@ -7,29 +7,37 @@ import CounterPage from './routes/Counter'
 import CommentsPage from './routes/CommentsPage'
 import { Route, Redirect, Switch } from 'react-router-dom'
 import Menu, { MenuItem } from './Menu'
+import Header from './Header'
+import {locales} from '../locales'
+import {getLocaleText} from './utils'
 
 class App extends Component {
     static childContextTypes = {
-        user: PropTypes.string
+        user: PropTypes.string,
+        locale: PropTypes.object
     }
 
     state = {
-        username: 'Roma'
+        username: 'Roma',
+        localeName: null
     }
 
     getChildContext() {
         return {
-            user: this.state.username
+            user: this.state.username,
+            locale: this.state.localeName != null ? locales[this.state.localeName] : null
         }
     }
 
     handleUserChange = username => this.setState({ username })
 
+    handleLocaleChange = localeName => () => this.setState({ localeName })
+
     render() {
-        console.log('---', 1)
+        console.log('---', 1, this.context)
         return (
             <div>
-                <h1>App name</h1>
+                <Header onLocaleChange = {this.handleLocaleChange} />
                 <Menu>
                     <MenuItem to = "/articles">Articles</MenuItem>
                     <MenuItem to = "/filters">Filters</MenuItem>

@@ -1,11 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {addComment} from '../../AC'
+import {getLocaleText} from '../utils'
 import './style.css'
 
 class CommentForm extends Component {
     static propTypes = {
     };
+
+    static contextTypes = {
+        locale: PropTypes.object
+    }
 
     state = {
         user: '',
@@ -15,10 +21,10 @@ class CommentForm extends Component {
     render() {
         return (
             <form onSubmit = {this.handleSubmit}>
-                user: <input value = {this.state.user}
+                {getLocaleText(this)('user')}: <input value = {this.state.user}
                              onChange = {this.handleChange('user')}
                              className = {this.getClassName('user')} />
-                comment: <input value = {this.state.text}
+                {getLocaleText(this)('comment')}: <input value = {this.state.text}
                                 onChange = {this.handleChange('text')}
                                 className = {this.getClassName('text')} />
                 <input type = "submit" value = "submit" disabled = {!this.isValidForm()}/>
@@ -63,4 +69,4 @@ const limits = {
 
 export default connect(null, (dispatch, ownProps) => ({
     addComment: (comment) => dispatch(addComment(comment, ownProps.articleId))
-}))(CommentForm)
+}), null, { pure: false })(CommentForm)

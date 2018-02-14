@@ -6,6 +6,7 @@ import {filtratedArticlesSelector, articlesLoadingSelector} from '../selectors'
 import {loadAllArticles} from '../AC'
 import Loader from './common/Loader'
 import {NavLink, withRouter} from 'react-router-dom'
+import {getLocaleText} from './utils'
 
 class ArticleList extends Accordion {
     componentDidMount() {
