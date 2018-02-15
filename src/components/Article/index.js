@@ -5,6 +5,7 @@ import CSSTransition from 'react-addons-css-transition-group'
 import {connect} from 'react-redux'
 import CommentList from '../CommentList'
 import Loader from '../common/Loader'
+import LocalizedText from '../common/LocalizedText'
 import {deleteArticle, loadArticle} from '../../AC'
 import { articleSelector } from '../../selectors'
 import './style.css'
@@ -37,7 +38,6 @@ class Article extends Component {
     }
 
     render() {
-        console.log('---', 4)
         const {article, isOpen, toggleOpen} = this.props
         if (!article) return null
 
@@ -46,10 +46,10 @@ class Article extends Component {
                 <h2 ref = {this.setTitleRef} onClick = {this.increment}>
                     {article.title}
                     <button onClick={toggleOpen}>
-                        {isOpen ? 'close' : 'open'}
+                        <LocalizedText>{isOpen ? 'close' : 'open'}</LocalizedText>
                     </button>
                     <button onClick = {this.handleDelete}>
-                        delete
+                        <LocalizedText>delete me</LocalizedText>
                     </button>
                 </h2>
                 <CSSTransition

@@ -48,7 +48,7 @@ export default (articles = new ReducerRecord(), action) => {
             return articles
                 .set('loading', false)
                 .set('loaded', true)
-                .set('entities', arrToMap(response, ArticleRecord))
+                .update('entities', entities => arrToMap(response, ArticleRecord).merge(entities))
 
         case LOAD_ARTICLE + START:
             return articles.setIn(['entities', payload.id, 'loading'], true)
